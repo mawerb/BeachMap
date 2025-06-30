@@ -1,0 +1,151 @@
+{
+    "_meta": {
+        "units": "kilometers",
+        "description": "Campus walking paths graph"
+    },
+    "Library" : {
+        "coords" : [33.777214344991215, -118.11445900673947],
+        "neighbors" : {
+            "LiberalArts_Main_Path" : {
+                "distance" : 0.003
+            }
+        }
+    },
+    "LiberalArts_Main_Path" : {
+        "coords" : [33.77747472732573, -118.11435910837174],
+        "neighbors" : {
+            "Library" : {
+                "distance" : 0.003
+            },
+            "Path_Psychology" : {
+                "distance" : 0.1
+            }
+        }
+    },
+    "Path_Psychology" : {
+        "coords" : [33.779420, -118.113757],
+        "neighbors" : {
+            "LiberalArts_Main_Path" : {
+                "distance" : 0.1
+            },
+            "Path_Psych_UP" : {
+                "distance" : 0.1
+            }
+        }
+    },
+    "Path_Psych_UP" : {
+        "coords" : [33.77974832051982, -118.11375187521769],
+        "neighbors" : {
+            "Bookstore" : {
+                "distance" : 0.037
+            },
+            "Path_Psych_UPR" : {
+                "distance" : 0.0125
+            },
+            "Path_Psychology" : {
+                "distance" : 0.1
+            }
+        }
+    },
+    "Path_Psych_UPR" : {
+        "coords" : [33.779876, -118.113555],
+        "neighbors" : {
+            "Path_Psych_UP" : {
+                "distance" : 0.0125
+            },
+            "Path_Psych_UPRU" : {
+                "distance" : 0.005
+            }
+        }
+    },
+    "Path_Psych_UPRU" : {
+        "coords" : [33.779876, -118.113553],
+        "neighbors" : {
+            "Path_Psych_UPR" : {
+                "distance" : 0.005
+            },
+            "CSNM_West_Lawn" : {
+                "distance" : 0.02
+            }
+        }
+    },
+    "CSNM_West_Lawn" :  {
+        "coords" : [33.779877, -118.113319],
+        "neighbors" : {
+            "Path_Psych_UPRU" : {
+                "distance" : 0.02
+            },
+            "CSNM" : {
+                "distance" : 0.03
+            },
+            "Bookstore_UPR" : {
+                "distance" : 0.02
+            }
+        }
+    },
+    "Bookstore" : {
+        "coords" : [33.779954, -118.113761],
+        "neighbors" : {
+            "Path_Psych_UP" : {
+                "distance" : 0.037
+            },
+            "Bookstore_UP" : {
+                "distance" : 0.02
+            }
+        }
+    },
+    "Bookstore_UP" : {
+        "coords" : [33.780164, -118.113535],
+        "neighbors" : {
+            "Bookstore" : {
+                "distance" : 0.02
+            },
+            "Bookstore_UPR" : {
+                "distance" : 0.03
+            }
+        }
+    },
+    "Bookstore_UPR" : {
+        "coords" : [33.780165, -118.113239],
+        "neighbors" : {
+            "Bookstore_UP" : {
+                "distance" : 0.03
+            },
+            "Bookstore_UPRU" : {
+                "distance" : 0.005
+            },
+            "CSNM_West_Lawn" : {
+                "distance" : 0.02
+            }
+        }
+    },
+    "Bookstore_UPRU" : {
+        "coords" : [33.780184576387065, -118.1131629739804],
+        "neighbors" : {
+            "Bookstore_UPR" : {
+                "distance" : 0.005
+            },
+            "CSNM" : {
+                "distance" : 0.02
+            }
+
+        }
+    },
+    "CSNM" : {
+        "coords" : [33.77986517619714, -118.1127735647257],
+        "neighbors" : {
+            "CSNM_West_Lawn" : {
+                "distance" : 0.03
+            },
+            "Bookstore_UPRU" : {
+                "distance" : 0.02
+            }
+        }
+    },
+    "Engineering Building" : {
+        "coords" : [33.78361942490184,-118.11066778703615],
+        "neighbors" : {
+
+        }
+    }
+}

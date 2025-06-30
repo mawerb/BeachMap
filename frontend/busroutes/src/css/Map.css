@@ -1,0 +1,11 @@
+.leaflet-map {
+    display: flex;
+    justify-content: center;  
+    padding: 1em;   
+    width: 100%;
+}
+
+.leaflet-map > div {
+    height: 60em;
+    width: 75vw;
+}
