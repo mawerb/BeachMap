@@ -1,10 +1,9 @@
 import { useState, useEffect } from 'react'
-import busLogo from '/favicon.png'
 import Map from '../components/Map'
 import DropDown from '../components/Dropdown'
 import { getOptions, findOptRoute } from '../services/api';
 
-function App() {
+function PathFinder() {
   const[start,setStart] = useState('');
   const[end,setEnd] = useState('');
   const [options,setOptions] = useState([]);
@@ -85,4 +84,4 @@ function App() {
   )
 }
 
-export default App
+export default PathFinder
