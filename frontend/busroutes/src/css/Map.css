@@ -1,11 +1,10 @@
 .leaflet-map {
     display: flex;
-    justify-content: center;  
-    padding: 1em;   
+    justify-content: center;     
     width: 100%;
 }
 
 .leaflet-map > div {
-    height: 60em;
-    width: 75vw;
+    height: auto;
+    width: 100vw;
 }

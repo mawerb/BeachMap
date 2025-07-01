@@ -1,7 +1,8 @@
 import { useMapEvents } from 'react-leaflet';
 import { useRef, useEffect } from 'react';
 import NodeMarker from './NodeMarker';
-import { useNodeManager } from './useNodeManager';
+import { useNodeManager } from './NodeManager';
+import '../css/LocationMarker.css';
 
 function LocationMarker() {
   const {
@@ -36,10 +37,15 @@ function LocationMarker() {
 
   if (nodes.length === 0) return null;
 
+  console.log('Current nodes:', nodes);
+  if(nodes.length > 0) {
+    console.log(nodes[0])
+  }
+
   return (
     <>
       {neighborUI && (
-        <button onClick={endNeighborsMode} id="endNeighbor">
+        <button onClick={endNeighborsMode} id='endNeighbor'>
           Stop Attaching Neighbors
         </button>
       )}

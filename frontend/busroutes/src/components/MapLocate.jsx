@@ -60,7 +60,7 @@ function LocationMarker(){
         console.log(nodes[i])
         if (!neighborUI || activeNode === null) return;
 
-        if (i == activeNode) {
+        if (i === activeNode) {
             alert("Cannot add neighbors to itself.");
             return;
         }

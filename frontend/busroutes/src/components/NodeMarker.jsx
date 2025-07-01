@@ -1,5 +1,5 @@
 import { Marker, Popup, Polyline } from 'react-leaflet';
-import { useRef } from 'react';
+import pointImg from '../assets/point.png';
 
 function NodeMarker({
   node,
@@ -12,7 +12,7 @@ function NodeMarker({
   popupRefs,
 }) {
   const pointIcon = L.icon({
-    iconUrl: '/path/to/point.png',
+    iconUrl: pointImg,
     iconSize: [8, 8],
   });
 
