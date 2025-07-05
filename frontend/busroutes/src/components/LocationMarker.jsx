@@ -4,6 +4,7 @@ import NodeMarker from './NodeMarker';
 import { useNodeManager } from './NodeManager';
 import '../css/LocationMarker.css';
 
+/** LocationMarker component handles the addition of nodes on the map, **/
 function LocationMarker() {
   const {
     nodes,
@@ -12,19 +13,33 @@ function LocationMarker() {
     neighborUI,
     setNeighborsMode,
     endNeighborsMode,
+    handleUpdateGraph,
+    updated,
     activeNode,
     handleAddNeighbor,
+    handleUpdateName,
+    handleRemoveNode,
   } = useNodeManager();
 
-  const popupRefs = useRef({});
+  const popupRefs = useRef({}); // Store references to popups for each node
 
+  // Handle map events for adding nodes
   const map = useMapEvents({
-    click(e) {
+    click(e) { // Set updated to true on change
       if (neighborUI) return;
       addNode(e.latlng);
     },
-  });
+  }); 
 
+  // Disable click propagation for the update graph button
+  useEffect(() => {
+    const button = document.getElementById('updateGraph');
+    if (button) {
+      L.DomEvent.disableClickPropagation(button);
+    }
+  }, []);
+
+  // Handle Escape key to exit neighbors mode
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === 'Escape' && neighborUI) {
@@ -35,13 +50,6 @@ function LocationMarker() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [neighborUI, endNeighborsMode]);
 
-  if (nodes.length === 0) return null;
-
-  console.log('Current nodes:', nodes);
-  if(nodes.length > 0) {
-    console.log(nodes[0])
-  }
-
   return (
     <>
       {neighborUI && (
@@ -49,19 +57,28 @@ function LocationMarker() {
           Stop Attaching Neighbors
         </button>
       )}
-      {nodes.map((node, index) => (
+      { !updated && (
+        <button onClick={(e) => {handleUpdateGraph(); e.stopPropagation()}} id='updateGraph'>
+          Update Graph
+        </button>
+      )}
+      {Object.entries(nodes).length > 0 && (Object.entries(nodes).map(([name,node], index) => (
         <NodeMarker
           key={index}
+          name={name}
           node={node}
           index={index}
           nodes={nodes}
           neighborUI={neighborUI}
           onSetNeighbors={setNeighborsMode}
           onRemoveNodes={removeAllNodes}
+          onRemoveNode={handleRemoveNode}
           onAddNeighbor={handleAddNeighbor}
+          onChangeName={handleUpdateName}
           popupRefs={popupRefs}
         />
-      ))}
+      ))
+      )}
     </>
   );
 }
