@@ -1,10 +1,41 @@
+/**
+ * LocationMarker component handles the addition and management of nodes on the map.
+ * It utilizes the react-leaflet library to interact with map events and manage node states.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered LocationMarker component.
+ *
+ * @hooks
+ * @useNodeManager - Custom hook to manage nodes, including adding, removing, and updating nodes.
+ * @useMapEvents - Hook from react-leaflet to handle map events such as clicks.
+ *
+ * @effects
+ * - Adds a node to the map when clicked, unless in neighbor UI mode.
+ * - Disables click propagation for the update graph button.
+ * - Listens for the Escape key to exit neighbor mode.
+ *
+ * @props
+ * - nodes {Object} - The current nodes in the graph.
+ * - addNode {Function} - Function to add a new node.
+ * - removeAllNodes {Function} - Function to remove all nodes.
+ * - neighborUI {boolean} - Indicates if the neighbor UI is active.
+ * - setNeighborsMode {Function} - Function to set the neighbors mode.
+ * - endNeighborsMode {Function} - Function to exit the neighbors mode.
+ * - handleUpdateGraph {Function} - Function to update the graph.
+ * - updated {boolean} - Indicates if the graph has been updated.
+ * - activeNode {Object} - The currently active node.
+ * - handleAddNeighbor {Function} - Function to add a neighbor to a node.
+ * - handleUpdateName {Function} - Function to update the name of a node.
+ * - handleRemoveNode {Function} - Function to remove a specific node.
+ */
+
 import { useMapEvents } from 'react-leaflet';
 import { useRef, useEffect } from 'react';
 import NodeMarker from './NodeMarker';
 import { useNodeManager } from './NodeManager';
-import '../css/LocationMarker.css';
+import '../../css/LocationMarker.css';
 
-/** LocationMarker component handles the addition of nodes on the map, **/
+
 function LocationMarker() {
   const {
     nodes,

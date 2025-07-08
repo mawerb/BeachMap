@@ -1,7 +1,7 @@
 #endNeighbor {
     position: absolute;
     top: 10px;
-    left: 60px;
+    left: 190px;
     z-index: 1000;
     padding: 10px 14px;
     background-color: white;
@@ -21,7 +21,7 @@
   #updateGraph {
     position: absolute;
     top: 10px;
-    left: 90px;
+    left: 60px;
     z-index: 1000;
     padding: 10px 14px;
     background-color: white;

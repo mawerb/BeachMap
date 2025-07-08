@@ -46,3 +46,30 @@ def get_options (request):
         print("Error", e)
         return Response({'error': str(e)}, status=500)
 
+@api_view(['GET'])
+def get_nodes (request):
+    try:
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        path = os.path.join(base_dir,'algo','mapdata','coordinate_graph.json')
+        with open(path,'r') as file:
+            data = json.load(file)
+        
+        del data['_meta']
+
+        return Response({'result':data})
+    except Exception as e:
+        print("Error", e)
+        return Response({'error': str(e)}, status=500)
+    
+@api_view(['PUT'])
+def update_nodes (request):
+    try:
+        data = request.data
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        path = os.path.join(base_dir,'algo','TEST','test.json')
+        with open(path,'w') as file:
+            json.dump(data,file,indent=4)
+        return Response({'message': 'Nodes updated successfully'}, status=status.HTTP_200_OK)
+    except Exception as e:
+        print("Error", e)
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

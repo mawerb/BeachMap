@@ -1,7 +1,7 @@
 import { MapContainer, TileLayer, Polyline } from 'react-leaflet'
 import '../css/Map.css'
 import 'leaflet/dist/leaflet.css';
-import LocationMarker from './LocationMarker'
+import LocationMarker from './NodeCreator/LocationMarker'
 
 function Map(){
     return (
