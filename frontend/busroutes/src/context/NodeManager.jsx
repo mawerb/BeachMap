@@ -28,10 +28,12 @@ NOTES:
 * - Fix DOM click propagation for the update graph button.
 * - Hello jules in case ur seeing this
 */
-import { useState,useEffect, act } from 'react';
-import { getNodes,updateNodes } from '../../services/api.js';
+import { useState,useEffect, createContext,useContext } from 'react';
+import { getNodes,updateNodes } from '../services/api.js';
 
-export function useNodeManager() {
+const NodeContext = createContext();
+
+export function NodeProvider({children}) {
   const [nodes, setNodes] = useState({});
   const [activeNode, setActiveNode] = useState(null);
   const [neighborUI, setNeighborUI] = useState(false);
@@ -169,9 +171,8 @@ export function useNodeManager() {
     setNodes(currentNodes => addNeighbor(node));
   };
 
-  console.log(nodes)
-
-  return {
+  return (
+    <NodeContext.Provider value={{
     nodes,
     addNode,
     removeAllNodes,
@@ -184,5 +185,12 @@ export function useNodeManager() {
     handleAddNeighbor,
     handleUpdateName,
     handleRemoveNode,
-  };
+  }}>
+      {children}
+    </NodeContext.Provider>
+  );
+}
+
+export function useNodeManager(){
+  return useContext(NodeContext);
 }

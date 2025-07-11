@@ -32,7 +32,7 @@
 import { useMapEvents } from 'react-leaflet';
 import { useRef, useEffect } from 'react';
 import NodeMarker from './NodeMarker';
-import { useNodeManager } from './NodeManager';
+import { useNodeManager } from '../../context/NodeManager';
 import '../../css/LocationMarker.css';
 
 
@@ -63,12 +63,12 @@ function LocationMarker() {
   }); 
 
   // Disable click propagation for the update graph button
-  useEffect(() => {
-    const button = document.getElementById('updateGraph');
-    if (button) {
-      L.DomEvent.disableClickPropagation(button);
-    }
-  }, []);
+  // useEffect(() => {
+  //   const button = document.getElementById('updateGraph');
+  //   if (button) {
+  //     L.DomEvent.disableClickPropagation(button);
+  //   }
+  // }, []);
 
   // Handle Escape key to exit neighbors mode
   useEffect(() => {
@@ -86,11 +86,6 @@ function LocationMarker() {
       {neighborUI && (
         <button onClick={endNeighborsMode} id='endNeighbor'>
           Stop Attaching Neighbors
-        </button>
-      )}
-      { !updated && (
-        <button onClick={(e) => {handleUpdateGraph(); e.stopPropagation()}} id='updateGraph'>
-          Update Graph
         </button>
       )}
       {Object.entries(nodes).length > 0 && (Object.entries(nodes).map(([name,node], index) => (

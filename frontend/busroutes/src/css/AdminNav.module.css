@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+
+/* AdminNav.module.css */
+.header {
+    position:fixed;
+    width:100%;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 5%;
+    background-color: #ECAA00;
+  }
+  
+.logo {
+    cursor: pointer;
+    color: white;
+}
+  
+.navLinks {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+  
+.navLinks li a {
+    color: #edf0f1;
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    transition: all 0.3s ease 0s;
+}
+  
+.navLinks li a:hover {
+    color: #0088A9;
+}
+  
+.button {
+    padding: 5px 18px;
+    background-color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+  
+.button:hover {
+    background-color: rgba(255, 255, 255, 0.8);
+}
+  
