@@ -38,6 +38,7 @@ export function NodeProvider({children}) {
   const [activeNode, setActiveNode] = useState(null);
   const [neighborUI, setNeighborUI] = useState(false);
   const [updated, setUpdated] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const loadedNodes = async () => {
@@ -120,6 +121,7 @@ export function NodeProvider({children}) {
   const handleUpdateGraph = async () => {
     if (updated) return;
       setUpdated(true);
+    setLoading(true);
     try {
       await updateNodes(nodes)
     } catch (err) {
@@ -127,13 +129,26 @@ export function NodeProvider({children}) {
       alert('Failed to update nodes. Please try again later.');
     } finally {
       setUpdated(false)
+      setLoading(false);
     }
   };
 
   const addNeighbor = (name) => {
     const node = nodes[name];
     const activeNodeObj = nodes[activeNode];
-    const distance = Math.sqrt((activeNodeObj.coords[0]-node.coords[1])**2 + (activeNodeObj.coords[0]-node.coords[1])**2);
+
+    const lat1 = activeNodeObj.coords[0];
+    const lon1 = activeNodeObj.coords[1];
+    const lat2 = node.coords[0];
+    const lon2 = node.coords[1];
+    
+    const milesPerLat = 69;
+    const milesPerLon = 69 * Math.cos((lat1 + lat2) / 2 * Math.PI / 180);
+    
+    const dx = (lat2 - lat1) * milesPerLat;
+    const dy = (lon2 - lon1) * milesPerLon;
+    
+    const distance = Math.sqrt(dx ** 2 + dy ** 2);
 
     if (activeNodeObj === null || name === activeNode) return nodes;
 
@@ -171,6 +186,31 @@ export function NodeProvider({children}) {
     setNodes(currentNodes => addNeighbor(node));
   };
 
+  const removeNeighbor = (nodeName, neighborName) => {
+    return Object.entries(nodes).reduce((acc, [key, value]) => {
+      if (key == nodeName) {
+          // Remove the neighbor reference from the neighbors of this node
+        const updatedNeighbors = { ...value.neighbors };
+        delete updatedNeighbors[neighborName];
+        acc[key] = { ...value, neighbors: updatedNeighbors };
+      } else if (key == neighborName) {
+        // Remove the node reference from the neighbors of the neighbor node
+        const updatedNeighbors = { ...value.neighbors };
+        delete updatedNeighbors[nodeName];
+        acc[key] = { ...value, neighbors: updatedNeighbors };
+      } else {
+          // If no neighbor reference, just copy the node
+          acc[key] = value;
+        }
+      return acc
+      }
+    , {})
+  }
+
+  const handleRemoveNeighbor = (nodeName, neighborName) => {
+    setNodes(currentNodes => removeNeighbor(nodeName, neighborName))
+  };
+
   return (
     <NodeContext.Provider value={{
     nodes,
@@ -180,9 +220,11 @@ export function NodeProvider({children}) {
     setNeighborsMode,
     endNeighborsMode,
     handleUpdateGraph,
+    loading,
     updated,
     activeNode,
     handleAddNeighbor,
+    handleRemoveNeighbor,
     handleUpdateName,
     handleRemoveNode,
   }}>

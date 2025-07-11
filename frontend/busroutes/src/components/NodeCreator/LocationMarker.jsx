@@ -40,14 +40,11 @@ function LocationMarker() {
   const {
     nodes,
     addNode,
-    removeAllNodes,
     neighborUI,
     setNeighborsMode,
     endNeighborsMode,
-    handleUpdateGraph,
-    updated,
-    activeNode,
     handleAddNeighbor,
+    handleRemoveNeighbor,
     handleUpdateName,
     handleRemoveNode,
   } = useNodeManager();
@@ -97,9 +94,9 @@ function LocationMarker() {
           nodes={nodes}
           neighborUI={neighborUI}
           onSetNeighbors={setNeighborsMode}
-          onRemoveNodes={removeAllNodes}
           onRemoveNode={handleRemoveNode}
           onAddNeighbor={handleAddNeighbor}
+          onRemoveNeighbor={handleRemoveNeighbor}
           onChangeName={handleUpdateName}
           popupRefs={popupRefs}
         />

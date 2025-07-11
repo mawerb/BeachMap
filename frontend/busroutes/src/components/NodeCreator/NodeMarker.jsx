@@ -29,9 +29,9 @@ function NodeMarker({
   nodes,
   neighborUI,
   onSetNeighbors,
-  onRemoveNodes,
   onRemoveNode,
   onAddNeighbor,
+  onRemoveNeighbor,
   onChangeName,
   popupRefs,
 }) {
@@ -55,7 +55,15 @@ function NodeMarker({
           key={`${index}-${neighborIndex}`}
           positions={[node.coords, nodes[key].coords]}
           color="red"
-        />
+        >
+          <Popup>
+          <button 
+            className="bg-red-500 hover:bg-red-600 text-white font-semibold py-1 px-3 rounded mr-2 transition"
+            onClick={(e) => { onRemoveNeighbor(name,key); e.stopPropagation(); }}>
+              Remove Connection
+            </button>
+          </Popup>
+        </Polyline>
       ))}
       <Marker
         key={index}
@@ -69,18 +77,22 @@ function NodeMarker({
       >
         {!neighborUI && (
           <Popup ref={(el) => (popupRefs.current[index] = el)}>
-            <div>Node {index + 1}: {name}</div>
-            <input type="text" onKeyUp={(e) => {
+            <div className='montserrat font-semibold mb-2'>Node {index + 1}: {name}</div>
+            <input 
+            className="border border-gray-300 rounded px-2 py-1 mb-3 w-full focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            type="text" 
+            onKeyUp={(e) => {
               if (e.key === "Enter") {
               onChangeName(name,e.target.value)}
-              }}></input><br></br>
-            <button onClick={(e) => { onRemoveNode(name); e.stopPropagation(); }}>
+              }}></input><br/>
+            <button 
+            className="bg-red-500 hover:bg-red-600 text-white font-semibold py-1 px-3 rounded mr-2 transition"
+            onClick={(e) => { onRemoveNode(name); e.stopPropagation(); }}>
               Delete
             </button>
-            <button onClick={() => onSetNeighbors(name)}>Set Neighbors</button><br></br>
-            <button onClick={(e) => { onRemoveNodes(); e.stopPropagation(); }}>
-              Delete All Nodes
-            </button>
+            <button 
+            className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-1 px-3 rounded transition"
+            onClick={() => onSetNeighbors(name)}>Set Neighbors</button><br></br>
           </Popup>
         )}
       </Marker>

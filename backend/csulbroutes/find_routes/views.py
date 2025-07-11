@@ -65,10 +65,19 @@ def get_nodes (request):
 def update_nodes (request):
     try:
         data = request.data
+
+        meta = {
+            "_meta": {
+                "units": "kilometers",
+                "description": "Campus walking paths graph"
+            }
+        }
+
+        combined_data = {**meta, **data}
         base_dir = os.path.dirname(os.path.abspath(__file__))
-        path = os.path.join(base_dir,'algo','TEST','test.json')
+        path = os.path.join(base_dir,'algo','mapdata','coordinate_graph.json')
         with open(path,'w') as file:
-            json.dump(data,file,indent=4)
+            json.dump(combined_data,file,indent=4)
         return Response({'message': 'Nodes updated successfully'}, status=status.HTTP_200_OK)
     except Exception as e:
         print("Error", e)
