@@ -9,14 +9,14 @@ export default function Button({
     return (
         <button
         className='flex transform flex-row items-center 
-        justify-center rounded-mg bg-blue-600 px-2 py-1
+        justify-center rounded-lg bg-blue-600 px-2 py-1
         text-white shadow-lg outline-none transition-transform
-        focus:ring-2 active:scale-95'
+        focus:ring-2 active:scale-95 relative'
         onClick={onClick} 
-        disabled={loading || disabled}
+        disabled={loading || disabled}  
         >
-            {loading && <Spinner className='mr-2'/>}
-            {title}
+        {loading && <Spinner className='mr-2'/>}
+        {title}
         </button>
     )
 }

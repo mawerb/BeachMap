@@ -3,7 +3,8 @@ import busLogo from '/favicon.png'
 import Map from '../components/NodeCreator/AdminMap'
 import DropDown from '../components/Dropdown'
 import { getOptions, findOptRoute } from '../services/api';
-import AdminNav from '../components/NodeCreator/AdminNav'
+import AdminNav from '../components/NodeCreator/AdminNav';
+import PropCheckbox from '../components/NodeCreator/PropCheckbox';
 import { NodeProvider } from '../context/NodeManager';
 
 function PathFinder() {

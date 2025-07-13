@@ -30,6 +30,7 @@ NOTES:
 */
 import { useState,useEffect, createContext,useContext } from 'react';
 import { getNodes,updateNodes } from '../services/api.js';
+import { set } from 'zod';
 
 const NodeContext = createContext();
 
@@ -39,6 +40,12 @@ export function NodeProvider({children}) {
   const [neighborUI, setNeighborUI] = useState(false);
   const [updated, setUpdated] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [selectedNode, setSelectedNode] = useState(null);
+
+  const property_list = {
+    isLandmark: false,
+    isAccessible: false,
+  }
 
   useEffect(() => {
     const loadedNodes = async () => {
@@ -56,13 +63,30 @@ export function NodeProvider({children}) {
 
   // Function to add a new node with coordinates and an optional name
   const addNode = (coords, name="unNamed Node") => {
-    setNodes(nodes => ({...nodes, [name]: { coords : [coords.lat,coords.lng], neighbors: {} }}));
+    let newNode =  {[name]: { coords : [coords.lat,coords.lng], neighbors: {},
+      properties: {...property_list}
+    }};
+    setNodes(nodes => ({...nodes, ...newNode}));
+    setSelectedNode({ name, ...newNode[name] });
+  };
+
+  const handlePropChange = (name,newProperties) => {
+    setNodes(nodes => ({
+      ...nodes,
+      [name]: {
+        ...nodes[name],
+        properties: {...newProperties}
+      }
+    }));
   };
 
   // Function to handle updating the name of a node
-  const handleUpdateName = (currName, newName) => {
+  const handleUpdateName = (currName, newName, currNode) => {
     if (newName in nodes) {
       return alert('This name already exists. Please choose a different name.');
+    }
+    if (currName === selectedNode?.name) {
+      setSelectedNode({name: newName, node: currNode});
     }
     setNodes(nodes => (updateName(currName,newName)));
   }
@@ -74,7 +98,15 @@ export function NodeProvider({children}) {
         acc[newName] = value;
       }
       else {
+        if(currName in value.neighbors) {
+          const { [currName]: removed, ...restNeighbors } = value.neighbors;
+          acc[key] = {...value, neighbors :{
+            ...restNeighbors,
+            [newName] : removed,
+          }}
+        } else {
         acc[key] = value;
+        }
       }
       return acc;
     }, {})};
@@ -227,6 +259,8 @@ export function NodeProvider({children}) {
     handleRemoveNeighbor,
     handleUpdateName,
     handleRemoveNode,
+    selectedNode,
+    setSelectedNode,
   }}>
       {children}
     </NodeContext.Provider>

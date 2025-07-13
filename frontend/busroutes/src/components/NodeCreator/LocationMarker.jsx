@@ -47,6 +47,9 @@ function LocationMarker() {
     handleRemoveNeighbor,
     handleUpdateName,
     handleRemoveNode,
+    selectedNode,
+    setSelectedNode,
+
   } = useNodeManager();
 
   const popupRefs = useRef({}); // Store references to popups for each node
@@ -86,12 +89,15 @@ function LocationMarker() {
         </button>
       )}
       {Object.entries(nodes).length > 0 && (Object.entries(nodes).map(([name,node], index) => (
+        // Render NodeMarker for each node in the nodes object
         <NodeMarker
           key={index}
           name={name}
           node={node}
           index={index}
           nodes={nodes}
+          selectedNode={selectedNode}
+          setSelectedNode={setSelectedNode}
           neighborUI={neighborUI}
           onSetNeighbors={setNeighborsMode}
           onRemoveNode={handleRemoveNode}

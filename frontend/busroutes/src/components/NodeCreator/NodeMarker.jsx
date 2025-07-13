@@ -20,13 +20,16 @@
 
 import { Marker, Popup, Polyline, useMap } from 'react-leaflet';
 import pointImg from '../../assets/point.png';
-import { use, useEffect } from 'react';
+import { use, useEffect, useState } from 'react';
+import PropCheckbox from './PropCheckbox';
 
 function NodeMarker({
   name,
   node,
   index,
   nodes,
+  selectedNode,
+  setSelectedNode,
   neighborUI,
   onSetNeighbors,
   onRemoveNode,
@@ -42,11 +45,16 @@ function NodeMarker({
 
   const curr_map = useMap();
 
-  useEffect(() => {
-    const popup = popupRefs.current[index];
-    curr_map.openPopup(popup, node.coords);
-  },[popupRefs.current[index]]);
+  // useEffect(() => {
+  //   const popup = popupRefs.current[index];
+  //   curr_map.openPopup(popup, node.coords);
+  // },[popupRefs.current[index]]);
 
+  useEffect(() => {
+    if (popupRefs.current) {
+      popupRefs.current.openPopup()
+    }
+  }, [popupRefs])
 
   return (
     <>
@@ -69,21 +77,26 @@ function NodeMarker({
         key={index}
         icon={pointIcon}
         position={node.coords}
+        ref={popupRefs}
         eventHandlers={{
           click: () => {
             if (neighborUI) onAddNeighbor(name);
+            else {
+              setSelectedNode({ name, node });
+            }
           },
         }}
       >
+        {selectedNode && selectedNode.name === name && <PropCheckbox NodeName={name} Node={node} Property={node.properties}/>}
         {!neighborUI && (
-          <Popup ref={(el) => (popupRefs.current[index] = el)}>
-            <div className='montserrat font-semibold mb-2'>Node {index + 1}: {name}</div>
+          <Popup>
+            <div className='montserrat font-semibold mb-2 truncate max-w-45'>Node {index + 1}: {name}</div>
             <input 
             className="border border-gray-300 rounded px-2 py-1 mb-3 w-full focus:outline-none focus:ring-2 focus:ring-indigo-500"
             type="text" 
             onKeyUp={(e) => {
               if (e.key === "Enter") {
-              onChangeName(name,e.target.value)}
+              onChangeName(name,e.target.value,node)}
               }}></input><br/>
             <button 
             className="bg-red-500 hover:bg-red-600 text-white font-semibold py-1 px-3 rounded mr-2 transition"
