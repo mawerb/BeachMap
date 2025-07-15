@@ -2,5 +2,27 @@
     "_meta": {
         "units": "kilometers",
         "description": "Campus walking paths graph"
+    },
+    "hi": {
+        "coords": [
+            33.77802369778192,
+            -118.11387956142427
+        ],
+        "neighbors": {},
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": true
+        }
+    },
+    "unNamed Node": {
+        "coords": [
+            33.781662076671104,
+            -118.1147861480713
+        ],
+        "neighbors": {},
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        }
     }
 }

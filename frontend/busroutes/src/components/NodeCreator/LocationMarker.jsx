@@ -49,6 +49,7 @@ function LocationMarker() {
     handleRemoveNode,
     selectedNode,
     setSelectedNode,
+    handlePropChange
 
   } = useNodeManager();
 
@@ -105,6 +106,7 @@ function LocationMarker() {
           onRemoveNeighbor={handleRemoveNeighbor}
           onChangeName={handleUpdateName}
           popupRefs={popupRefs}
+          handlePropChange={handlePropChange}
         />
       ))
       )}

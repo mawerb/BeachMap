@@ -71,6 +71,9 @@ export function NodeProvider({children}) {
   };
 
   const handlePropChange = (name,newProperties) => {
+    console.log('Updating properties for node:', name, newProperties);
+    if (loading) return;
+    setLoading(true);
     setNodes(nodes => ({
       ...nodes,
       [name]: {
@@ -78,6 +81,7 @@ export function NodeProvider({children}) {
         properties: {...newProperties}
       }
     }));
+    setLoading(false);
   };
 
   // Function to handle updating the name of a node
@@ -151,8 +155,8 @@ export function NodeProvider({children}) {
   };
 
   const handleUpdateGraph = async () => {
-    if (updated) return;
-      setUpdated(true);
+    if (updated || loading) return;
+    setUpdated(true);
     setLoading(true);
     try {
       await updateNodes(nodes)
@@ -249,6 +253,7 @@ export function NodeProvider({children}) {
     addNode,
     removeAllNodes,
     neighborUI,
+    handlePropChange,
     setNeighborsMode,
     endNeighborsMode,
     handleUpdateGraph,

@@ -73,11 +73,27 @@ def update_nodes (request):
             }
         }
 
+        # Combine the meta information with the data
         combined_data = {**meta, **data}
+
+        # Define the path to save the JSON file
         base_dir = os.path.dirname(os.path.abspath(__file__))
-        path = os.path.join(base_dir,'algo','mapdata','coordinate_graph.json')
-        with open(path,'w') as file:
+        coord_path = os.path.join(base_dir,'algo','mapdata','coordinate_graph.json')
+
+        # Write the combined data to the JSON file
+        with open(coord_path,'w') as file:
             json.dump(combined_data,file,indent=4)
+
+        landmarks = [{'name': key} 
+                     for key, value in data.items() if (key != '_meta') 
+                     and value.get('properties',{}).get('isLandmark', False)]
+
+        options_path = os.path.join(base_dir,'options','TEST.json')
+
+        # Save landmarks to a separate file
+        with open(options_path,'w') as file:
+            json.dump(landmarks, file, indent=4)
+
         return Response({'message': 'Nodes updated successfully'}, status=status.HTTP_200_OK)
     except Exception as e:
         print("Error", e)

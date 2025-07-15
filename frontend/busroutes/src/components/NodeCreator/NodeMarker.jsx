@@ -21,7 +21,7 @@
 import { Marker, Popup, Polyline, useMap } from 'react-leaflet';
 import pointImg from '../../assets/point.png';
 import { use, useEffect, useState } from 'react';
-import PropCheckbox from './PropCheckbox';
+import NodePropertyEditor from './NodePropertyEditor';
 
 function NodeMarker({
   name,
@@ -37,6 +37,7 @@ function NodeMarker({
   onRemoveNeighbor,
   onChangeName,
   popupRefs,
+  handlePropChange,
 }) {
   const pointIcon = L.icon({
     iconUrl: pointImg,
@@ -54,7 +55,7 @@ function NodeMarker({
     if (popupRefs.current) {
       popupRefs.current.openPopup()
     }
-  }, [popupRefs])
+  }, [popupRefs.current]);
 
   return (
     <>
@@ -87,7 +88,7 @@ function NodeMarker({
           },
         }}
       >
-        {selectedNode && selectedNode.name === name && <PropCheckbox NodeName={name} Node={node} Property={node.properties}/>}
+        {selectedNode && selectedNode.name === name && <NodePropertyEditor nodeName={name} property={node.properties} handlePropChange={handlePropChange}/>}
         {!neighborUI && (
           <Popup>
             <div className='montserrat font-semibold mb-2 truncate max-w-45'>Node {index + 1}: {name}</div>
