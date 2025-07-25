@@ -3,23 +3,31 @@
         "units": "kilometers",
         "description": "Campus walking paths graph"
     },
-    "hi": {
+    "Hi": {
         "coords": [
-            33.77802369778192,
-            -118.11387956142427
+            33.77913841361827,
+            -118.11341285705568
         ],
-        "neighbors": {},
+        "neighbors": {
+            "Hello": {
+                "distance": 0.10905302435542212
+            }
+        },
         "properties": {
-            "isLandmark": true,
-            "isAccessible": true
+            "isLandmark": false,
+            "isAccessible": false
         }
     },
-    "unNamed Node": {
+    "Hello": {
         "coords": [
-            33.781662076671104,
-            -118.1147861480713
+            33.77782750629346,
+            -118.11447501182558
         ],
-        "neighbors": {},
+        "neighbors": {
+            "Hi": {
+                "distance": 0.10905302435542212
+            }
+        },
         "properties": {
             "isLandmark": true,
             "isAccessible": false

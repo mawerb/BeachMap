@@ -66,19 +66,21 @@ function PathFinder() {
      finally {
          setLoading(false)
      }
-    }
+    } 
     loadOptions()
   }, [])
 
   return (
     <>
-      <form onSubmit={handleSearch}>
+      {/* <form onSubmit={handleSearch}>
         <DropDown options={options} value={start} oppValue={end} setValue={handleStartChange} placeholder={"Select A Start"}/>
         <DropDown options={options} value={end} oppValue={start} setValue={handleEndChange} placeholder={"Select A Destination"}/>
         <button type="submit">Submit</button>
-      </form>
-      <div className="leaflet-map">
-        <Map routeData ={route}/>
+      </form> */}
+      <div id="root">
+        <div className="leaflet-map">
+          <Map routeData ={route}/>
+        </div>
       </div>
     </>
   )

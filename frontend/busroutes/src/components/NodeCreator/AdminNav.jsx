@@ -13,7 +13,7 @@ function AdminNav() {
             <h1 className={styles.logo}>Admin Utilities</h1>
             <nav>
                 <ul className={styles.navLinks}> 
-                    <li><a href='./'><button>Home</button></a></li>
+                    <li><a href='./'><button className="cursor-pointer">Home</button></a></li>
                 </ul>
             </nav>
             <button className={styles.button} onClick={(e) => {handleUpdateGraph(); e.stopPropagation()}}>Update</button>

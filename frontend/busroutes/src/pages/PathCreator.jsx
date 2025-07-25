@@ -5,7 +5,7 @@ import { getOptions, findOptRoute } from '../services/api';
 import AdminNav from '../components/NodeCreator/AdminNav';
 import { NodeProvider } from '../context/NodeManager';
 
-function PathFinder() {
+function PathCreator() {
   const[start,setStart] = useState('');
   const[end,setEnd] = useState('');
   const [options,setOptions] = useState([]);
@@ -27,4 +27,4 @@ function PathFinder() {
   )
 }
 
-export default PathFinder
+export default PathCreator

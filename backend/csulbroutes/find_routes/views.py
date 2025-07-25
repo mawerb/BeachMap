@@ -84,7 +84,7 @@ def update_nodes (request):
         with open(coord_path,'w') as file:
             json.dump(combined_data,file,indent=4)
 
-        landmarks = [{'name': key} 
+        landmarks = [{'name': key, 'coords' : value.get('coords', []),} 
                      for key, value in data.items() if (key != '_meta') 
                      and value.get('properties',{}).get('isLandmark', False)]
 

@@ -1,8 +1,8 @@
 [
-    "Library",
-    "University Student Union(USU)",
-    "Engineering Building",
-    "Bookstore",
-    "CSNM"
+    {
+        "name": "hi"
+    },
+    {
+        "name": "unNamed Node"
+    }
 ]
-  
