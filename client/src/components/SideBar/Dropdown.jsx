@@ -1,10 +1,10 @@
 import { useState, useEffect, useRef } from "react";
 import waypoint from "../../assets/searchbox/waypoint-icon.svg"
 
-const DropDown = ({ options=['Oranges', 'Apples', 'Pearls','Feet'] }) => {
+const DropDown = ({ choices=['Oranges', 'Apples', 'Pearls','Feet'] }) => {
     const[value,setValue] = useState("");
     const[showSuggestions, setShowSuggestions] = useState(false);
-    const suggestions = options.filter( option => option.toLowerCase().includes(value.toLowerCase())).slice(0,4);
+    const suggestions = choices.filter( option => option.toLowerCase().includes(value.toLowerCase())).slice(0,4);
 
     const autocompleteRef = useRef();
 

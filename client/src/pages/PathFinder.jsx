@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import Map from '../components/Map'
-import DropDown from '../components/SideBar/Dropdown'
+import SideBarManager from '../components/SideBar/SideBarManager';
 import Navbar from '../components/NavBar';
 import InfoBar from "../components/SideBar/InfoBar";
 import { getOptions, findOptRoute } from '../services/api';
@@ -80,7 +80,7 @@ function PathFinder() {
         <button type="submit">Submit</button>
       </form> */}
       <Navbar/>
-      <DropDown/>
+      <SideBarManager LandMarks={options}/>
       <InfoBar/>
       <div id="root">
         <div className="leaflet-map">

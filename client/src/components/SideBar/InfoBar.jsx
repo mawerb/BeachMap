@@ -25,8 +25,8 @@ function InfoBar ({
 
     return (
         <div className="absolute top-10 h-[calc(100%-2.5rem)] z-[1099]">
-            <div className="relative h-full w-[21.7rem] bg-white border-r">
-                <img src={Image} className="border-b h-[30%] w-full"/>
+            <div className="relative h-full w-[21.7rem] bg-white">
+                <img src={Image} className="h-[30%] w-full"/>
                 <div className="ml-4">
                     <h1 className="text-2xl font-medium">{Name}</h1>
                     <h2 className="text-sm font-light text-gray-500">{LandmarkType}</h2>
