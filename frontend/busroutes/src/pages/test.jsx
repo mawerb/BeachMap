@@ -1,15 +1,13 @@
-import DropDown from "../components/Dropdown";
+import DropDown from "../components/SideBar/Dropdown";
 import Navbar from "../components/NavBar";
+import InfoBar from "../components/SideBar/InfoBar";
 
 const Tester = () => {
     return(
         <>
             <Navbar/>
-            <main className="pt-[50px]">
-                <div className="flex">
-                    <DropDown/>
-                </div>
-            </main>
+            <DropDown/>
+            <InfoBar/>
         </>
     )
 }

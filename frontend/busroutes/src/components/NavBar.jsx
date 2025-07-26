@@ -3,18 +3,14 @@ import styles from '../css/AdminNav.module.css';
 function Navbar() {
   return (
     <header className={styles.header}>
-      <h1 className={styles.logo}>Admin Utilities</h1>
+      <h1 className={styles.logo}>CSULB Routes</h1>
       <nav>
         <ul className={styles.navLinks}> 
-          <li><a href='./'><button>Home</button></a></li>
+          <li><a href='./' onClick="return false;"><button>Home</button></a></li>
+          <li><a href='./'><button>About</button></a></li>
+          <li><a href='./'><button>Contact Us</button></a></li>
         </ul>
       </nav>
-      <button className={styles.button} onClick={(e) => e.stopPropagation()}>
-        Update
-      </button>
-      <button className={styles.danger_button}>
-        Delete All
-      </button>
     </header> 
   )
 }

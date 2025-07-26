@@ -1,4 +1,4 @@
-import { MapContainer, TileLayer, Polyline, useMap } from 'react-leaflet'
+import { MapContainer, TileLayer, Polyline, useMap, ZoomControl } from 'react-leaflet'
 import { useEffect } from 'react'
 import '../css/Map.css'
 import 'leaflet/dist/leaflet.css';
@@ -24,7 +24,7 @@ function Map({routeData}){
 
     return (
         <div className='leaflet-map'>
-            <MapContainer center={[33.78184042460368,-118.11463594436647]} zoom={15.7} scrollWheelZoom={true} maxZoom={20} minZoom={15}>
+            <MapContainer center={[33.78184042460368,-118.11463594436647]} zoom={15.7} scrollWheelZoom={true} maxZoom={20} minZoom={15} zoomControl={false}>
                 {coords && coords.length > 0 && 
                 <>
                 <Polyline positions={coords} color='blue' />
@@ -43,6 +43,7 @@ function Map({routeData}){
                     maxZoom={20}
                     keepBuffer={10}
                 />
+                <ZoomControl position="bottomright" />  
             </MapContainer>
         </div>
     )

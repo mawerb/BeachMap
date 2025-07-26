@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import Map from '../components/Map'
-import DropDown from '../components/Dropdown'
+import DropDown from '../components/SideBar/Dropdown'
+import Navbar from '../components/NavBar';
+import InfoBar from "../components/SideBar/InfoBar";
 import { getOptions, findOptRoute } from '../services/api';
 
 function PathFinder() {
@@ -77,6 +79,9 @@ function PathFinder() {
         <DropDown options={options} value={end} oppValue={start} setValue={handleEndChange} placeholder={"Select A Destination"}/>
         <button type="submit">Submit</button>
       </form> */}
+      <Navbar/>
+      <DropDown/>
+      <InfoBar/>
       <div id="root">
         <div className="leaflet-map">
           <Map routeData ={route}/>
