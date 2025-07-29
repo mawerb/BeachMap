@@ -54,6 +54,13 @@ function LocationMarker() {
   } = useNodeManager();
 
   const popupRefs = useRef({}); // Store references to popups for each node
+  const containerRef = useRef(null); // Reference to the container div
+
+  useEffect(() => {
+    if(containerRef.current) {
+      containerRef.current.focus(); // Focus the container to enable keyboard events
+    }
+  }, [neighborUI])
 
   // Handle map events for adding nodes
   const map = useMapEvents({
@@ -63,27 +70,19 @@ function LocationMarker() {
     },
   }); 
 
-  // Disable click propagation for the update graph button
-  // useEffect(() => {
-  //   const button = document.getElementById('updateGraph');
-  //   if (button) {
-  //     L.DomEvent.disableClickPropagation(button);
-  //   }
-  // }, []);
-
   // Handle Escape key to exit neighbors mode
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (e.key === 'Escape' && neighborUI) {
+      if (e.key === 'Escape') {
         endNeighborsMode();
       }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [neighborUI, endNeighborsMode]);
+  }, [neighborUI,endNeighborsMode]);
 
   return (
-    <>
+    <div tabIndex={0} ref={containerRef}>
       {neighborUI && (
         <button onClick={endNeighborsMode} id='endNeighbor'>
           Stop Attaching Neighbors
@@ -110,7 +109,7 @@ function LocationMarker() {
         />
       ))
       )}
-    </>
+    </div>
   );
 }
 
