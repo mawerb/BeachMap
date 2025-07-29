@@ -2,7 +2,11 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 from .algo.opt_path import find_path
+from pymongo.server_api import ServerApi
+from dotenv import load_dotenv
+from bson import json_util
 import traceback
+import pymongo
 import json
 import os
 
@@ -35,26 +39,27 @@ def opt_path (request):
 
 @api_view(['GET'])
 def get_options (request):
-    try:
-        base_dir = os.path.dirname(os.path.abspath(__file__))
-        path = os.path.join(base_dir,'options','locations.json')
-        with open(path,'r') as file:
-            data = json.load(file)
 
-        return Response({'options': data})
+    load_dotenv()
+    uri  = os.getenv('MONGO_URI')
+    client = pymongo.MongoClient(uri, server_api=ServerApi('1'))
+
+    try:
+        collection = client['GeoJson']['nodes']
+        cursor = collection.find({'properties.isLandmark' : {'$eq':True}}, {'_id':0,'neighbors':0,})
+        return Response({'options': list(cursor)}, status=status.HTTP_200_OK)
     except Exception as e:
         print("Error", e)
         return Response({'error': str(e)}, status=500)
 
 @api_view(['GET'])
 def get_nodes (request):
+
     try:
         base_dir = os.path.dirname(os.path.abspath(__file__))
         path = os.path.join(base_dir,'algo','mapdata','coordinate_graph.json')
         with open(path,'r') as file:
             data = json.load(file)
-        
-        del data['_meta']
 
         return Response({'result':data})
     except Exception as e:
@@ -63,18 +68,13 @@ def get_nodes (request):
     
 @api_view(['PUT'])
 def update_nodes (request):
+    load_dotenv()
+
+    uri  = os.getenv('MONGO_URI')
+    client = pymongo.MongoClient(uri, server_api=ServerApi('1'))
+
     try:
         data = request.data
-
-        meta = {
-            "_meta": {
-                "units": "kilometers",
-                "description": "Campus walking paths graph"
-            }
-        }
-
-        # Combine the meta information with the data
-        combined_data = {**meta, **data}
 
         # Define the path to save the JSON file
         base_dir = os.path.dirname(os.path.abspath(__file__))
@@ -82,17 +82,34 @@ def update_nodes (request):
 
         # Write the combined data to the JSON file
         with open(coord_path,'w') as file:
-            json.dump(combined_data,file,indent=4)
+            json.dump(data,file,indent=4)
 
-        landmarks = [{'name': key, 'coords' : value.get('coords', []),} 
-                     for key, value in data.items() if (key != '_meta') 
-                     and value.get('properties',{}).get('isLandmark', False)]
+        coordinate_data = [{'name':key, **value} for key,value in data.items()]
+
+        landmarks = [{'name': key, 'location' : {
+                                    'type' : 'Point',
+                                    'coordinates' : value.get('coords', [])[::-1]
+                                    },
+                    } 
+                     for key, value in data.items() 
+                     if value.get('properties',{}).get('isLandmark', False)]
+
+        # Insert or update landmarks in the MongoDB collection
+        collection = client['GeoJson']['landmarks']
+        collection.create_index([("location", "2dsphere")])
+        collection.delete_many({})
+        collection.insert_many(landmarks)
+
+        nd_collection = client['GeoJson']['nodes']
+        nd_collection.create_index([("name", pymongo.ASCENDING)])
+        nd_collection.delete_many({})
+        nd_collection.insert_many(coordinate_data)
 
         options_path = os.path.join(base_dir,'options','TEST.json')
 
         # Save landmarks to a separate file
         with open(options_path,'w') as file:
-            json.dump(landmarks, file, indent=4)
+            json.dump(landmarks, file, indent=4, default=json_util.default)       
 
         return Response({'message': 'Nodes updated successfully'}, status=status.HTTP_200_OK)
     except Exception as e:

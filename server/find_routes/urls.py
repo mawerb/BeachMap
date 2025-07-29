@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+import asyncio
 
 urlpatterns = [
     path('opt_path/', views.opt_path , name='opt_path'),

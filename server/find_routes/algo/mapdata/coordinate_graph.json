@@ -1,35 +1,49 @@
 {
-    "_meta": {
-        "units": "kilometers",
-        "description": "Campus walking paths graph"
-    },
-    "Hi": {
+    "Random": {
         "coords": [
-            33.77913841361827,
-            -118.11341285705568
+            33.7797358953349,
+            -118.11459302902223
         ],
         "neighbors": {
-            "Hello": {
-                "distance": 0.10905302435542212
-            }
-        },
-        "properties": {
-            "isLandmark": false,
-            "isAccessible": false
-        }
-    },
-    "Hello": {
-        "coords": [
-            33.77782750629346,
-            -118.11447501182558
-        ],
-        "neighbors": {
-            "Hi": {
-                "distance": 0.10905302435542212
+            "unNamed Node": {
+                "distance": 0.07891401188854189
             }
         },
         "properties": {
             "isLandmark": true,
+            "isAccessible": false
+        }
+    },
+    "Library": {
+        "coords": [
+            33.776935721137164,
+            -118.11442136764528
+        ],
+        "neighbors": {
+            "unNamed Node": {
+                "distance": 0.20050538153086564
+            }
+        },
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        }
+    },
+    "unNamed Node": {
+        "coords": [
+            33.77966455445351,
+            -118.1132197380066
+        ],
+        "neighbors": {
+            "Random": {
+                "distance": 0.07891401188854189
+            },
+            "Library": {
+                "distance": 0.20050538153086564
+            }
+        },
+        "properties": {
+            "isLandmark": false,
             "isAccessible": false
         }
     }

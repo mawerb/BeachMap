@@ -1,6 +1,7 @@
 # IDEs
 .vscode/
 .idea/
+.env
 
 # OS generated files
 Thumbs.db
