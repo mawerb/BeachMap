@@ -62,3 +62,38 @@ export const updateNodes = async( nodes ) => {
         console.log('Fetch Error:', err)
     }
 }
+
+export const uploadImage = async ( image ) => {
+    try {
+        const response = await fetch('http://localhost:8000/api/upload_image/', {
+            method: "POST",
+            body: image,
+        })
+        if(!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`)
+        }
+        const data = await response.json();
+        console.log('Image uploaded:', data);
+        return data['image_url'];
+    } catch (err) {
+        console.log('Fetch Error:', err)
+    }
+};
+
+export const getImage = async( imageName ) => {
+    try {
+        if (!imageName) return null;
+        const response = await fetch(`http://localhost:8000/api/get_image/${imageName}`, {method: 'GET'});
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`)
+        };
+        const blob = await response.blob();
+        const imageUrl = URL.createObjectURL(blob);
+        
+        console.log('Image URL:', imageUrl);
+
+        return imageUrl;
+    } catch (err) {
+        console.log('Fetch Error:', err)
+    }
+};

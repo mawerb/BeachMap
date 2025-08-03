@@ -1,10 +1,10 @@
 import placeholder from '../../assets/InfoBar/placeholder-event.png'
 
 function EventsTab({
-    events=["No Events", "Poop","stink",'Freak',"hey!"],
+    events = ["No Events", "Poop", "stink", 'Freak', "hey!"],
 }) {
-    return(
-        events.map((event,index) => (
+    return (
+        events.map((event, index) => (
             <div key={index} className="flex items-center space-x-2 h-[10%] min-h-[70px]">
                 <img src={placeholder} alt="Description" className="h-[75%] aspect-square object-cover rounded-full" />
                 <div className="flex-1">
@@ -13,7 +13,7 @@ function EventsTab({
                         This is a placeholder for the event description.
                     </p>
                 </div>
-                            </div>
+            </div>
         ))
     )
 } export default EventsTab

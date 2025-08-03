@@ -3,11 +3,11 @@ import Navbar from "../components/NavBar";
 import InfoBar from "../components/SideBar/InfoBar";
 
 const Tester = () => {
-    return(
+    return (
         <>
-            <Navbar/>
-            <DropDown/>
-            <InfoBar/>
+            <Navbar />
+            <DropDown />
+            <InfoBar />
         </>
     )
 }

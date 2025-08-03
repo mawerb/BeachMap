@@ -1,10 +1,15 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework.views import APIView
 from rest_framework import status
 from .algo.opt_path import find_path
 from pymongo.server_api import ServerApi
+from rest_framework import generics, renderers
+from django.http import FileResponse, Http404
 from dotenv import load_dotenv
 from bson import json_util
+from .models import Images
+import mimetypes
 import traceback
 import pymongo
 import json
@@ -42,7 +47,10 @@ def get_options (request):
 
     load_dotenv()
     uri  = os.getenv('MONGO_URI')
-    client = pymongo.MongoClient(uri, server_api=ServerApi('1'))
+    client = pymongo.MongoClient(uri, 
+                                 tls=True,
+                                 tlsAllowInvalidCertificates=True,
+                                 server_api=ServerApi('1'))
 
     try:
         collection = client['GeoJson']['nodes']
@@ -50,7 +58,7 @@ def get_options (request):
         return Response({'options': list(cursor)}, status=status.HTTP_200_OK)
     except Exception as e:
         print("Error", e)
-        return Response({'error': str(e)}, status=500)
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 @api_view(['GET'])
 def get_nodes (request):
@@ -72,6 +80,7 @@ def update_nodes (request):
 
     uri  = os.getenv('MONGO_URI')
     client = pymongo.MongoClient(uri, server_api=ServerApi('1'))
+    print(request.data)
 
     try:
         data = request.data
@@ -96,9 +105,12 @@ def update_nodes (request):
 
         # Insert or update landmarks in the MongoDB collection
         collection = client['GeoJson']['landmarks']
-        collection.create_index([("location", "2dsphere")])
-        collection.delete_many({})
-        collection.insert_many(landmarks)
+        if landmarks:
+            collection.create_index([("location", "2dsphere")])
+            collection.delete_many({})
+            collection.insert_many(landmarks)
+        else:
+            collection.delete_many({})
 
         nd_collection = client['GeoJson']['nodes']
         nd_collection.create_index([("name", pymongo.ASCENDING)])
@@ -115,3 +127,65 @@ def update_nodes (request):
     except Exception as e:
         print("Error", e)
         return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+@api_view(['POST'])
+def upload_image ( request ):
+    try:
+        data = request.FILES
+        if 'image' not in data:
+            return Response({'error': 'No image provided'}, status=status.HTTP_400_BAD_REQUEST)
+        image = data['image']
+        # Define the path to save the image
+        print('image' , image)
+        print(data)
+        return Response({'message': 'Image uploaded successfully'}, status=status.HTTP_200_OK)
+
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+class ImageAPIView(APIView):
+
+    def get(self, request, *args, **kwargs):
+        name = self.kwargs.get('name')
+        try:
+            image_instance = Images.objects.get(name=name)
+            image = image_instance.name
+            content_type, _ = mimetypes.guess_type(image)
+            return FileResponse(image_instance.image.open(), content_type=content_type)
+        except Images.DoesNotExist:
+            raise Http404("Image not found")
+    
+    def post(self, request):
+        print('hi')
+        print(request.FILES)
+        print(request.data)
+        try:
+            if 'image' not in request.FILES:
+                return Response({'error': 'No image provided'}, status=status.HTTP_400_BAD_REQUEST)
+            
+            data = request.FILES['image']
+            name = data.name.split('.')[:-1][0]
+            ext = data.name.split('.')[-1]
+            print(name,ext)
+
+            image_instance = Images.objects.get(name=name)
+
+            print(image_instance.image.name)
+
+            if image_instance.image and image_instance.image.name != data.name:
+                old_image_path = image_instance.image.path
+                if os.path.exists(old_image_path):
+                    os.remove(old_image_path)
+                image_instance.image = data
+                image_instance.save()
+
+            return Response({'message': 'Image replaced successfully'}, status=status.HTTP_200_OK)
+        except Images.DoesNotExist:
+            image_instance = Images(name=name, image=data)
+            image_instance.save()
+
+            return Response({'message': 'Image updated successfully'}, status=status.HTTP_200_OK)
+
+        except Exception as e:
+            print("Error", e)
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

@@ -6,21 +6,19 @@ import AdminNav from '../components/NodeCreator/AdminNav';
 import { NodeProvider } from '../context/NodeManager';
 
 function PathCreator() {
-  const[start,setStart] = useState('');
-  const[end,setEnd] = useState('');
-  const [options,setOptions] = useState([]);
-  const [loading,setLoading] = useState(true);
-  const [error,setError] = useState(null)
-  const [route,setRoute] = useState(null)
-
-
+  const [start, setStart] = useState('');
+  const [end, setEnd] = useState('');
+  const [options, setOptions] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null)
+  const [route, setRoute] = useState(null)
 
   return (
     <>
       <NodeProvider>
-        <AdminNav/>
+        <AdminNav />
         <div className="leaflet-map">
-          <Map/>
+          <Map />
         </div>
       </NodeProvider>
     </>

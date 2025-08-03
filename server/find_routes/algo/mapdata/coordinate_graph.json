@@ -1,49 +1,23 @@
 {
-    "Random": {
+    "a": {
         "coords": [
-            33.7797358953349,
-            -118.11459302902223
+            33.77961104875347,
+            -118.1134557723999
         ],
-        "neighbors": {
-            "unNamed Node": {
-                "distance": 0.07891401188854189
-            }
-        },
+        "neighbors": {},
         "properties": {
             "isLandmark": true,
             "isAccessible": false
         }
     },
-    "Library": {
+    "v": {
         "coords": [
-            33.776935721137164,
-            -118.11442136764528
+            33.78273215869563,
+            -118.11169624328613
         ],
-        "neighbors": {
-            "unNamed Node": {
-                "distance": 0.20050538153086564
-            }
-        },
+        "neighbors": {},
         "properties": {
             "isLandmark": true,
-            "isAccessible": false
-        }
-    },
-    "unNamed Node": {
-        "coords": [
-            33.77966455445351,
-            -118.1132197380066
-        ],
-        "neighbors": {
-            "Random": {
-                "distance": 0.07891401188854189
-            },
-            "Library": {
-                "distance": 0.20050538153086564
-            }
-        },
-        "properties": {
-            "isLandmark": false,
             "isAccessible": false
         }
     }
