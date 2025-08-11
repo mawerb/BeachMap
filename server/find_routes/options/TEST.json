@@ -9,11 +9,11 @@
             ]
         },
         "_id": {
-            "$oid": "68993a8bb22129d3c8b86a0f"
+            "$oid": "689963c019ae3c47feff6a30"
         }
     },
     {
-        "name": "Student Rec",
+        "name": "Student Recreation and Welness Center(SRWC)",
         "location": {
             "type": "Point",
             "coordinates": [
@@ -22,7 +22,7 @@
             ]
         },
         "_id": {
-            "$oid": "68993a8bb22129d3c8b86a10"
+            "$oid": "689963c019ae3c47feff6a31"
         }
     }
 ]

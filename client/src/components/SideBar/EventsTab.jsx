@@ -1,5 +1,6 @@
 import placeholder from '../../assets/InfoBar/placeholder-event.png'
 import landmark from '../../assets/landmark.png'
+import clock from '../../assets/clock.png'
 import { Transition } from '@headlessui/react'
 import { useState } from 'react';
 
@@ -66,7 +67,7 @@ function EventsTab({
                             <p className="text-xs text-gray-600 line-clamp-2">{event.location}</p>
                         </div>
                         <div className="flex gap-1 items-center max-w-[275px] ">
-                            <img src={landmark} alt="Landmark" className="h-[20px] w-[20px] object-cover" />
+                            <img src={clock} alt="Landmark" className="h-[15px] w-[15px] object-cover" />
                             <p className="text-xs text-gray-600 line-clamp-2">{formatEventTime(event.starts_on, event.ends_on)}</p>
                         </div>
                     </div>
