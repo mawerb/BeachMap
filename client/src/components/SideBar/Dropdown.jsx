@@ -51,6 +51,11 @@ const DropDown = ({
                     value={value}
                     onChange={handleChange}
                     placeholder="Search Landmark"
+                    onKeyDown={(e) => {
+                        if (e.key === 'Enter' && suggestions.length > 0) {
+                            handleSuggestionClick(suggestions[0]);
+                        }
+                    }}
                     onFocus={() => {
                         setShowSuggestions(true)
                     }}
