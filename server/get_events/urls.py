@@ -1,0 +1,8 @@
+from django.urls import path
+from . import views
+import asyncio
+
+urlpatterns = [
+    path('update_events/', views.update_events , name='update_events'),
+    path('<str:node_name>/', views.get_events, name='get_events'),
+]

@@ -73,7 +73,17 @@ function PathFinder() {
     loadOptions()
   }, [])
 
-
+  function setSelectedNodeByName(name) {
+    console.log('name:', name)
+    const node = options.find(node => node.name === name);
+    console.log('node:', node)
+    if (node) {
+        setSelectedNode(node);
+    } else {
+        alert(`Node with name ${name} not found.`);
+        console.error(`Node with name ${name} not found.`);
+    }
+}
 
   return (
     <>
@@ -95,6 +105,7 @@ function PathFinder() {
             error={error}
             setError={setError} />
         </div>
+        <SideBarManager LandMarks={options} selectedNode={selectedNode} setSelectedNode={setSelectedNode} setSelectedNodeByName={setSelectedNodeByName} />
       </div>
     </>
   )

@@ -42,6 +42,10 @@ export function NodeProvider({ children }) {
   const [loading, setLoading] = useState(false);
   const [selectedNode, setSelectedNode] = useState(null);
 
+  const [deletedNodes,setDeletedNodes] = useState([]);
+  const [updatedNodes, setUpdatedNodes] = useState([]);
+  const [renamedNodes, setRenamedNodes] = useState([]);
+
   const property_list = {
     isLandmark: false,
     isAccessible: false,
@@ -98,6 +102,7 @@ export function NodeProvider({ children }) {
         image,
       }
     }));
+    setUpdatedNodes(updatedNodes => [...updatedNodes,{name: name, properties: newProperties}]);
     setLoading(false);
   };
 
@@ -117,6 +122,13 @@ export function NodeProvider({ children }) {
     return Object.entries(nodes).reduce((acc, [key, value]) => {
       if (key === currName) {
         acc[newName] = value;
+        setRenamedNodes(renamedNodes => [...renamedNodes ,{oldName : currName, newName: newName}]);
+        console.log('Renaming node:', currName, 'to', newName);
+        setUpdatedNodes(prevUpdatedNodes =>
+          prevUpdatedNodes.map(node =>
+            node.name === currName ? { ...node, name: newName } : node
+          )
+        );
       }
       else {
         if (currName in value.neighbors) {
@@ -137,6 +149,7 @@ export function NodeProvider({ children }) {
 
   // Function to remove all nodes and reset the state
   const removeAllNodes = () => {
+    setDeletedNodes([...Object.keys(nodes)]);
     setNodes({});
     setActiveNode(null);
     setNeighborUI(false);
@@ -144,6 +157,7 @@ export function NodeProvider({ children }) {
 
   // Function to remove a node and its references from neighbors
   const handleRemoveNode = (nodeName) => {
+    setDeletedNodes(deletedNodes => [...deletedNodes, nodeName]);
     setNodes(nodes => (removeNode(nodeName)));
   };
 
@@ -178,14 +192,18 @@ export function NodeProvider({ children }) {
     if (updated || loading) return;
     setUpdated(true);
     setLoading(true);
+    console.log(renamedNodes)
     try {
-      await updateNodes(nodes)
+      await updateNodes(nodes, deletedNodes, updatedNodes, renamedNodes);
     } catch (err) {
       console.error('Error updating nodes:', err);
       alert('Failed to update nodes. Please try again later.');
     } finally {
-      setUpdated(false)
+      setUpdated(false);
       setLoading(false);
+      setDeletedNodes([]);
+      setUpdatedNodes([]);
+      setRenamedNodes([]);
     }
   };
 

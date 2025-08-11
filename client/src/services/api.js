@@ -1,6 +1,6 @@
 export const getOptions = async () => {
     try {
-        const response = await fetch('http://localhost:8000/api/options/', {method:'GET'});
+        const response = await fetch('http://localhost:8000/api/options/', { method: 'GET' });
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`)
         };
@@ -11,12 +11,12 @@ export const getOptions = async () => {
     }
 }
 
-export const findOptRoute = async(start,end) => {
+export const findOptRoute = async (start, end) => {
     try {
-        const response = await fetch('http://localhost:8000/api/opt_path/', 
+        const response = await fetch('http://localhost:8000/api/opt_path/',
             {
-                method:"POST",
-                headers:{
+                method: "POST",
+                headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({ start, end })
@@ -32,8 +32,8 @@ export const findOptRoute = async(start,end) => {
 }
 
 export const getNodes = async () => {
-    try{
-        const response = await fetch('http://localhost:8000/api/nodes/', {method:'GET'});
+    try {
+        const response = await fetch('http://localhost:8000/api/nodes/', { method: 'GET' });
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`)
         };
@@ -44,14 +44,24 @@ export const getNodes = async () => {
     }
 }
 
-export const updateNodes = async( nodes ) => {
-    try{
+export const updateNodes = async (
+    nodes = {},
+    deletedNodes = [],
+    updatedNodes = [],
+    renamedNodes = [],
+) => {
+    try {
         const response = await fetch('http://localhost:8000/api/update_nodes/', {
-            method:"PUT",
-            headers:{
+            method: "PUT",
+            headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify( nodes )
+            body: JSON.stringify({
+                'nodes': nodes,
+                'deleted_nodes': deletedNodes,
+                'updated_nodes': updatedNodes,
+                'renamed_nodes': renamedNodes,
+            })
         });
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`)
@@ -63,13 +73,13 @@ export const updateNodes = async( nodes ) => {
     }
 }
 
-export const uploadImage = async ( image ) => {
+export const uploadImage = async (image) => {
     try {
         const response = await fetch('http://localhost:8000/api/upload_image/', {
             method: "POST",
             body: image,
         })
-        if(!response.ok) {
+        if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`)
         }
         const data = await response.json();
@@ -80,16 +90,17 @@ export const uploadImage = async ( image ) => {
     }
 };
 
-export const getImage = async( imageName ) => {
+export const getImage = async (imageName) => {
     try {
         if (!imageName) return null;
-        const response = await fetch(`http://localhost:8000/api/get_image/${imageName}`, {method: 'GET'});
+        imageName = encodeURIComponent(imageName);
+        const response = await fetch(`http://localhost:8000/api/get_image/${imageName}/`, { method: 'GET' });
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`)
         };
         const blob = await response.blob();
         const imageUrl = URL.createObjectURL(blob);
-        
+
         console.log('Image URL:', imageUrl);
 
         return imageUrl;
@@ -97,3 +108,16 @@ export const getImage = async( imageName ) => {
         console.log('Fetch Error:', err)
     }
 };
+
+export const getEvents = async (nodeName, skip, take) => {
+    try{
+        const response = await fetch (`http://localhost:8000/api/events/${nodeName}/?skip=${skip}&take=${take}`, { method: 'GET' });
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`)
+        };
+        const data = await response.json();
+        return data;
+    } catch (err) {
+        console.log('Fetch Error:', err)
+    }
+}

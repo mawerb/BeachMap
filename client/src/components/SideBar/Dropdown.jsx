@@ -4,6 +4,7 @@ import waypoint from "../../assets/searchbox/waypoint-icon.svg"
 const DropDown = ({
     choices = ['Oranges', 'Apples', 'Pearls', 'Feet'],
     setSelectedNodeByName,
+    setSelectedNode,
 }) => {
     const [value, setValue] = useState("");
     const [showSuggestions, setShowSuggestions] = useState(false);
@@ -33,7 +34,8 @@ const DropDown = ({
     const handleSuggestionClick = (suggestion) => {
         setValue(suggestion);
         setShowSuggestions(false);
-        setSelectedNodeByName(suggestion);
+        setSelectedNode(null);
+        setSelectedNodeByName(suggestion)
     }
 
     return (
@@ -52,9 +54,6 @@ const DropDown = ({
                     onFocus={() => {
                         setShowSuggestions(true)
                     }}
-                // onBlur={() => {
-                //     setTimeout(() => setShowSuggestions(false),1)
-                // }}
                 />
                 {showSuggestions && suggestions.length > 0 && (
                     <ul className="absolute top-full border-l border-r border-b border-[rgba(0,0,0,0.35)] 

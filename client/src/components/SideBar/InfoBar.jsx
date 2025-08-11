@@ -11,7 +11,7 @@ function InfoBar({
 
                 Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.`
     ,
-    Events = ["poop", "fire"],
+    events = ["poop", "fire"],
     setSelectedNode,
 }) {
 
@@ -40,16 +40,16 @@ function InfoBar({
                     <h2 className="text-sm font-light text-gray-500">{LandmarkType}</h2>
                 </div>
                 <div className="flex border-b border-[#ECAA01] justify-around mt-5">
-                    <button className="hover:bg-gray-200 w-full relative" value="overview" onClick={handleClicks}>
-                        <h2 className="text-gray-500">Overview</h2>
-                        {selected === "overview" && (
+                    <button className="hover:bg-gray-100 w-full relative" value="events" onClick={handleClicks}>
+                        <h2 className="text-gray-500">Events</h2>
+                        {selected === "events" && (
                             <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 
                                         h-[1px] w-[35px] border-[#ECAA01] border-1 rounded-t-full" />
                         )}
                     </button>
-                    <button className="hover:bg-gray-200 w-full relative" value="events" onClick={handleClicks}>
-                        <h2 className="text-gray-500">Events</h2>
-                        {selected === "events" && (
+                    <button className="hover:bg-gray-100 w-full relative" value="overview" onClick={handleClicks}>
+                        <h2 className="text-gray-500">Overview</h2>
+                        {selected === "overview" && (
                             <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 
                                         h-[1px] w-[35px] border-[#ECAA01] border-1 rounded-t-full" />
                         )}
@@ -57,8 +57,8 @@ function InfoBar({
                 </div>
                 {selected === "overview" && (<Overview text={OverviewText} />)}
                 {selected === "events" && (
-                    <div className="h-[57%] max-h-screen p-2 overflow-y-auto">
-                        <EventsTab events={Events} />
+                    <div className="h-[57%] max-h-screen overflow-y-auto">
+                        <EventsTab events={events} />
                     </div>
                 )}
             </div>

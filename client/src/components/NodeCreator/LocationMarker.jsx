@@ -45,6 +45,7 @@ function LocationMarker() {
     endNeighborsMode,
     handleAddNeighbor,
     handleRemoveNeighbor,
+    handleUpdateGraph,
     handleUpdateName,
     handleRemoveNode,
     selectedNode,
@@ -106,6 +107,7 @@ function LocationMarker() {
           onChangeName={handleUpdateName}
           popupRefs={popupRefs}
           handlePropChange={handlePropChange}
+          handleUpdateGraph={handleUpdateGraph}
         />
       ))
       )}

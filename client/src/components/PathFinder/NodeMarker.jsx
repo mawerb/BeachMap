@@ -17,7 +17,6 @@ function NodeMarker({
     });
 
     const curr_map = useMap();
-
     return (
         <Marker
             key={index}
@@ -27,8 +26,9 @@ function NodeMarker({
             position={coords}
             eventHandlers={{
                 click: () => {
+                    setSelectedNode(null);
                     setSelectedNode(node);
-                    curr_map.flyTo(coords, 18);
+                    curr_map.flyTo([coords[0],coords[1]-0.0008], 18);
                 },
             }}
         />

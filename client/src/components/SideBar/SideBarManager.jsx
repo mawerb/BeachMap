@@ -1,6 +1,6 @@
 import DropDown from "./Dropdown"
 import InfoBar from "./InfoBar"
-import { getImage } from "../../services/api"
+import { getImage, getEvents  } from "../../services/api"
 import { useEffect, useState } from "react"
 
 
@@ -11,10 +11,10 @@ function SideBarManager({
     setSelectedNodeByName,
 }) {
     const [image, setImage] = useState(null);
+    const [events, setEvents] = useState([]);
 
     const loadImage = async (name) => {
-        console.log('hello!', name)
-        if (!name) return null;
+        console.log('loading image:', name)
         try {
             const image = await getImage(name);
             return image;
@@ -22,36 +22,67 @@ function SideBarManager({
             console.error('Error loading image:', err);
             return null;
         }
-    }
+    };
 
     useEffect(() => {
+        let isCancelled = false;
 
-        const handleImageLoading = async (name) => {
-            if (!name) return null;
-            const image = await loadImage(name);
-            if (image) {
-                console.log('loaded image:', image)
-                setImage(image);
-                return;
-            } else {
-                console.error(`Image for ${name} not found.`);
-                return null;
-            }
+        if (!selectedNode?.name) {
+            setEvents([]);
+            return;
         }
-        handleImageLoading(selectedNode?.name);
+        console.log('Fetching events for node:', selectedNode.name);
+        getEvents(selectedNode.name, 0, 10).then((data) => {
+            if (isCancelled) return;
+            console.log('Fetched events:', data);
+            setEvents(data);
+        }).catch((err) => {
+            if (isCancelled) return;
+            console.error('Error fetching events:', err);
+        })
 
-    }, [selectedNode?.name])
+        return () => {
+            isCancelled = true;
+        };
+    }, [selectedNode?.name]);
 
-    console.log(selectedNode)
+    useEffect(() => {
+        let isCancelled = false;
+        
+        if (!selectedNode?.name) {
+            setImage(null);
+            return;
+        }
+
+        getImage(selectedNode?.name).then((image) => {
+            if (!isCancelled) {
+                console.log('loaded image:', image);
+                setImage(image);
+            }
+        }).catch((err) => {
+            if (!isCancelled) {
+                console.error('Error loading image:', err);
+                setImage(null);
+            }
+        });
+
+        return () => {
+            isCancelled = true;
+        };
+
+    }, [selectedNode?.name]);
+
     return (
         <>
             <DropDown
                 choices={LandMarks.map(landmark => landmark.name)}
-                setSelectedNodeByName={setSelectedNodeByName} />
+                setSelectedNodeByName={setSelectedNodeByName} 
+                setSelectedNode={setSelectedNode}/>
             {selectedNode && (<InfoBar
                 Name={selectedNode?.name ?? "Landmark Name"}
                 Image={image}
-                setSelectedNode={setSelectedNode} />
+                setSelectedNode={setSelectedNode}
+                events={events} />
             )}
         </>
 

@@ -38,6 +38,7 @@ function NodeMarker({
   onChangeName,
   popupRefs,
   handlePropChange,
+  handleUpdateGraph,
 }) {
   const pointIcon = L.icon({
     iconUrl: pointImg,
@@ -88,7 +89,7 @@ function NodeMarker({
           },
         }}
       >
-        {selectedNode && selectedNode.name === name && <NodePropertyEditor nodeName={name} property={node.properties} handlePropChange={handlePropChange}/>}
+        {selectedNode && selectedNode.name === name && <NodePropertyEditor nodeName={name} property={node.properties} handlePropChange={handlePropChange} handleUpdateGraph={handleUpdateGraph}/>}
         {!neighborUI && (
           <Popup>
             <div className='montserrat font-semibold mb-2 truncate max-w-45'>Node {index + 1}: {name}</div>

@@ -8,7 +8,8 @@ from rest_framework import generics, renderers
 from django.http import FileResponse, Http404
 from dotenv import load_dotenv
 from bson import json_util
-from .models import Images
+from .models import Nodes, Image
+from urllib.parse import unquote
 import mimetypes
 import traceback
 import pymongo
@@ -84,6 +85,13 @@ def update_nodes (request):
 
     try:
         data = request.data
+        nodes = data.get('nodes', {})
+        removed_nodes = data.get('deleted_nodes', [])
+        updated_nodes = data.get('updated_nodes', [])
+        renamed_nodes = data.get('renamed_nodes', [])
+        print('nodes:', nodes)
+        print('removed_nodes:', removed_nodes)
+        print('renamed_nodes:', renamed_nodes)
 
         # Define the path to save the JSON file
         base_dir = os.path.dirname(os.path.abspath(__file__))
@@ -91,16 +99,16 @@ def update_nodes (request):
 
         # Write the combined data to the JSON file
         with open(coord_path,'w') as file:
-            json.dump(data,file,indent=4)
+            json.dump(nodes,file,indent=4)
 
-        coordinate_data = [{'name':key, **value} for key,value in data.items()]
+        coordinate_data = [{'name':key, **value} for key,value in nodes.items()]
 
         landmarks = [{'name': key, 'location' : {
                                     'type' : 'Point',
                                     'coordinates' : value.get('coords', [])[::-1]
                                     },
                     } 
-                     for key, value in data.items() 
+                     for key, value in nodes.items() 
                      if value.get('properties',{}).get('isLandmark', False)]
 
         # Insert or update landmarks in the MongoDB collection
@@ -111,11 +119,33 @@ def update_nodes (request):
             collection.insert_many(landmarks)
         else:
             collection.delete_many({})
+        
+        # Insert or update landmarks in the Django ORM
+        
+        for landmark in removed_nodes:
+            Nodes.objects.filter(name=landmark).delete()
+            print('removing:' , landmark)
+        
+        for landmark in renamed_nodes:
+            old_name = landmark['oldName']
+            new_name = landmark['newName']
+            print('renaming:', old_name, 'to', new_name)
+            selectedNode = Nodes.objects.filter(name=old_name)
+            selectedNode.update(name=new_name)
+        
+        for landmark in landmarks:
+            node, created = Nodes.objects.update_or_create(
+                name = landmark['name'], defaults={
+                    'name': landmark['name'],
+                }
+            )
+            print('created:', node.name) if created else print('updated:', node.name)
 
         nd_collection = client['GeoJson']['nodes']
         nd_collection.create_index([("name", pymongo.ASCENDING)])
         nd_collection.delete_many({})
-        nd_collection.insert_many(coordinate_data)
+        if coordinate_data:
+            nd_collection.insert_many(coordinate_data)
 
         options_path = os.path.join(base_dir,'options','TEST.json')
 
@@ -128,32 +158,25 @@ def update_nodes (request):
         print("Error", e)
         return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     
-@api_view(['POST'])
-def upload_image ( request ):
-    try:
-        data = request.FILES
-        if 'image' not in data:
-            return Response({'error': 'No image provided'}, status=status.HTTP_400_BAD_REQUEST)
-        image = data['image']
-        # Define the path to save the image
-        print('image' , image)
-        print(data)
-        return Response({'message': 'Image uploaded successfully'}, status=status.HTTP_200_OK)
-
-    except Exception as e:
-        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
 class ImageAPIView(APIView):
 
     def get(self, request, *args, **kwargs):
-        name = self.kwargs.get('name')
+        name = unquote(self.kwargs.get('name'))
+        print('Looking for image:' , name)
         try:
-            image_instance = Images.objects.get(name=name)
-            image = image_instance.name
-            content_type, _ = mimetypes.guess_type(image)
-            return FileResponse(image_instance.image.open(), content_type=content_type)
-        except Images.DoesNotExist:
-            raise Http404("Image not found")
+            node = Nodes.objects.get(name=name)
+        except Nodes.DoesNotExist:
+            print('node not found')
+            return Response({'error': 'Node not found'}, status=status.HTTP_404_NOT_FOUND)
+        
+        image_instance = node.image
+        if not image_instance or not image_instance.image:
+            print('image not found')
+            return Response({'error': 'Image not found'}, status=status.HTTP_404_NOT_FOUND)
+        
+        image = image_instance.name
+        content_type, _ = mimetypes.guess_type(image)
+        return FileResponse(image_instance.image.open(), content_type=content_type)
     
     def post(self, request):
         print('hi')
@@ -164,27 +187,40 @@ class ImageAPIView(APIView):
                 return Response({'error': 'No image provided'}, status=status.HTTP_400_BAD_REQUEST)
             
             data = request.FILES['image']
-            name = data.name.split('.')[:-1][0]
-            ext = data.name.split('.')[-1]
+            name = data.name.rsplit('.', 1)[0]
+            ext = data.name.rsplit('.', 1)[-1]
             print(name,ext)
+            
+            try:
+                print('Fetching node with name:', name)
+                print(Nodes.objects.all())
+                node = Nodes.objects.get(name=name)
+            except Nodes.DoesNotExist:
+                print('Node does not exist')
+                return Response({'error': f'Node with name "{name}" does not exist'}, status=status.HTTP_400_BAD_REQUEST)
 
-            image_instance = Images.objects.get(name=name)
-
+            try:
+                image_instance = node.image
+            except Image.DoesNotExist:
+                image_instance = Image(node=node, name=name, ext=ext, image=data)
+                image_instance.save()
+                node.save()
+                print(image_instance.image.name)
+                
+                return Response({'message': 'Image updated successfully'}, status=status.HTTP_200_OK)
+            
             print(image_instance.image.name)
 
-            if image_instance.image and image_instance.image.name != data.name:
+            if image_instance.image:
                 old_image_path = image_instance.image.path
                 if os.path.exists(old_image_path):
                     os.remove(old_image_path)
+                image_instance.name = name
                 image_instance.image = data
+                image_instance.ext = ext
                 image_instance.save()
 
             return Response({'message': 'Image replaced successfully'}, status=status.HTTP_200_OK)
-        except Images.DoesNotExist:
-            image_instance = Images(name=name, image=data)
-            image_instance.save()
-
-            return Response({'message': 'Image updated successfully'}, status=status.HTTP_200_OK)
 
         except Exception as e:
             print("Error", e)

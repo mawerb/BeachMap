@@ -42,9 +42,11 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'django.contrib.postgres',
     'daphne',
     'django.contrib.staticfiles',
     'find_routes',
+    'get_events',
     'rest_framework',
     'corsheaders',
 ]
@@ -86,8 +88,10 @@ WSGI_APPLICATION = 'csulbroutes.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'mawerb',
+        'PASSWORD': 'm30032006B',
     }
 }
 
