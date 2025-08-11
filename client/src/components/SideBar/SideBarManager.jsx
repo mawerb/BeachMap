@@ -13,17 +13,6 @@ function SideBarManager({
     const [image, setImage] = useState(null);
     const [events, setEvents] = useState([]);
 
-    const loadImage = async (name) => {
-        console.log('loading image:', name)
-        try {
-            const image = await getImage(name);
-            return image;
-        } catch (err) {
-            console.error('Error loading image:', err);
-            return null;
-        }
-    };
-
     useEffect(() => {
         let isCancelled = false;
 

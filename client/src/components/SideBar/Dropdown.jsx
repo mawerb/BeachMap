@@ -35,7 +35,7 @@ const DropDown = ({
         setValue(suggestion);
         setShowSuggestions(false);
         setSelectedNode(null);
-        setSelectedNodeByName(suggestion)
+        setSelectedNodeByName(suggestion);
     }
 
     return (

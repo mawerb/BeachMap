@@ -1,6 +1,7 @@
 import placeholder from '../../assets/InfoBar/placeholder-event.png'
 import landmark from '../../assets/landmark.png'
 import clock from '../../assets/clock.png'
+import gcal_logo from '../../assets/gcal-logo.png'
 import { Transition } from '@headlessui/react'
 import { useState } from 'react';
 
@@ -21,6 +22,32 @@ function formatEventTime(startsOnStr, endsOnStr) {
     return `${dateFormatted} (${startTimeFormatted} - ${endTimeFormatted})`;
 }
 
+function formatForGCal(dateStr) {
+    // Parse date string to Date object
+    const date = new Date(dateStr);
+    // Format date parts with leading zeros
+    const pad = n => n.toString().padStart(2, '0');
+
+    const year = date.getUTCFullYear();
+    const month = pad(date.getUTCMonth() + 1);
+    const day = pad(date.getUTCDate());
+    const hours = pad(date.getUTCHours());
+    const minutes = pad(date.getUTCMinutes());
+    const seconds = pad(date.getUTCSeconds());
+
+    return `${year}${month}${day}T${hours}${minutes}${seconds}Z`;
+}
+
+function createGCalendarLink(event, webURL) {
+    const GCalendarBaseURL = 'https://calendar.google.com/calendar/u/0/r/eventedit?'
+    const title = encodeURIComponent(event.name);
+    const details = encodeURIComponent('For more details visit: ' + webURL)
+    const date = encodeURIComponent(formatForGCal(event.starts_on) + '/' + formatForGCal(event.ends_on));
+    const location = encodeURIComponent(event.location);
+
+    return `${GCalendarBaseURL}text=${title}&dates=${date}&details=${details}&location=${location}`;
+}
+
 function EventsTab({
     events = ["No Events", "Poop", "stink", 'Freak', "hey!"],
 }) {
@@ -35,7 +62,6 @@ function EventsTab({
         )
     }
 
-    console.log('image:', events[1].org_image_path)
     return (
         events.map((event, index) => (
             < div key={index}
@@ -54,10 +80,10 @@ function EventsTab({
                 </a>
                 <Transition
                     show={hoveredIndex === index}
-                    enter="transition-all duration-300 ease-out"
+                    enter="transition-all duration-200 ease-out"
                     enterFrom="opacity-0 translate-y-2"
                     enterTo="opacity-100 translate-y-0"
-                    leave="transition-all duration-200 ease-in"
+                    leave="transition-all duration-100 ease-in"
                     leaveFrom="opacity-100 translate-y-0"
                     leaveTo="opacity-0 translate-y-2"
                 >
@@ -67,8 +93,14 @@ function EventsTab({
                             <p className="text-xs text-gray-600 line-clamp-2">{event.location}</p>
                         </div>
                         <div className="flex gap-1 items-center max-w-[275px] ">
-                            <img src={clock} alt="Landmark" className="h-[15px] w-[15px] object-cover" />
-                            <p className="text-xs text-gray-600 line-clamp-2">{formatEventTime(event.starts_on, event.ends_on)}</p>
+                            <img src={clock} alt="Landmark" className="m-[2.5px] h-[15px] w-[15px] object-cover" />
+                            <p className="text-xs text-gray-600 line-clamp-2">
+                                {formatEventTime(event.starts_on, event.ends_on)}
+                            </p>
+                            <a target="_blank" rel="noopener noreferrer" href={createGCalendarLink(event, websiteURL + event.id)}>
+                                <img src={gcal_logo} alt="Google Calendar" className="h-[20px] w-[20px] ml-2" />
+                            </a>
+
                         </div>
                     </div>
                 </Transition>
