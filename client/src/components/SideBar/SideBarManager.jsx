@@ -61,6 +61,8 @@ function SideBarManager({
 
     }, [selectedNode?.name]);
 
+    console.log('selectedNode:', selectedNode);
+
     return (
         <>
             <DropDown
@@ -69,6 +71,7 @@ function SideBarManager({
                 setSelectedNode={setSelectedNode}/>
             {selectedNode && (<InfoBar
                 Name={selectedNode?.name ?? "Landmark Name"}
+                LandmarkType={selectedNode?.type ?? "Landmark Type"}
                 Image={image}
                 setSelectedNode={setSelectedNode}
                 events={events} />

@@ -121,3 +121,18 @@ export const getEvents = async (nodeName, skip, take) => {
         console.log('Fetch Error:', err)
     }
 }
+
+export const filterNodesByEvent = async () => {
+    try{
+        const response = await fetch('http://127.0.0.1:8000/api/events/get_nodes_with_events/')
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`)
+        };
+        const data = await response.json();
+
+        return data;
+    } catch (err) {
+        console.log('Fetch Error:', err);
+        return [];
+    }
+}

@@ -5,11 +5,14 @@ import Button from '../Button/Button';
 function NodePropertyEditor({
   nodeName,
   property,
+  landmarkType = null,
+  overview = "Overview Placeholder",
   image = null,
   handlePropChange,
   handleUpdateGraph,
 }) {
   const [selectedImage, setSelectedImage] = useState(image);
+  const [selectedType, setSelectedType] = useState(landmarkType || 'default');
   const [newProperties, setNewProperties] = useState(property);
   const [newImage, setNewImage] = useState(null);
   const [updated, setUpdated] = useState(true);
@@ -41,11 +44,17 @@ function NodePropertyEditor({
         if(updated) return;
         setUpdated(true); 
         await handleUpdateGraph(); 
-        handlePropChange(nodeName, newProperties, newImage
+        handlePropChange(nodeName, newProperties, newImage, selectedType
         ) }}>
       <h2 className="text-lg font-bold">NodeManager</h2>
       <div className='border-t-1'>
         <h3 className='text-base font-medium mb-0 truncate'>{nodeName}</h3>
+        <select className="border" value={selectedType} onChange={(e) => {setSelectedType(e.target.value); setUpdated(false);}}>
+          <option value="default" classNmae="" disabled selected>Landmark Type</option>
+          <option value="Building">Building</option>
+          <option value="Lawn">Lawn</option>
+          <option value="Parking">Parking</option>
+        </select>
         {Object.entries(newProperties).map(([key, value]) => (
           <CheckBoxElement
             title={key}

@@ -1,14 +1,18 @@
 import styles from '../css/AdminNav.module.css';
+import { Link } from 'react-router-dom';
 
 function Navbar() {
   return (
     <header className={styles.header}>
-      <h1 className={styles.logo}>CSULB Routes</h1>
+      <Link className={styles.logo} to="/">
+      <h1>CSULB Routes</h1>
+      </Link>
       <nav>
         <ul className={styles.navLinks}>
-          <li><a href='./' onClick="return false;"><button>Home</button></a></li>
-          <li><a href='./'><button>About</button></a></li>
-          <li><a href='./'><button>Contact Us</button></a></li>
+
+          <li><Link to='/home#home'><button>Home</button></Link></li>
+          <li><Link to='/home#about'><button>About</button></Link></li>
+          <li><Link to='/home#contact'><button>Contact Me</button></Link></li>
         </ul>
       </nav>
     </header>

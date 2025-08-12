@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.postgres',
+    'django.contrib.gis',
     'daphne',
     'django.contrib.staticfiles',
     'find_routes',
@@ -53,6 +54,24 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
 ]
+
+# For Apple Silicon (M1/M2)
+if os.path.exists('/opt/homebrew/lib/libgdal.dylib'):
+    GDAL_LIBRARY_PATH = '/opt/homebrew/lib/libgdal.dylib'
+    GEOS_LIBRARY_PATH = '/opt/homebrew/lib/libgeos_c.dylib'
+# For Intel Macs
+elif os.path.exists('/usr/local/lib/libgdal.dylib'):
+    GDAL_LIBRARY_PATH = '/usr/local/lib/libgdal.dylib'
+    GEOS_LIBRARY_PATH = '/usr/local/lib/libgeos_c.dylib'
+else:
+    # Fallback: let Django try to find it automatically
+    import subprocess
+    try:
+        gdal_path = subprocess.check_output(['brew', '--prefix']).decode().strip()
+        GDAL_LIBRARY_PATH = f'{gdal_path}/lib/libgdal.dylib'
+        GEOS_LIBRARY_PATH = f'{gdal_path}/lib/libgeos_c.dylib'
+    except:
+        pass
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
@@ -91,7 +110,7 @@ WSGI_APPLICATION = 'csulbroutes.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'postgres',
         'USER': os.getenv('PSGR_USER'),
         'PASSWORD': os.getenv('PSGR_PASS'),

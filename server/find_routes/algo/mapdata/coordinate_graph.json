@@ -1,15 +1,4 @@
 {
-    "bamaB": {
-        "coords": [
-            33.780859506378704,
-            -118.11362743377687
-        ],
-        "neighbors": {},
-        "properties": {
-            "isLandmark": true,
-            "isAccessible": false
-        }
-    },
     "Student Recreation and Welness Center(SRWC)": {
         "coords": [
             33.78512196027651,
@@ -21,5 +10,702 @@
             "isAccessible": false
         },
         "image": null
+    },
+    "Liberal Arts Buildings": {
+        "coords": [
+            33.77825555987076,
+            -118.11437308788301
+        ],
+        "neighbors": {},
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "image": null
+    },
+    "Psychology Building": {
+        "coords": [
+            33.77933014327998,
+            -118.11443209648134
+        ],
+        "neighbors": {},
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "image": null
+    },
+    "Faculty Office 3": {
+        "coords": [
+            33.77911611944372,
+            -118.11371326446535
+        ],
+        "neighbors": {},
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "image": null
+    },
+    "Faculty Office 2": {
+        "coords": [
+            33.77849188020011,
+            -118.11394929885866
+        ],
+        "neighbors": {},
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "image": null
+    },
+    "Central Quad": {
+        "coords": [
+            33.77800586221063,
+            -118.1134343147278
+        ],
+        "neighbors": {},
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "image": null
+    },
+    "Macintosh Humanities": {
+        "coords": [
+            33.776848771587694,
+            -118.11323046684267
+        ],
+        "neighbors": {},
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "image": null
+    },
+    "Language Arts": {
+        "coords": [
+            33.77690673796381,
+            -118.11270743608476
+        ],
+        "neighbors": {},
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "image": null
+    },
+    "University Library": {
+        "coords": [
+            33.77720102819133,
+            -118.11446428298952
+        ],
+        "neighbors": {},
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        }
+    },
+    "Academic Services": {
+        "coords": [
+            33.77678857569407,
+            -118.11375081539155
+        ],
+        "neighbors": {},
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "image": null
+    },
+    "Education 1": {
+        "coords": [
+            33.77624458125534,
+            -118.1141719222069
+        ],
+        "neighbors": {},
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "image": null
+    },
+    "Education 2": {
+        "coords": [
+            33.77575632101,
+            -118.11434358358385
+        ],
+        "neighbors": {},
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "image": null
+    },
+    "E8": {
+        "coords": [
+            33.775870025699255,
+            -118.11232388019563
+        ],
+        "neighbors": {},
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "image": null
+    },
+    "Theatre Arts": {
+        "coords": [
+            33.776494284049576,
+            -118.11264574527742
+        ],
+        "neighbors": {},
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "image": null
+    },
+    "University Theatre": {
+        "coords": [
+            33.77648090713263,
+            -118.11165869235994
+        ],
+        "neighbors": {},
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "image": null
+    },
+    "Fine Arts 1": {
+        "coords": [
+            33.77720771659384,
+            -118.11258673667909
+        ],
+        "neighbors": {},
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "image": null
+    },
+    "Fine Arts 3": {
+        "coords": [
+            33.77790776650215,
+            -118.11224877834321
+        ],
+        "neighbors": {},
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "image": null
+    },
+    "Fine Arts 2": {
+        "coords": [
+            33.777444039814036,
+            -118.11184108257295
+        ],
+        "neighbors": {},
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "image": null
+    },
+    "Faculty Office 4": {
+        "coords": [
+            33.77823326546642,
+            -118.11207711696626
+        ],
+        "neighbors": {},
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "image": null
+    },
+    "Fine Arts 4": {
+        "coords": [
+            33.77833136080215,
+            -118.11275303363801
+        ],
+        "neighbors": {},
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "image": null
+    },
+    "Peterson Hall 1": {
+        "coords": [
+            33.7787638707155,
+            -118.11216294765474
+        ],
+        "neighbors": {},
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "image": null
+    },
+    "Faculty Office 5": {
+        "coords": [
+            33.7790581545627,
+            -118.1123721599579
+        ],
+        "neighbors": {},
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "image": null
+    },
+    "Peterson Hall 2": {
+        "coords": [
+            33.77932122563081,
+            -118.11255991458894
+        ],
+        "neighbors": {},
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "image": null
+    },
+    "Microbiology": {
+        "coords": [
+            33.77944161381623,
+            -118.11175525188447
+        ],
+        "neighbors": {},
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "image": null
+    },
+    "Hall of Science": {
+        "coords": [
+            33.779811694956265,
+            -118.11254382133485
+        ],
+        "neighbors": {},
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "image": null
+    },
+    "Molecular and Life Sciences Center": {
+        "coords": [
+            33.780159480594286,
+            -118.11233460903169
+        ],
+        "neighbors": {},
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "image": null
+    },
+    "CSULB Bookstore": {
+        "coords": [
+            33.77997667037087,
+            -118.11390638351442
+        ],
+        "neighbors": {},
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "image": null
+    },
+    "The Nugget": {
+        "coords": [
+            33.780315537793385,
+            -118.1142094731331
+        ],
+        "neighbors": {},
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "image": null
+    },
+    "Beach Kitchen": {
+        "coords": [
+            33.78057191686033,
+            -118.11392247676851
+        ],
+        "neighbors": {},
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "image": null
+    },
+    "University Student Union(USU)": {
+        "coords": [
+            33.78142353573076,
+            -118.11343699693681
+        ],
+        "neighbors": {},
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "image": null
+    },
+    "Beach Pantry": {
+        "coords": [
+            33.781531659510335,
+            -118.11360999941826
+        ],
+        "neighbors": {},
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "image": null
+    },
+    "Central Plant": {
+        "coords": [
+            33.781131489375795,
+            -118.11261355876924
+        ],
+        "neighbors": {},
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "image": null
+    },
+    "Health and Human Services": {
+        "coords": [
+            33.78240221816375,
+            -118.11236411333086
+        ],
+        "neighbors": {},
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "image": null
+    },
+    "Kinesiology": {
+        "coords": [
+            33.78266973761142,
+            -118.11252236366273
+        ],
+        "neighbors": {},
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "image": null
+    },
+    "Horn Center": {
+        "coords": [
+            33.78344108067393,
+            -118.11413168907167
+        ],
+        "neighbors": {},
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "image": null,
+        "type": "Building"
+    },
+    "Brotman Hall": {
+        "coords": [
+            33.782629609747545,
+            -118.11526358127595
+        ],
+        "neighbors": {},
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "image": null
+    },
+    "Student Health Services": {
+        "coords": [
+            33.78233087950323,
+            -118.11789751052858
+        ],
+        "neighbors": {},
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "image": null
+    },
+    "Los Cerritos Hall": {
+        "coords": [
+            33.78246909810401,
+            -118.11911523342134
+        ],
+        "neighbors": {},
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "image": null
+    },
+    "Hillside Dorms": {
+        "coords": [
+            33.78307993247486,
+            -118.1198287010193
+        ],
+        "neighbors": {},
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "image": null
+    },
+    "International House": {
+        "coords": [
+            33.78170666368908,
+            -118.1207299232483
+        ],
+        "neighbors": {},
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "image": null
+    },
+    "Nursing": {
+        "coords": [
+            33.78167545277892,
+            -118.11787068843843
+        ],
+        "neighbors": {},
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "image": null
+    },
+    "School of Nursing": {
+        "coords": [
+            33.78171112238958,
+            -118.11735033988954
+        ],
+        "neighbors": {},
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "image": null
+    },
+    "Family and Consumer Services": {
+        "coords": [
+            33.781697746287335,
+            -118.11611652374269
+        ],
+        "neighbors": {},
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "image": null
+    },
+    "Los Alamitos Hall": {
+        "coords": [
+            33.78334744980558,
+            -118.11875581741334
+        ],
+        "neighbors": {},
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "image": null
+    },
+    "College of Business": {
+        "coords": [
+            33.78409203530968,
+            -118.11596632003786
+        ],
+        "neighbors": {},
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "image": null
+    },
+    "Engineering 4": {
+        "coords": [
+            33.783668469499425,
+            -118.11118125915529
+        ],
+        "neighbors": {},
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "image": null
+    },
+    "Engineering 2": {
+        "coords": [
+            33.78317356363568,
+            -118.11087012290956
+        ],
+        "neighbors": {},
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "image": null
+    },
+    "Vivian Engineering Center(VEC)": {
+        "coords": [
+            33.78283470752095,
+            -118.11040341854097
+        ],
+        "neighbors": {},
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "image": null
+    },
+    "Computer Engineering & Computer Science": {
+        "coords": [
+            33.78332069811013,
+            -118.1103363633156
+        ],
+        "neighbors": {},
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "image": null
+    },
+    "Human Services and Design": {
+        "coords": [
+            33.782718782752845,
+            -118.10958534479143
+        ],
+        "neighbors": {},
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "image": null
+    },
+    "Design Center": {
+        "coords": [
+            33.78206112965604,
+            -118.1094190478325
+        ],
+        "neighbors": {},
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "image": null
+    },
+    "Department of Physical Therapy": {
+        "coords": [
+            33.783661781601396,
+            -118.10853123664857
+        ],
+        "neighbors": {},
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "image": null
+    },
+    "College of Human and Health Services": {
+        "coords": [
+            33.783044263434284,
+            -118.10894161462785
+        ],
+        "neighbors": {},
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "image": null
+    },
+    "Walter Pyramid": {
+        "coords": [
+            33.78743144395892,
+            -118.11443209648134
+        ],
+        "neighbors": {},
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "image": null
+    },
+    "Parkside College Dorms": {
+        "coords": [
+            33.78694101827018,
+            -118.12000036239625
+        ],
+        "neighbors": {},
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "image": null
+    },
+    "Parkside North College Dorms": {
+        "coords": [
+            33.788251786104915,
+            -118.12008619308472
+        ],
+        "neighbors": {},
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "image": null
+    },
+    "Bob Cole Conservatory of Music": {
+        "coords": [
+            33.7876499054069,
+            -118.1126055121422
+        ],
+        "neighbors": {},
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "image": null
+    },
+    "Carpenter Performing Arts Center": {
+        "coords": [
+            33.788193827406964,
+            -118.11191082000734
+        ],
+        "neighbors": {},
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "image": null
+    },
+    "E1": {
+        "coords": [
+            33.7835614630685,
+            -118.11664223670961
+        ],
+        "neighbors": {},
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "image": null,
+        "type": "Parking"
     }
 }

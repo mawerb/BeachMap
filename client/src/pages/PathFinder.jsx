@@ -86,7 +86,7 @@ function PathFinder() {
 }
 
   return (
-    <>
+    <div className="h-screen overflow-hidden">
       {/* <form onSubmit={handleSearch}>
         <DropDown options={options} value={start} oppValue={end} setValue={handleStartChange} placeholder={"Select A Start"}/>
         <DropDown options={options} value={end} oppValue={start} setValue={handleEndChange} placeholder={"Select A Destination"}/>
@@ -107,7 +107,7 @@ function PathFinder() {
         </div>
         <SideBarManager LandMarks={options} selectedNode={selectedNode} setSelectedNode={setSelectedNode} setSelectedNodeByName={setSelectedNodeByName} />
       </div>
-    </>
+    </div>
   )
 }
 

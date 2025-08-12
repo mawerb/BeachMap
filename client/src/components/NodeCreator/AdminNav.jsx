@@ -10,7 +10,9 @@ function AdminNav() {
 
     return (
         <header className={styles.header}>
+            <a className={styles.logo} href="./">
             <h1 className={styles.logo}>Admin Utilities</h1>
+            </a>
             <nav>
                 <ul className={styles.navLinks}> 
                     <li><a href='./'><button className="cursor-pointer">Home</button></a></li>

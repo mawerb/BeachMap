@@ -1,18 +1,5 @@
 [
     {
-        "name": "bamaB",
-        "location": {
-            "type": "Point",
-            "coordinates": [
-                -118.11362743377687,
-                33.780859506378704
-            ]
-        },
-        "_id": {
-            "$oid": "689963c019ae3c47feff6a30"
-        }
-    },
-    {
         "name": "Student Recreation and Welness Center(SRWC)",
         "location": {
             "type": "Point",
@@ -21,8 +8,1057 @@
                 33.78512196027651
             ]
         },
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "type": "default",
         "_id": {
-            "$oid": "689963c019ae3c47feff6a31"
+            "$oid": "689a9137216315fdc112297e"
+        }
+    },
+    {
+        "name": "Liberal Arts Buildings",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                -118.11437308788301,
+                33.77825555987076
+            ]
+        },
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "type": "default",
+        "_id": {
+            "$oid": "689a9137216315fdc112297f"
+        }
+    },
+    {
+        "name": "Psychology Building",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                -118.11443209648134,
+                33.77933014327998
+            ]
+        },
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "type": "default",
+        "_id": {
+            "$oid": "689a9137216315fdc1122980"
+        }
+    },
+    {
+        "name": "Faculty Office 3",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                -118.11371326446535,
+                33.77911611944372
+            ]
+        },
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "type": "default",
+        "_id": {
+            "$oid": "689a9137216315fdc1122981"
+        }
+    },
+    {
+        "name": "Faculty Office 2",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                -118.11394929885866,
+                33.77849188020011
+            ]
+        },
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "type": "default",
+        "_id": {
+            "$oid": "689a9137216315fdc1122982"
+        }
+    },
+    {
+        "name": "Central Quad",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                -118.1134343147278,
+                33.77800586221063
+            ]
+        },
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "type": "default",
+        "_id": {
+            "$oid": "689a9137216315fdc1122983"
+        }
+    },
+    {
+        "name": "Macintosh Humanities",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                -118.11323046684267,
+                33.776848771587694
+            ]
+        },
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "type": "default",
+        "_id": {
+            "$oid": "689a9137216315fdc1122984"
+        }
+    },
+    {
+        "name": "Language Arts",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                -118.11270743608476,
+                33.77690673796381
+            ]
+        },
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "type": "default",
+        "_id": {
+            "$oid": "689a9137216315fdc1122985"
+        }
+    },
+    {
+        "name": "University Library",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                -118.11446428298952,
+                33.77720102819133
+            ]
+        },
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "type": "default",
+        "_id": {
+            "$oid": "689a9137216315fdc1122986"
+        }
+    },
+    {
+        "name": "Academic Services",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                -118.11375081539155,
+                33.77678857569407
+            ]
+        },
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "type": "default",
+        "_id": {
+            "$oid": "689a9137216315fdc1122987"
+        }
+    },
+    {
+        "name": "Education 1",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                -118.1141719222069,
+                33.77624458125534
+            ]
+        },
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "type": "default",
+        "_id": {
+            "$oid": "689a9137216315fdc1122988"
+        }
+    },
+    {
+        "name": "Education 2",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                -118.11434358358385,
+                33.77575632101
+            ]
+        },
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "type": "default",
+        "_id": {
+            "$oid": "689a9137216315fdc1122989"
+        }
+    },
+    {
+        "name": "E8",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                -118.11232388019563,
+                33.775870025699255
+            ]
+        },
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "type": "default",
+        "_id": {
+            "$oid": "689a9137216315fdc112298a"
+        }
+    },
+    {
+        "name": "Theatre Arts",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                -118.11264574527742,
+                33.776494284049576
+            ]
+        },
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "type": "default",
+        "_id": {
+            "$oid": "689a9137216315fdc112298b"
+        }
+    },
+    {
+        "name": "University Theatre",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                -118.11165869235994,
+                33.77648090713263
+            ]
+        },
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "type": "default",
+        "_id": {
+            "$oid": "689a9137216315fdc112298c"
+        }
+    },
+    {
+        "name": "Fine Arts 1",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                -118.11258673667909,
+                33.77720771659384
+            ]
+        },
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "type": "default",
+        "_id": {
+            "$oid": "689a9137216315fdc112298d"
+        }
+    },
+    {
+        "name": "Fine Arts 3",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                -118.11224877834321,
+                33.77790776650215
+            ]
+        },
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "type": "default",
+        "_id": {
+            "$oid": "689a9137216315fdc112298e"
+        }
+    },
+    {
+        "name": "Fine Arts 2",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                -118.11184108257295,
+                33.777444039814036
+            ]
+        },
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "type": "default",
+        "_id": {
+            "$oid": "689a9137216315fdc112298f"
+        }
+    },
+    {
+        "name": "Faculty Office 4",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                -118.11207711696626,
+                33.77823326546642
+            ]
+        },
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "type": "default",
+        "_id": {
+            "$oid": "689a9137216315fdc1122990"
+        }
+    },
+    {
+        "name": "Fine Arts 4",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                -118.11275303363801,
+                33.77833136080215
+            ]
+        },
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "type": "default",
+        "_id": {
+            "$oid": "689a9137216315fdc1122991"
+        }
+    },
+    {
+        "name": "Peterson Hall 1",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                -118.11216294765474,
+                33.7787638707155
+            ]
+        },
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "type": "default",
+        "_id": {
+            "$oid": "689a9137216315fdc1122992"
+        }
+    },
+    {
+        "name": "Faculty Office 5",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                -118.1123721599579,
+                33.7790581545627
+            ]
+        },
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "type": "default",
+        "_id": {
+            "$oid": "689a9137216315fdc1122993"
+        }
+    },
+    {
+        "name": "Peterson Hall 2",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                -118.11255991458894,
+                33.77932122563081
+            ]
+        },
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "type": "default",
+        "_id": {
+            "$oid": "689a9137216315fdc1122994"
+        }
+    },
+    {
+        "name": "Microbiology",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                -118.11175525188447,
+                33.77944161381623
+            ]
+        },
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "type": "default",
+        "_id": {
+            "$oid": "689a9137216315fdc1122995"
+        }
+    },
+    {
+        "name": "Hall of Science",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                -118.11254382133485,
+                33.779811694956265
+            ]
+        },
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "type": "default",
+        "_id": {
+            "$oid": "689a9137216315fdc1122996"
+        }
+    },
+    {
+        "name": "Molecular and Life Sciences Center",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                -118.11233460903169,
+                33.780159480594286
+            ]
+        },
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "type": "default",
+        "_id": {
+            "$oid": "689a9137216315fdc1122997"
+        }
+    },
+    {
+        "name": "CSULB Bookstore",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                -118.11390638351442,
+                33.77997667037087
+            ]
+        },
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "type": "default",
+        "_id": {
+            "$oid": "689a9137216315fdc1122998"
+        }
+    },
+    {
+        "name": "The Nugget",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                -118.1142094731331,
+                33.780315537793385
+            ]
+        },
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "type": "default",
+        "_id": {
+            "$oid": "689a9137216315fdc1122999"
+        }
+    },
+    {
+        "name": "Beach Kitchen",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                -118.11392247676851,
+                33.78057191686033
+            ]
+        },
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "type": "default",
+        "_id": {
+            "$oid": "689a9137216315fdc112299a"
+        }
+    },
+    {
+        "name": "University Student Union(USU)",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                -118.11343699693681,
+                33.78142353573076
+            ]
+        },
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "type": "default",
+        "_id": {
+            "$oid": "689a9137216315fdc112299b"
+        }
+    },
+    {
+        "name": "Beach Pantry",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                -118.11360999941826,
+                33.781531659510335
+            ]
+        },
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "type": "default",
+        "_id": {
+            "$oid": "689a9137216315fdc112299c"
+        }
+    },
+    {
+        "name": "Central Plant",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                -118.11261355876924,
+                33.781131489375795
+            ]
+        },
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "type": "default",
+        "_id": {
+            "$oid": "689a9137216315fdc112299d"
+        }
+    },
+    {
+        "name": "Health and Human Services",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                -118.11236411333086,
+                33.78240221816375
+            ]
+        },
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "type": "default",
+        "_id": {
+            "$oid": "689a9137216315fdc112299e"
+        }
+    },
+    {
+        "name": "Kinesiology",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                -118.11252236366273,
+                33.78266973761142
+            ]
+        },
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "type": "default",
+        "_id": {
+            "$oid": "689a9137216315fdc112299f"
+        }
+    },
+    {
+        "name": "Horn Center",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                -118.11413168907167,
+                33.78344108067393
+            ]
+        },
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "type": "default",
+        "_id": {
+            "$oid": "689a9137216315fdc11229a0"
+        }
+    },
+    {
+        "name": "Brotman Hall",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                -118.11526358127595,
+                33.782629609747545
+            ]
+        },
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "type": "default",
+        "_id": {
+            "$oid": "689a9137216315fdc11229a1"
+        }
+    },
+    {
+        "name": "Student Health Services",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                -118.11789751052858,
+                33.78233087950323
+            ]
+        },
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "type": "default",
+        "_id": {
+            "$oid": "689a9137216315fdc11229a2"
+        }
+    },
+    {
+        "name": "Los Cerritos Hall",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                -118.11911523342134,
+                33.78246909810401
+            ]
+        },
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "type": "default",
+        "_id": {
+            "$oid": "689a9137216315fdc11229a3"
+        }
+    },
+    {
+        "name": "Hillside Dorms",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                -118.1198287010193,
+                33.78307993247486
+            ]
+        },
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "type": "default",
+        "_id": {
+            "$oid": "689a9137216315fdc11229a4"
+        }
+    },
+    {
+        "name": "International House",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                -118.1207299232483,
+                33.78170666368908
+            ]
+        },
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "type": "default",
+        "_id": {
+            "$oid": "689a9137216315fdc11229a5"
+        }
+    },
+    {
+        "name": "Nursing",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                -118.11787068843843,
+                33.78167545277892
+            ]
+        },
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "type": "default",
+        "_id": {
+            "$oid": "689a9137216315fdc11229a6"
+        }
+    },
+    {
+        "name": "School of Nursing",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                -118.11735033988954,
+                33.78171112238958
+            ]
+        },
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "type": "default",
+        "_id": {
+            "$oid": "689a9137216315fdc11229a7"
+        }
+    },
+    {
+        "name": "Family and Consumer Services",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                -118.11611652374269,
+                33.781697746287335
+            ]
+        },
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "type": "default",
+        "_id": {
+            "$oid": "689a9137216315fdc11229a8"
+        }
+    },
+    {
+        "name": "Los Alamitos Hall",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                -118.11875581741334,
+                33.78334744980558
+            ]
+        },
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "type": "default",
+        "_id": {
+            "$oid": "689a9137216315fdc11229a9"
+        }
+    },
+    {
+        "name": "College of Business",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                -118.11596632003786,
+                33.78409203530968
+            ]
+        },
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "type": "default",
+        "_id": {
+            "$oid": "689a9137216315fdc11229aa"
+        }
+    },
+    {
+        "name": "Engineering 4",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                -118.11118125915529,
+                33.783668469499425
+            ]
+        },
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "type": "default",
+        "_id": {
+            "$oid": "689a9137216315fdc11229ab"
+        }
+    },
+    {
+        "name": "Engineering 2",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                -118.11087012290956,
+                33.78317356363568
+            ]
+        },
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "type": "default",
+        "_id": {
+            "$oid": "689a9137216315fdc11229ac"
+        }
+    },
+    {
+        "name": "Vivian Engineering Center(VEC)",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                -118.11040341854097,
+                33.78283470752095
+            ]
+        },
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "type": "default",
+        "_id": {
+            "$oid": "689a9137216315fdc11229ad"
+        }
+    },
+    {
+        "name": "Computer Engineering & Computer Science",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                -118.1103363633156,
+                33.78332069811013
+            ]
+        },
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "type": "default",
+        "_id": {
+            "$oid": "689a9137216315fdc11229ae"
+        }
+    },
+    {
+        "name": "Human Services and Design",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                -118.10958534479143,
+                33.782718782752845
+            ]
+        },
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "type": "default",
+        "_id": {
+            "$oid": "689a9137216315fdc11229af"
+        }
+    },
+    {
+        "name": "Design Center",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                -118.1094190478325,
+                33.78206112965604
+            ]
+        },
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "type": "default",
+        "_id": {
+            "$oid": "689a9137216315fdc11229b0"
+        }
+    },
+    {
+        "name": "Department of Physical Therapy",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                -118.10853123664857,
+                33.783661781601396
+            ]
+        },
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "type": "default",
+        "_id": {
+            "$oid": "689a9137216315fdc11229b1"
+        }
+    },
+    {
+        "name": "College of Human and Health Services",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                -118.10894161462785,
+                33.783044263434284
+            ]
+        },
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "type": "default",
+        "_id": {
+            "$oid": "689a9137216315fdc11229b2"
+        }
+    },
+    {
+        "name": "Walter Pyramid",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                -118.11443209648134,
+                33.78743144395892
+            ]
+        },
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "type": "default",
+        "_id": {
+            "$oid": "689a9137216315fdc11229b3"
+        }
+    },
+    {
+        "name": "Parkside College Dorms",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                -118.12000036239625,
+                33.78694101827018
+            ]
+        },
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "type": "default",
+        "_id": {
+            "$oid": "689a9137216315fdc11229b4"
+        }
+    },
+    {
+        "name": "Parkside North College Dorms",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                -118.12008619308472,
+                33.788251786104915
+            ]
+        },
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "type": "default",
+        "_id": {
+            "$oid": "689a9137216315fdc11229b5"
+        }
+    },
+    {
+        "name": "Bob Cole Conservatory of Music",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                -118.1126055121422,
+                33.7876499054069
+            ]
+        },
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "type": "default",
+        "_id": {
+            "$oid": "689a9137216315fdc11229b6"
+        }
+    },
+    {
+        "name": "Carpenter Performing Arts Center",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                -118.11191082000734,
+                33.788193827406964
+            ]
+        },
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "type": "default",
+        "_id": {
+            "$oid": "689a9137216315fdc11229b7"
+        }
+    },
+    {
+        "name": "E1",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                -118.11664223670961,
+                33.7835614630685
+            ]
+        },
+        "properties": {
+            "isLandmark": true,
+            "isAccessible": false
+        },
+        "type": "Parking",
+        "_id": {
+            "$oid": "689a9137216315fdc11229b8"
         }
     }
 ]

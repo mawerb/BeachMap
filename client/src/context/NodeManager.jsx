@@ -77,10 +77,10 @@ export function NodeProvider({ children }) {
     setSelectedNode({ name, ...newNode[name] });
   };
 
-  const handlePropChange = async (name, newProperties, newImage) => {
+  const handlePropChange = async (name, newProperties, newImage, newLandmarkType) => {
     if (loading) return;
 
-    console.log('Updating properties for node:', name, newProperties);
+    console.log('Updating properties for node:', name, newProperties, newLandmarkType);
     console.log('New image:', newImage);
     let image = null
 
@@ -100,9 +100,10 @@ export function NodeProvider({ children }) {
         ...nodes[name],
         properties: { ...newProperties },
         image,
+        type: newLandmarkType,
       }
     }));
-    setUpdatedNodes(updatedNodes => [...updatedNodes,{name: name, properties: newProperties}]);
+    setUpdatedNodes(updatedNodes => [...updatedNodes,{name: name, properties: newProperties, type: newLandmarkType}]);
     setLoading(false);
   };
 

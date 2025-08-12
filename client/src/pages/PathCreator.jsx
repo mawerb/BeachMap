@@ -17,7 +17,7 @@ function PathCreator() {
     <>
       <NodeProvider>
         <AdminNav />
-        <div className="leaflet-map">
+        <div className="leaflet-map h-screen overflow-hidden">
           <Map />
         </div>
       </NodeProvider>

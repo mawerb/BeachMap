@@ -1,6 +1,7 @@
-import { MapContainer, TileLayer, Polyline, useMap, ZoomControl } from 'react-leaflet'
-import { useEffect } from 'react'
-import NodeLoader from './NodeLoader'
+import { MapContainer, TileLayer, Polyline, useMap, ZoomControl, LayersControl,  } from 'react-leaflet'
+import { useEffect, useState } from 'react'
+import NodeLoader from './NodeLoader' 
+import { filterNodesByEvent } from '../../services/api'
 import '../../css/Map.css'
 import 'leaflet/dist/leaflet.css';
 
@@ -27,7 +28,16 @@ function Map({
     error,
     setError,
 }) {
+    const[nodesWithEvents, setNodesWithEvents] = useState([]);
     let coords = null;
+
+    useEffect(() => {
+        const loadNodesWithEvents = async () => {
+            let nodes = await filterNodesByEvent();
+            setNodesWithEvents(nodes);
+        }
+        loadNodesWithEvents();
+    }, [])
 
     if (routeData) {
         coords = routeData.map(coord => coord[1])
@@ -55,6 +65,7 @@ function Map({
                     keepBuffer={10}
                 />
                 <ZoomControl position="bottomright" />
+                <LayersControl position="bottomright">
                 <NodeLoader
                     nodes={nodes}
                     setNodes={setNodes}
@@ -64,7 +75,9 @@ function Map({
                     setSelectedNode={setSelectedNode}
                     error={error}
                     setError={setError}
+                    nodesWithEvents={nodesWithEvents}
                 />
+                </LayersControl>
             </MapContainer>
         </div>
     )

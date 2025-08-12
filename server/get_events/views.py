@@ -14,7 +14,7 @@ from django.db.models.functions import Cast, Lower
 from dotenv import load_dotenv
 from bson import json_util
 from find_routes.models import Nodes
-from .models import Event
+from .models import Event, LandmarksWithEvents
 import requests
 import html
 
@@ -59,52 +59,87 @@ def update_events(request):
     Event.objects.filter(starts_on__lt=date_time).delete()
 
     errors = []
+    nodes_with_events = set()
     
     for event in data.get('value',[]):
+        search_str = event.get('location', '').lower().strip()
         
-        search_str = event.get('location', '')
-        alias_search = search_str.strip().lower().split()
-        prefix_url = 'https://se-images.campuslabs.com/clink/images/'
-        suffix_url = '?preset=med-sq'
-        try:
-            for alias in alias_search:
-                node_location = Nodes.objects.annotate(aliases_text=Lower(Cast('aliases',TextField()))).filter(aliases_text__icontains=alias)
-                if node_location.exists():
-                    break
+        search_parts = []
+        if ',' in search_str:
+            search_parts = [part.strip() for part in search_str.split(',')]
+        elif '&' in search_str:
+            search_parts = [part.strip() for part in search_str.split('&')]
+        elif 'and' in search_str:
+            search_parts = [part.strip() for part in search_str.split('and')]
+        else:
+            search_parts = [search_str]
+        
+        for location_part in search_parts:
+            # Filter out common stop words
+            stop_words = {'the', 'a', 'an', 'of', 'at', 'in', 'on', 'and', 'or', 'to', 'for'}
+            alias_search = [part.lower().replace('-', '') for part in location_part.strip().split() 
+                            if part.lower() not in stop_words]
+            
+            # Fallback if all words were filtered out
+            if not alias_search:
+                alias_search = [part.lower().replace('-', '') for part in location_part.strip().split()]
+
+    
+            prefix_url = 'https://se-images.campuslabs.com/clink/images/'
+            suffix_url = '?preset=med-sq'
+            try:
+                for alias in alias_search:
+                    node_location = Nodes.objects.annotate(aliases_text=Lower(Cast('aliases',TextField()))).filter(aliases_text__icontains=alias)
+                    if node_location.exists():
+                        print(f"DEBUG - First match: alias '{alias}' found in nodes: {[n.name for n in node_location]}")
+                        break
+                    
+                if not node_location or not node_location.exists():
+                    candidates = Nodes.objects.all()
+                    for node in candidates:
+                        matches = [alias.lower() for alias in node.aliases if (alias.lower() in location_part and -2 < len(alias) - len(location_part) < 2)]
+                        if matches:
+                            print(f"DEBUG - Node '{node.name}' aliases {node.aliases} - matches found: {matches} in '{location_part}'")
+                            node_location = Nodes.objects.filter(id=node.id)
+                            break
                 
-            if not node_location.exists():
-                node_location = Nodes.objects.annotate(similarity=TrigramSimilarity(Lower('name'), Cast(Value(search_str), CharField()))).filter(similarity__gt=0.3).order_by('-similarity')
-            
-            if not node_location.exists():
-                errors.append(f"No matching node for event ID {event.get('id', '')} with location '{search_str}'")
-                continue
-            
-            starts_on = safe_parse(event.get('startsOn', ''))
-            ends_on = safe_parse(event.get('endsOn', ''))
-            
-            if not starts_on or not ends_on:
-                errors.append(f"Invalid date format for event ID {event.get('id', '')}")
-                continue
-            
-            event_data = {
-                'id' : event.get('id', ''),
-                'name' : html.unescape(event.get('name', '')),
-                'organization_name' : html.unescape(event.get('organizationName', '')),
-                'node_location' : node_location.first(),
-                'location' : html.unescape(event.get('location', '')),
-                'starts_on' : starts_on,
-                'ends_on' : ends_on,
-                'description' : html.unescape(event.get('description','')),
-                'image_path' : prefix_url + event.get('imagePath','') + suffix_url,
-                'org_image_path' : prefix_url + event.get('organizationProfilePicture','') + suffix_url
-            }
-            
-            Event.objects.update_or_create(id=event_data['id'], defaults=event_data)
-            
-        except Exception as e:
-            print(f"Error processing event {event.get('id', '')}: {e}")
-            errors.append(f"Error processing event ID {event.get('id', '')}: {str(e)}")
-            
+                if not node_location.exists():
+                    node_location = Nodes.objects.annotate(similarity=TrigramSimilarity(Lower('name'), Cast(Value(search_str), CharField()))).filter(similarity__gt=0.5).order_by('-similarity')
+                
+                if not node_location.exists():
+                    errors.append(f"{alias_search}: No matching node for event ID {event.get('id', '')} with location '{search_str}'")
+                    continue
+                
+                starts_on = safe_parse(event.get('startsOn', ''))
+                ends_on = safe_parse(event.get('endsOn', ''))
+                
+                if not starts_on or not ends_on:
+                    errors.append(f"Invalid date format for event ID {event.get('id', '')}")
+                    continue
+                
+                nodes_with_events.add(node_location.first().name)
+                
+                event_data = {
+                    'id' : event.get('id', ''),
+                    'name' : html.unescape(event.get('name', '')),
+                    'organization_name' : html.unescape(event.get('organizationName', '')),
+                    'node_location' : node_location.first(),
+                    'location' : html.unescape(event.get('location', '')),
+                    'starts_on' : starts_on,
+                    'ends_on' : ends_on,
+                    'description' : html.unescape(event.get('description','')),
+                    'image_path' : prefix_url + event.get('imagePath','') + suffix_url,
+                    'org_image_path' : prefix_url + event.get('organizationProfilePicture','') + suffix_url
+                }
+                
+                Event.objects.update_or_create(id=event_data['id'], defaults=event_data)
+                
+            except Exception as e:
+                print(f"Error processing event {event.get('id', '')}: {e}")
+                errors.append(f"Error processing event ID {event.get('id', '')}: {str(e)}")
+    
+    LandmarksWithEvents.objects.update_or_create(id="1", defaults={'nodes_with_events': list(nodes_with_events)})
+    
     if errors:
         return Response({'errors' : errors }, status=status.HTTP_207_MULTI_STATUS)
     return Response({'message' : 'Events updated succesfully'}, status=status.HTTP_200_OK)
@@ -133,3 +168,17 @@ def get_events(request, node_name):
     } for event in event_qs]
     
     return Response(events_data, status=status.HTTP_200_OK)
+
+@api_view(['GET'])
+def get_nodes_with_events(request):
+    """
+    This view handles the request to get nodes with events.
+    """
+    print('howdy')
+    try:
+        q_nodesWithEvents = LandmarksWithEvents.objects.get(id="1")
+        nodes_with_events = q_nodesWithEvents.nodes_with_events or []
+        print(nodes_with_events,q_nodesWithEvents)
+    except LandmarksWithEvents.DoesNotExist:
+        return Response({'error': 'No landmarks with events found'}, status=status.HTTP_404_NOT_FOUND)
+    return Response(nodes_with_events, status=status.HTTP_200_OK)

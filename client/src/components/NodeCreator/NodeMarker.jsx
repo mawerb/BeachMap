@@ -89,7 +89,7 @@ function NodeMarker({
           },
         }}
       >
-        {selectedNode && selectedNode.name === name && <NodePropertyEditor nodeName={name} property={node.properties} handlePropChange={handlePropChange} handleUpdateGraph={handleUpdateGraph}/>}
+        {selectedNode && selectedNode.name === name && <NodePropertyEditor nodeName={name} property={node.properties} landmarkType={node.type} handlePropChange={handlePropChange} handleUpdateGraph={handleUpdateGraph}/>}
         {!neighborUI && (
           <Popup>
             <div className='montserrat font-semibold mb-2 truncate max-w-45'>Node {index + 1}: {name}</div>
