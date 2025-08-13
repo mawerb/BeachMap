@@ -38,11 +38,10 @@ export function NodeProvider({ children }) {
   const [nodes, setNodes] = useState({});
   const [activeNode, setActiveNode] = useState(null);
   const [neighborUI, setNeighborUI] = useState(false);
-  const [updated, setUpdated] = useState(false);
   const [loading, setLoading] = useState(false);
   const [selectedNode, setSelectedNode] = useState(null);
-
-  const [deletedNodes,setDeletedNodes] = useState([]);
+  const [updated,setUpdated] = useState(true)
+  const [deletedNodes, setDeletedNodes] = useState([]);
   const [updatedNodes, setUpdatedNodes] = useState([]);
   const [renamedNodes, setRenamedNodes] = useState([]);
 
@@ -77,23 +76,23 @@ export function NodeProvider({ children }) {
     setSelectedNode({ name, ...newNode[name] });
   };
 
-  const handlePropChange = async (name, newProperties, newImage, newLandmarkType) => {
+  const handlePropChange = async (name, newProperties, newImage, newLandmarkType, newOverview) => {
     if (loading) return;
 
     console.log('Updating properties for node:', name, newProperties, newLandmarkType);
     console.log('New image:', newImage);
     let image = null
-
-    if(newImage) {
+    setLoading(true);
+    if (newImage) {
       if (newImage.name != name) {
         const image_ext = newImage.name.split('.').pop();
-        newImage = new File([newImage], `${name}.${image_ext}` , { type: newImage.type });
+        newImage = new File([newImage], `${name}.${image_ext}`, { type: newImage.type });
       }
       const formData = new FormData();
       formData.append('image', newImage);
       image = await uploadImage(formData)
     }
-    setLoading(true);
+
     setNodes(nodes => ({
       ...nodes,
       [name]: {
@@ -101,11 +100,26 @@ export function NodeProvider({ children }) {
         properties: { ...newProperties },
         image,
         type: newLandmarkType,
+        overview: newOverview,
       }
     }));
-    setUpdatedNodes(updatedNodes => [...updatedNodes,{name: name, properties: newProperties, type: newLandmarkType}]);
+    console.log('nodes after property change: ', nodes)
+    setUpdatedNodes(updatedNodes => [...updatedNodes, {
+      name: name,
+      properties: newProperties,
+      type: newLandmarkType,
+      overview: newOverview,
+    }
+    ]);
+    console.log('updatedNodes after property change:', updatedNodes)
     setLoading(false);
   };
+
+  // useEffect to set updated to false once node state
+  useEffect(() => {
+    setUpdated(true)
+    handleUpdateGraph()
+  },[nodes])
 
   // Function to handle updating the name of a node
   const handleUpdateName = (currName, newName, currNode) => {
@@ -123,7 +137,7 @@ export function NodeProvider({ children }) {
     return Object.entries(nodes).reduce((acc, [key, value]) => {
       if (key === currName) {
         acc[newName] = value;
-        setRenamedNodes(renamedNodes => [...renamedNodes ,{oldName : currName, newName: newName}]);
+        setRenamedNodes(renamedNodes => [...renamedNodes, { oldName: currName, newName: newName }]);
         console.log('Renaming node:', currName, 'to', newName);
         setUpdatedNodes(prevUpdatedNodes =>
           prevUpdatedNodes.map(node =>
@@ -190,17 +204,15 @@ export function NodeProvider({ children }) {
   };
 
   const handleUpdateGraph = async () => {
-    if (updated || loading) return;
-    setUpdated(true);
+    if (loading) return;
     setLoading(true);
-    console.log(renamedNodes)
+
     try {
       await updateNodes(nodes, deletedNodes, updatedNodes, renamedNodes);
     } catch (err) {
       console.error('Error updating nodes:', err);
       alert('Failed to update nodes. Please try again later.');
     } finally {
-      setUpdated(false);
       setLoading(false);
       setDeletedNodes([]);
       setUpdatedNodes([]);
@@ -298,6 +310,7 @@ export function NodeProvider({ children }) {
       handleUpdateGraph,
       loading,
       updated,
+      setUpdated,
       activeNode,
       handleAddNeighbor,
       handleRemoveNeighbor,

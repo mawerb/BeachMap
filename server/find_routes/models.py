@@ -7,6 +7,7 @@ import os
 class Nodes(models.Model):
     name = models.CharField(max_length=100, unique=True)
     coords = models.PointField(null=True, blank=True, srid=4326)
+    overview = models.CharField(max_length=1000, blank=True, default="")
     properties = models.JSONField(default=dict, blank=True)
     type = models.CharField(max_length=50, default="default")
     aliases = models.JSONField(default=list, blank=True)

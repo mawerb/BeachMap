@@ -9,7 +9,9 @@
             "isLandmark": true,
             "isAccessible": false
         },
-        "image": null
+        "image": null,
+        "type": "default",
+        "overview": "State-of-the-art facility offering students access to pools, racquetball courts, a rock-climbing wall, and more."
     },
     "Liberal Arts Buildings": {
         "coords": [
@@ -706,6 +708,7 @@
             "isAccessible": false
         },
         "image": null,
-        "type": "Parking"
+        "type": "Building",
+        "overview": "Another test to see if its updating now i wonder ..."
     }
 }

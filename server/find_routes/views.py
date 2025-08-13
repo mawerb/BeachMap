@@ -99,10 +99,12 @@ def update_nodes (request):
         for updated_node in updated_nodes:
             node_name = updated_node.get('name')
             node_type = updated_node.get('type')
+            node_overview = updated_node.get('overview')
             print(f'{node_name} type: {node_type}')
             
             if node_name in nodes and node_type:
                 nodes[node_name]['type'] = node_type
+                nodes[node_name]['overview'] = node_overview
 
         # Write the combined data to the JSON file
         with open(coord_path,'w') as file:
@@ -132,6 +134,7 @@ def update_nodes (request):
                 'coords': point,
                 'properties': node_data.get('properties', {}),
                 'type': node_data.get('type', 'default'),
+                'overview' : node_data.get('overview', '')
                 }
             )
             print(f'{"Created" if created else "Updated"} node: {node.name}')
