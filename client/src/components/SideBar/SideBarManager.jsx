@@ -11,33 +11,9 @@ function SideBarManager({
     setSelectedNodeByName,
 }) {
     const [image, setImage] = useState(null);
-    const [events, setEvents] = useState([]);
 
     useEffect(() => {
         let isCancelled = false;
-
-        if (!selectedNode?.name) {
-            setEvents([]);
-            return;
-        }
-        console.log('Fetching events for node:', selectedNode.name);
-        getEvents(selectedNode.name, 0, 10).then((data) => {
-            if (isCancelled) return;
-            console.log('Fetched events:', data);
-            setEvents(data);
-        }).catch((err) => {
-            if (isCancelled) return;
-            console.error('Error fetching events:', err);
-        })
-
-        return () => {
-            isCancelled = true;
-        };
-    }, [selectedNode?.name]);
-
-    useEffect(() => {
-        let isCancelled = false;
-        
         if (!selectedNode?.name) {
             setImage(null);
             return;
@@ -74,7 +50,7 @@ function SideBarManager({
                 LandmarkType={selectedNode?.type ?? "Landmark Type"}
                 Image={image}
                 setSelectedNode={setSelectedNode}
-                events={events} />
+                selectedNode={selectedNode}/>
             )}
         </>
 

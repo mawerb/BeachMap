@@ -103,8 +103,9 @@ function EventsTab({
 
                         </div>
                     </div>
+
                 </Transition>
             </div>
-        ))
+            ))
     )
 } export default EventsTab

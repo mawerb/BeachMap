@@ -149,6 +149,12 @@ def get_events(request, node_name):
     try:
         skip = int(request.GET.get('skip',0))
         take = int(request.GET.get('take',10))
+        
+        if skip < 0:
+            return Response({'error': 'Skip parameter must be non-negative'}, status=status.HTTP_400_BAD_REQUEST)
+        if take <= 0 or take > 100:  # Limit maximum results per request
+            return Response({'error': 'Take parameter must be between 1 and 100'}, status=status.HTTP_400_BAD_REQUEST)
+        
     except ValueError:
         return Response({'error': 'Invalid skip or take parameter'}, status=status.HTTP_400_BAD_REQUEST)
 
