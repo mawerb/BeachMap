@@ -48,4 +48,4 @@ COPY . .
 EXPOSE 8080
 
 # Run the application.
-CMD ["python3", "-m", "daphne", "-b", "0.0.0.0", "p", "=8080", "csulbroutes.asgi:application"]
+CMD ["python3", "-m", "daphne", "-b", "0.0.0.0", "p", "8080", "csulbroutes.asgi:application"]
