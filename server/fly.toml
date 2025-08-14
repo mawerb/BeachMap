@@ -19,9 +19,5 @@ primary_region = 'lax'
   cpu_kind = 'shared'
   cpus = 1
 
-[mounts]
-  source = "static_data"
-  destination = "/app/staticfiles"
-
 [deploy]
   release_command = "sh -c 'rm -rf /app/staticfiles/* && python manage.py migrate && python manage.py collectstatic --noinput'"
