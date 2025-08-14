@@ -8,10 +8,7 @@ function InfoBar({
     Name = "Landmark Name",
     LandmarkType = "Landmark Type(building, lawn, etc..)",
     Image = placeholder,
-    OverviewText = `Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.
 
-                Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.`
-    ,
     selectedNode = null,
     setSelectedNode,
 }) {
@@ -76,11 +73,12 @@ function InfoBar({
 
     const handleScroll = async (e) => {
         if (e.currentTarget.scrollTop + e.currentTarget.clientHeight >= e.currentTarget.scrollHeight) {
-            if(loading || !hasMore) return;
+            if (loading || !hasMore) return;
 
-            fetchNodes(skip,take);
+            fetchNodes(skip, take);
         }
     }
+    console.log("Current Node:", selectedNode)
 
     const handleClicks = (e) => {
         if (e.currentTarget.value !== selected) {
@@ -120,7 +118,11 @@ function InfoBar({
                         )}
                     </button>
                 </div>
-                {selected === "overview" && (<Overview text={OverviewText} />)}
+                {selected === "overview" && (
+                    <div className="h-[57%] max-h-screen overflow-y-auto">
+                        <Overview overview={selectedNode.overview} />
+                    </div>
+                )}
                 {selected === "events" && (
                     <div className="h-[57%] max-h-screen overflow-y-auto" onScroll={handleScroll}>
                         <EventsTab events={events} selectedNode={selectedNode} />

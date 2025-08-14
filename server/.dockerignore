@@ -1,0 +1,25 @@
+# flyctl launch added from .venv/.gitignore
+# Created by venv; see https://docs.python.org/3/library/venv.html
+.venv/**/*
+
+# flyctl launch added from .venv/lib/python3.13/site-packages/twisted/conch/newsfragments/.gitignore
+!.venv/lib/python3.13/site-packages/twisted/conch/newsfragments/**/.gitignore
+
+# flyctl launch added from .venv/lib/python3.13/site-packages/twisted/mail/newsfragments/.gitignore
+!.venv/lib/python3.13/site-packages/twisted/mail/newsfragments/**/.gitignore
+
+# flyctl launch added from .venv/lib/python3.13/site-packages/twisted/names/newsfragments/.gitignore
+!.venv/lib/python3.13/site-packages/twisted/names/newsfragments/**/.gitignore
+
+# flyctl launch added from .venv/lib/python3.13/site-packages/twisted/newsfragments/.gitignore
+!.venv/lib/python3.13/site-packages/twisted/newsfragments/**/.gitignore
+
+# flyctl launch added from .venv/lib/python3.13/site-packages/twisted/trial/newsfragments/.gitignore
+!.venv/lib/python3.13/site-packages/twisted/trial/newsfragments/**/.gitignore
+
+# flyctl launch added from .venv/lib/python3.13/site-packages/twisted/web/newsfragments/.gitignore
+!.venv/lib/python3.13/site-packages/twisted/web/newsfragments/**/.gitignore
+
+# flyctl launch added from .venv/lib/python3.13/site-packages/twisted/words/newsfragments/.gitignore
+!.venv/lib/python3.13/site-packages/twisted/words/newsfragments/**/.gitignore
+fly.toml

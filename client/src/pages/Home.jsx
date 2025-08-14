@@ -51,7 +51,7 @@ export default function Home() {
                             Easy To Add Events
                         </h3>
                         <p>
-                        Quickly post your event by submitting it through the CSULB <a target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline" href="https://csulb.campuslabs.com/engage/events">Events & Orgs</a> page.
+                            Quickly post your event by submitting it through the CSULB <a target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline" href="https://csulb.campuslabs.com/engage/events">Events & Orgs</a> page.
                         </p>
                     </div>
                     <div className="bg-white rounded-lg shadow-md p-6 text-center">
@@ -101,8 +101,23 @@ export default function Home() {
                         </p>
                         <p>
                             Email:{" "}
-                            <a href="mailto:maorbarzilay8@gmail.com" className="text-blue-600 hover:underline">
+                            <a target="_blank"
+                                rel="noopener noreferrer"
+                                href="mailto:maorbarzilay8@gmail.com"
+                                className="text-blue-600 hover:underline"
+                            >
                                 maorbarzilay8@gmail.com
+                            </a>
+                        </p>
+                        <p>
+                            GitHub:{" "}
+                            <a
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                href="https://github.com/mawerb"
+                                className="text-blue-600 hover:underline"
+                            >
+                                mawerb
                             </a>
                         </p>
                     </div>

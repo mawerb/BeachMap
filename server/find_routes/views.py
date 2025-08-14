@@ -55,6 +55,7 @@ def get_options (request):
                     'coords' : [landmark.coords.y, landmark.coords.x],
                     'type' : landmark.type,
                     'properties' : landmark.properties,
+                    'overview' : landmark.overview
                 }
                 landmark_data.append(data)
         
