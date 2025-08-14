@@ -3,7 +3,7 @@
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'csulbroutes-delicate-night-320'
+app = 'csulbroutes_server'
 primary_region = 'lax'
 
 [http_service]
