@@ -30,7 +30,7 @@ CORS_ALLOWED_ORIGINS = [
     ]
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://csulbroutes-delicate-night-320.fly.dev'
+    'https://csulbroutesserver.fly.dev'
 ]
 
 # SECURITY WARNING: keep the secret key used in production secret!
@@ -39,7 +39,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['csulbroutes-delicate-night-320.fly.dev']
+ALLOWED_HOSTS = ['https://csulbroutesserver.fly.dev']
 
 
 # Application definition
