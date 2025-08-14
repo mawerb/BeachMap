@@ -30,7 +30,7 @@ CORS_ALLOWED_ORIGINS = [
     ]
 
 CSRF_TRUSTED_ORIGINS = [
-    'csulbroutes-delicate-night-320.fly.dev'
+    'https://csulbroutes-delicate-night-320.fly.dev'
 ]
 
 # SECURITY WARNING: keep the secret key used in production secret!
