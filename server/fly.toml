@@ -20,4 +20,4 @@ primary_region = 'lax'
   cpus = 1
 
 [deploy]
-  release_command = "sh -c 'rm -rf /app/staticfiles/* && python manage.py migrate && python manage.py collectstatic --noinput'"
+  release_command = "python manage.py migrate && python manage.py collectstatic --noinput"
