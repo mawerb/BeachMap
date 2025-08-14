@@ -39,7 +39,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['https://csulbroutesserver.fly.dev']
+ALLOWED_HOSTS = ['csulbroutesserver.fly.dev']
 
 
 # Application definition
