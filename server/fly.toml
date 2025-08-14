@@ -19,8 +19,5 @@ primary_region = 'lax'
   cpu_kind = 'shared'
   cpus = 1
 
-[build]
-  builder = "paketobuildpacks/builder:base"
-
 [deploy]
   release_command = "python manage.py migrate && python manage.py collectstatic --noinput"
