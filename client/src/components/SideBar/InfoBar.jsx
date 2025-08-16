@@ -91,18 +91,18 @@ function InfoBar({
 
     return (
         <div className="absolute top-10 h-[calc(100%-2.5rem)] z-[1099]">
-            <div className="relative h-full w-[21.7rem] bg-white">
+            <div className="relative h-full w-[21.7rem] bg-white flex flex-col">
                 <button
                     onClick={() => setSelectedNode(null)}
                     className="absolute top-2 right-2 text-gray-500 hover:text-black text-lg font-bold z-10">
                     ×
                 </button>
                 <img src={Image} className="h-[30%] w-full" />
-                <div className="ml-4">
+                <div className="ml-4 flex-shrink-0">
                     <h1 className="text-2xl font-medium">{Name}</h1>
                     <h2 className="text-sm font-light text-gray-500">{LandmarkType}</h2>
                 </div>
-                <div className="flex border-b border-[#ECAA01] justify-around mt-5">
+                <div className="flex border-b border-[#ECAA01] justify-around mt-5 flex-shrink-0">
                     <button className="hover:bg-gray-100 w-full relative" value="events" onClick={handleClicks}>
                         <h2 className="text-gray-500">Events</h2>
                         {selected === "events" && (
@@ -119,12 +119,12 @@ function InfoBar({
                     </button>
                 </div>
                 {selected === "overview" && (
-                    <div className="h-[57%] max-h-screen overflow-y-auto">
+                    <div className="flex-1 max-h-screen overflow-y-auto">
                         <Overview overview={selectedNode.overview} />
                     </div>
                 )}
                 {selected === "events" && (
-                    <div className="h-[57%] max-h-screen overflow-y-auto" onScroll={handleScroll}>
+                    <div className="flex-1 max-h-screen overflow-y-auto relative" onScroll={handleScroll}>
                         <EventsTab events={events} selectedNode={selectedNode} />
                     </div>
                 )}
