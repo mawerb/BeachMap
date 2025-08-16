@@ -1,6 +1,6 @@
 export const getOptions = async () => {
     try {
-        const response = await fetch('http://127.0.0.1:8000/api/options/', { method: 'GET' });
+        const response = await fetch('http://csulbroutesserver.fly.dev/api/options/', { method: 'GET' });
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`)
         };
@@ -13,7 +13,7 @@ export const getOptions = async () => {
 
 export const findOptRoute = async (start, end) => {
     try {
-        const response = await fetch('http://127.0.0.1:8000/api/opt_path/',
+        const response = await fetch('http://csulbroutesserver.fly.dev/api/opt_path/',
             {
                 method: "POST",
                 headers: {
@@ -33,7 +33,7 @@ export const findOptRoute = async (start, end) => {
 
 export const getNodes = async () => {
     try {
-        const response = await fetch('http://127.0.0.1:8000/api/nodes/', { method: 'GET' });
+        const response = await fetch('http://csulbroutesserver.fly.dev/api/nodes/', { method: 'GET' });
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`)
         };
@@ -51,7 +51,7 @@ export const updateNodes = async (
     renamedNodes = [],
 ) => {
     try {
-        const response = await fetch('http://127.0.0.1:8000/api/update_nodes/', {
+        const response = await fetch('http://csulbroutesserver.fly.dev/api/update_nodes/', {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -75,7 +75,7 @@ export const updateNodes = async (
 
 export const uploadImage = async (image) => {
     try {
-        const response = await fetch('http://127.0.0.1:8000/api/upload_image/', {
+        const response = await fetch('http://csulbroutesserver.fly.dev/api/upload_image/', {
             method: "POST",
             body: image,
         })
@@ -94,7 +94,7 @@ export const getImage = async (imageName) => {
     try {
         if (!imageName) return null;
         imageName = encodeURIComponent(imageName);
-        const response = await fetch(`http://127.0.0.1:8000/api/get_image/${imageName}/`, { method: 'GET' });
+        const response = await fetch(`http://csulbroutesserver.fly.dev/api/get_image/${imageName}/`, { method: 'GET' });
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`)
         };
@@ -111,7 +111,7 @@ export const getImage = async (imageName) => {
 
 export const getEvents = async (nodeName, skip, take) => {
     try{
-        const response = await fetch (`http://127.0.0.1:8000/api/events/${nodeName}/?skip=${skip}&take=${take}`, { method: 'GET' });
+        const response = await fetch (`http://csulbroutesserver.fly.dev/api/events/${nodeName}/?skip=${skip}&take=${take}`, { method: 'GET' });
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`)
         };
@@ -124,7 +124,7 @@ export const getEvents = async (nodeName, skip, take) => {
 
 export const filterNodesByEvent = async () => {
     try{
-        const response = await fetch('http://127.0.0.1:8000/api/events/get_nodes_with_events/')
+        const response = await fetch('http://csulbroutesserver.fly.dev/api/events/get_nodes_with_events/')
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`)
         };
