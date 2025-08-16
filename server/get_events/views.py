@@ -63,22 +63,39 @@ def update_events(request):
     
     for event in data.get('value',[]):
         search_str = event.get('location', '').lower().strip()
+        found_location = False
         
-        search_parts = []
-        if ',' in search_str:
-            search_parts = [part.strip() for part in search_str.split(',')]
-        elif '&' in search_str:
-            search_parts = [part.strip() for part in search_str.split('&')]
-        elif 'and' in search_str:
-            search_parts = [part.strip() for part in search_str.split('and')]
-        else:
-            search_parts = [search_str]
+        search_parts = set()
+        
+        for part in search_str.split(','):
+            part = part.strip()
+            if part:
+                search_parts.add(part)
+            
+        location_parts = set(search_parts)
+        for part in location_parts:
+            part = part.lower()
+            found_seperator = False
+            for seperator in ['&','-',' and ']:
+                if seperator in part:
+                    search_parts.remove(part)
+                    for subpart in part.split(seperator):
+                        subpart = subpart.strip()
+                        if subpart:
+                            search_parts.add(subpart)
+                    found_seperator = True
+                    break
         
         for location_part in search_parts:
             # Filter out common stop words
-            stop_words = {'the', 'a', 'an', 'of', 'at', 'in', 'on', 'and', 'or', 'to', 'for'}
-            alias_search = [part.lower().replace('-', '') for part in location_part.strip().split() 
+            stop_words = {'the', 'a', 'an', 'of', 'at', 'in', 'on', 'and', 'or', 'to', 'for', 'center','hall','university'}
+            alias_search = [part.lower().strip() for part in location_part.strip().split() 
                             if part.lower() not in stop_words]
+            
+            if 'library’s' in location_part:
+                print('ALIAS_SEARCH: ',alias_search)
+                print('LOCATION_PART: ', location_part)
+                
             
             # Fallback if all words were filtered out
             if not alias_search:
@@ -118,6 +135,7 @@ def update_events(request):
                     continue
                 
                 nodes_with_events.add(node_location.first().name)
+                found_location = True
                 
                 event_data = {
                     'id' : event.get('id', ''),
@@ -136,7 +154,9 @@ def update_events(request):
                 
             except Exception as e:
                 print(f"Error processing event {event.get('id', '')}: {e}")
-                errors.append(f"Error processing event ID {event.get('id', '')}: {str(e)}")
+                
+                if not found_location:
+                    errors.append(f"Error processing event ID {event.get('id', '')}: {str(e)}")
     
     LandmarksWithEvents.objects.update_or_create(id="1", defaults={'nodes_with_events': list(nodes_with_events)})
     

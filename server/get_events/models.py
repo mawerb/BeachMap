@@ -15,7 +15,7 @@ class Event(models.Model):
     org_image_path = models.CharField(max_length=255, blank=True, null=True)
     
     def __str__(self):
-        return f"{self.name} ({self.starts_on.strftime('%Y-%m-%d')})"
+        return f"ID: {self.id} {self.name} ({self.starts_on.strftime('%Y-%m-%d')})"
     
 class LandmarksWithEvents(models.Model):
     id = models.CharField(max_length=100, primary_key=True, default='1')
