@@ -35,9 +35,11 @@ const NodeContext = createContext();
 
 export function NodeProvider({ children }) {
   const [nodes, setNodes] = useState({});
+  const [nodeUpdate, setNodeUpdate] = useState(false)
   const [activeNode, setActiveNode] = useState(null);
   const [neighborUI, setNeighborUI] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [mapLoading, setMapLoading] = useState(true);
   const [selectedNode, setSelectedNode] = useState(null);
   const [updated,setUpdated] = useState(true)
   const [deletedNodes, setDeletedNodes] = useState([]);
@@ -55,12 +57,16 @@ export function NodeProvider({ children }) {
         const data = await getNodes();
         if (data) {
           setNodes(data);
+          console.log(data)
         }
       } catch (error) {
         console.error('Error loading nodes:', error);
+      } finally {
+        setMapLoading(false)
       }
     }
     loadedNodes();
+    console.log('done loading...')
   }, []);
 
   // Function to add a new node with coordinates and an optional name
@@ -91,7 +97,6 @@ export function NodeProvider({ children }) {
       formData.append('image', newImage);
       image = await uploadImage(formData)
     }
-
     setNodes(nodes => ({
       ...nodes,
       [name]: {
@@ -102,6 +107,7 @@ export function NodeProvider({ children }) {
         overview: newOverview,
       }
     }));
+    setNodeUpdate(true)
     console.log('nodes after property change: ', nodes)
     setUpdatedNodes(updatedNodes => [...updatedNodes, {
       name: name,
@@ -114,10 +120,14 @@ export function NodeProvider({ children }) {
     setLoading(false);
   };
 
-  // useEffect to set updated to false once node state
+  // useEffect to set updated to false once node state finished the update
   useEffect(() => {
+    if (!nodeUpdate) return;
+
     setUpdated(true)
     handleUpdateGraph()
+    
+    setNodeUpdate(false)
   },[nodes])
 
   // Function to handle updating the name of a node
@@ -165,6 +175,7 @@ export function NodeProvider({ children }) {
   const removeAllNodes = () => {
     setDeletedNodes([...Object.keys(nodes)]);
     setNodes({});
+    setNodeUpdate(true)
     setActiveNode(null);
     setNeighborUI(false);
   };
@@ -173,6 +184,7 @@ export function NodeProvider({ children }) {
   const handleRemoveNode = (nodeName) => {
     setDeletedNodes(deletedNodes => [...deletedNodes, nodeName]);
     setNodes(nodes => (removeNode(nodeName)));
+    setNodeUpdate(true)
   };
 
   const removeNode = (nodeName) => {
@@ -308,6 +320,7 @@ export function NodeProvider({ children }) {
       endNeighborsMode,
       handleUpdateGraph,
       loading,
+      mapLoading,
       updated,
       setUpdated,
       activeNode,

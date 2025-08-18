@@ -43,9 +43,11 @@ function NodeMarker({
   const pointIcon = L.icon({
     iconUrl: pointImg,
     iconSize: [20, 30],
-    iconAnchor: [7.5,23],
-    popupAnchor: [2,-20],
+    iconAnchor: [7.5, 23],
+    popupAnchor: [2, -20],
   });
+
+  const [showPropEditor, setShowPropEditor] = useState(true)
 
   const curr_map = useMap();
 
@@ -53,6 +55,8 @@ function NodeMarker({
   //   const popup = popupRefs.current[index];
   //   curr_map.openPopup(popup, node.coords);
   // },[popupRefs.current[index]]);
+
+  console.log('name', name, 'coords:', node.coords)
 
   useEffect(() => {
     if (popupRefs.current) {
@@ -62,16 +66,16 @@ function NodeMarker({
 
   return (
     <>
-      {Object.entries(node.neighbors || {}).map(([key,value],neighborIndex) => (
+      {Object.entries(node.neighbors || {}).map(([key, value], neighborIndex) => (
         <Polyline
           key={`${index}-${neighborIndex}`}
           positions={[node.coords, nodes[key].coords]}
           color="red"
         >
           <Popup>
-          <button 
-            className="bg-red-500 hover:bg-red-600 text-white font-semibold py-1 px-3 rounded mr-2 transition"
-            onClick={(e) => { onRemoveNeighbor(name,key); e.stopPropagation(); }}>
+            <button
+              className="bg-red-500 hover:bg-red-600 text-white font-semibold py-1 px-3 rounded mr-2 transition"
+              onClick={(e) => { onRemoveNeighbor(name, key); e.stopPropagation(); }}>
               Remove Connection
             </button>
           </Popup>
@@ -87,29 +91,39 @@ function NodeMarker({
             if (neighborUI) onAddNeighbor(name);
             else {
               setSelectedNode({ name, node });
+              setShowPropEditor(true)
             }
           },
         }}
       >
-        {selectedNode && selectedNode.name === name && <NodePropertyEditor nodeName={name} property={node.properties} overview={node.overview} landmarkType={node.type} handlePropChange={handlePropChange} handleUpdateGraph={handleUpdateGraph}/>}
+        {showPropEditor && selectedNode && selectedNode.name === name &&
+          (<NodePropertyEditor
+            nodeName={name}
+            property={node.properties}
+            overview={node.overview}
+            landmarkType={node.type}
+            handlePropChange={handlePropChange}
+            setShowPropEditor={setShowPropEditor} />)
+        }
         {!neighborUI && (
           <Popup>
             <div className='montserrat font-semibold mb-2 truncate max-w-45'>Node {index + 1}: {name}</div>
-            <input 
-            className="border border-gray-300 rounded px-2 py-1 mb-3 w-full focus:outline-none focus:ring-2 focus:ring-indigo-500"
-            type="text" 
-            onKeyUp={(e) => {
-              if (e.key === "Enter") {
-              onChangeName(name,e.target.value,node)}
-              }}></input><br/>
-            <button 
-            className="bg-red-500 hover:bg-red-600 text-white font-semibold py-1 px-3 rounded mr-2 transition"
-            onClick={(e) => { onRemoveNode(name); e.stopPropagation(); }}>
+            <input
+              className="border border-gray-300 rounded px-2 py-1 mb-3 w-full focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              type="text"
+              onKeyUp={(e) => {
+                if (e.key === "Enter") {
+                  onChangeName(name, e.target.value, node)
+                }
+              }}></input><br />
+            <button
+              className="bg-red-500 hover:bg-red-600 text-white font-semibold py-1 px-3 rounded mr-2 transition"
+              onClick={(e) => { onRemoveNode(name); e.stopPropagation(); }}>
               Delete
             </button>
-            <button 
-            className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-1 px-3 rounded transition"
-            onClick={() => onSetNeighbors(name)}>Set Neighbors</button><br></br>
+            <button
+              className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-1 px-3 rounded transition"
+              onClick={() => onSetNeighbors(name)}>Set Neighbors</button><br></br>
           </Popup>
         )}
       </Marker>

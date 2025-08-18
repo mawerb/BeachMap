@@ -2,6 +2,7 @@ import DropDown from "./Dropdown"
 import InfoBar from "./InfoBar"
 import { getImage, getEvents  } from "../../services/api"
 import { useEffect, useState } from "react"
+import FilterTab from './FilterTab';
 
 
 function SideBarManager({
@@ -41,6 +42,7 @@ function SideBarManager({
 
     return (
         <>
+            <FilterTab />
             <DropDown
                 choices={LandMarks.map(landmark => landmark.name)}
                 setSelectedNodeByName={setSelectedNodeByName} 

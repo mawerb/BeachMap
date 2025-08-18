@@ -7,7 +7,7 @@ function Map(){
     
     return (
         <div className='leaflet-map'>
-            <MapContainer center={[33.78184042460368,-118.11463594436647]} zoom={15.7} scrollWheelZoom={true} maxZoom={20} minZoom={15} zoomControl= {false}>
+            <MapContainer center={[33.78184042460368,-118.11463594436647]} zoom={15.7} scrollWheelZoom={true} maxZoom={20} minZoom={1} zoomControl= {false}>
                 <LocationMarker />
                 <TileLayer 
                     attribution='Mapbox'

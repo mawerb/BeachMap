@@ -66,13 +66,18 @@ def get_options (request):
 
 @api_view(['GET'])
 def get_nodes (request):
-
+    data = {}
     try:
-        base_dir = os.path.dirname(os.path.abspath(__file__))
-        path = os.path.join(base_dir,'algo','mapdata','coordinate_graph.json')
-        with open(path,'r') as file:
-            data = json.load(file)
-
+        nodes = Nodes.objects.all()
+        print(nodes[0].coords)
+        for node in nodes:
+            node_data = {
+                    'coords' : [node.coords.y, node.coords.x],
+                    'neighbors' : {},
+                    'properties' : node.properties,
+                }
+            data[node.name] = node_data
+        
         return Response({'result':data})
     except Exception as e:
         print("Error", e)
@@ -80,18 +85,12 @@ def get_nodes (request):
     
 @api_view(['PUT'])
 def update_nodes (request):
-    
-    print(request.data)
     try:
         data = request.data
         nodes = data.get('nodes', {})
         removed_nodes = data.get('deleted_nodes', [])
         updated_nodes = data.get('updated_nodes', [])
         renamed_nodes = data.get('renamed_nodes', [])
-        print('nodes:', nodes)
-        print('removed_nodes:', removed_nodes)
-        print('renamed_nodes:', renamed_nodes)
-        print('updated_nodes:', updated_nodes)
 
         # Define the path to save the JSON file
         base_dir = os.path.dirname(os.path.abspath(__file__))

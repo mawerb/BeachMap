@@ -41,6 +41,7 @@ function LocationMarker() {
     nodes,
     addNode,
     neighborUI,
+    mapLoading,
     setNeighborsMode,
     endNeighborsMode,
     handleAddNeighbor,
@@ -58,7 +59,7 @@ function LocationMarker() {
   const containerRef = useRef(null); // Reference to the container div
 
   useEffect(() => {
-    if(containerRef.current) {
+    if (containerRef.current) {
       containerRef.current.focus(); // Focus the container to enable keyboard events
     }
   }, [neighborUI])
@@ -69,7 +70,7 @@ function LocationMarker() {
       if (neighborUI) return;
       addNode(e.latlng);
     },
-  }); 
+  });
 
   // Handle Escape key to exit neighbors mode
   useEffect(() => {
@@ -80,38 +81,43 @@ function LocationMarker() {
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [neighborUI,endNeighborsMode]);
+  }, [neighborUI, endNeighborsMode]);
 
   return (
-    <div tabIndex={0} ref={containerRef}>
-      {neighborUI && (
-        <button onClick={endNeighborsMode} id='endNeighbor'>
-          Stop Attaching Neighbors
-        </button>
-      )}
-      {Object.entries(nodes).length > 0 && (Object.entries(nodes).map(([name,node], index) => (
-        // Render NodeMarker for each node in the nodes object
-        <NodeMarker
-          key={index}
-          name={name}
-          node={node}
-          index={index}
-          nodes={nodes}
-          selectedNode={selectedNode}
-          setSelectedNode={setSelectedNode}
-          neighborUI={neighborUI}
-          onSetNeighbors={setNeighborsMode}
-          onRemoveNode={handleRemoveNode}
-          onAddNeighbor={handleAddNeighbor}
-          onRemoveNeighbor={handleRemoveNeighbor}
-          onChangeName={handleUpdateName}
-          popupRefs={popupRefs}
-          handlePropChange={handlePropChange}
-          handleUpdateGraph={handleUpdateGraph}
-        />
-      ))
-      )}
-    </div>
+    mapLoading ? (
+      <div className="flex h-screen justify-center align-center">
+        <h1 className="text-xl">Loading ...</h1>
+      </div>
+    ) :
+      <div tabIndex={0} ref={containerRef}>
+        {neighborUI && (
+          <button onClick={endNeighborsMode} id='endNeighbor'>
+            Stop Attaching Neighbors
+          </button>
+        )}
+        {Object.entries(nodes).length > 0 && (Object.entries(nodes).map(([name, node], index) => (
+          // Render NodeMarker for each node in the nodes object
+          <NodeMarker
+            key={index}
+            name={name}
+            node={node}
+            index={index}
+            nodes={nodes}
+            selectedNode={selectedNode}
+            setSelectedNode={setSelectedNode}
+            neighborUI={neighborUI}
+            onSetNeighbors={setNeighborsMode}
+            onRemoveNode={handleRemoveNode}
+            onAddNeighbor={handleAddNeighbor}
+            onRemoveNeighbor={handleRemoveNeighbor}
+            onChangeName={handleUpdateName}
+            popupRefs={popupRefs}
+            handlePropChange={handlePropChange}
+            handleUpdateGraph={handleUpdateGraph}
+          />
+        ))
+        )}
+      </div>
   );
 }
 

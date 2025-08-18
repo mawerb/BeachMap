@@ -10,7 +10,7 @@ function NodePropertyEditor({
   overview = "Overview Placeholder",
   image = null,
   handlePropChange,
-  handleUpdateGraph,
+  setShowPropEditor,
 }) {
   const [selectedImage, setSelectedImage] = useState(image);
   const [selectedType, setSelectedType] = useState(landmarkType || 'default');
@@ -49,17 +49,22 @@ function NodePropertyEditor({
   return (
     // This component renders a checkbox for a specific property
     <form ref={formRef} id='manager_popup'
-      className="pointer-events-auto fixed z-1000 
-                  top-16 left-4 bg-white p-2 shadow-lg 
+      className="pointer-events-auto fixed z-1000
+                  top-16 left-4 bg-gray-200/80 backdrop-blur-sm drop-shadow-lg p-2 shadow-lg 
                   border-none rounded inline-block max-w-60"
       onPointerDown={(e) => e.stopPropagation()}
       onSubmit={async (e) => {
         e.preventDefault();
         if (updated) return;
-        await new Promise(resolve => setTimeout(resolve,0))
+        await new Promise(resolve => setTimeout(resolve, 0))
         handlePropChange(nodeName, newProperties, newImage, selectedType, newOverview
         )
       }}>
+      <button
+        onClick={() => setShowPropEditor(false)}
+        className="absolute top-0 right-2 text-gray-500 hover:text-black text-lg font-bold z-10">
+        ×
+      </button>
       <h2 className="text-lg font-bold">
         NodeManager
       </h2>
@@ -91,7 +96,7 @@ function NodePropertyEditor({
           <h3 className="font-semibold">Overview:</h3>
           <textarea
             value={newOverview}
-            onChange={(e) => {updateOverview(e);}}
+            onChange={(e) => { updateOverview(e); }}
             id="overview"
             className="border block"
             rows="4"

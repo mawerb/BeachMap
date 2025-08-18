@@ -1,20 +1,14 @@
-from django.shortcuts import render
 from rest_framework.decorators import api_view
 from datetime import datetime, timezone, timedelta
 from dateutil.parser import isoparse
 from rest_framework.response import Response
-from rest_framework.views import APIView
 from rest_framework import status
-from pymongo.server_api import ServerApi
-from rest_framework import generics, renderers
 from django.contrib.postgres.search import TrigramSimilarity
-from django.http import FileResponse, Http404
 from django.db.models import Value, CharField, TextField
 from django.db.models.functions import Cast, Lower
-from dotenv import load_dotenv
-from bson import json_util
 from find_routes.models import Nodes
 from .models import Event, LandmarksWithEvents
+from .filters import departments
 import requests
 import html
 
@@ -25,7 +19,7 @@ def safe_parse(date):
     except:
         return None
 
-# Create your views here.
+# Create your views here. 
 
 @api_view(['GET'])
 def update_events(request):
@@ -147,7 +141,8 @@ def update_events(request):
                     'ends_on' : ends_on,
                     'description' : html.unescape(event.get('description','')),
                     'image_path' : prefix_url + event.get('imagePath','') + suffix_url,
-                    'org_image_path' : prefix_url + event.get('organizationProfilePicture','') + suffix_url
+                    'org_image_path' : prefix_url + event.get('organizationProfilePicture','') + suffix_url,
+                    'is_department' : event.get('organizationName', '').lower() in departments
                 }
                 
                 Event.objects.update_or_create(id=event_data['id'], defaults=event_data)
@@ -200,7 +195,6 @@ def get_nodes_with_events(request):
     """
     This view handles the request to get nodes with events.
     """
-    print('howdy')
     try:
         q_nodesWithEvents = LandmarksWithEvents.objects.get(id="1")
         nodes_with_events = q_nodesWithEvents.nodes_with_events or []
