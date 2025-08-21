@@ -1,6 +1,7 @@
 import { React, useEffect } from "react";
 import Navbar from "../components/NavBar";
 import { useLocation, Link } from "react-router-dom";
+import "../css/scroll.css"
 
 export default function Home() {
     const { hash } = useLocation();
@@ -22,11 +23,11 @@ export default function Home() {
             {/* Main Content */}
             <main className="flex-grow mt-6 max-w-5xl mx-auto px-6 py-12">
                 {/* Hero Section */}
-                <section className="bg-white rounded-lg shadow-lg p-10 text-center">
-                    <h1 className="text-4xl font-extrabold text-[#ECAA00] mb-4">
+                <section className="bg-white rounded-lg shadow-lg p-6 sm:p-10 text-center">
+                    <h1 className="text-xl sm:text-4xl font-extrabold text-[#ECAA00] mb-4">
                         Discover All Campus Events at Your Fingertips
                     </h1>
-                    <p className="text-lg mb-8 text-gray-800">
+                    <p className="text-base sm:text-lg mb-8 text-gray-800">
                         Explore, add, and navigate upcoming events around campus with our
                         interactive map.
                     </p>
@@ -41,13 +42,13 @@ export default function Home() {
                 {/* Features Section */}
                 <section className="mt-16 grid gap-8 sm:grid-cols-3">
                     <div className="bg-white rounded-lg shadow-md p-6 text-center">
-                        <h3 className="text-xl font-semibold text-[#ECAA00] mb-2">
+                        <h3 className="text-lg sm:text-xl font-semibold text-[#ECAA00] mb-2">
                             Interactive Map
                         </h3>
                         <p>Easily locate events by building or area on campus.</p>
                     </div>
                     <div className="bg-white rounded-lg shadow-md p-6 text-center">
-                        <h3 className="text-xl font-semibold text-[#ECAA00] mb-2">
+                        <h3 className="text-lg sm:text-xl font-semibold text-[#ECAA00] mb-2">
                             Easy To Add Events
                         </h3>
                         <p>
@@ -55,7 +56,7 @@ export default function Home() {
                         </p>
                     </div>
                     <div className="bg-white rounded-lg shadow-md p-6 text-center">
-                        <h3 className="text-xl font-semibold text-[#ECAA00] mb-2">
+                        <h3 className="text-lg sm:text-xl font-semibold text-[#ECAA00] mb-2">
                             Event Details
                         </h3>
                         <p>Click on any event for times, descriptions, and RSVP info.</p>
@@ -63,11 +64,11 @@ export default function Home() {
                 </section>
 
                 {/* About Section */}
-                <section id="about" className="mt-20 bg-white rounded-lg shadow-lg p-10">
-                    <h2 className="text-3xl font-extrabold text-[#ECAA00] mb-6 text-center">
+                <section id="about" className=" mt-20 bg-white rounded-lg shadow-lg p-6 sm:p-10">
+                    <h2 className="text-xl sm:text-3xl font-extrabold text-[#ECAA00] mb-6 text-center">
                         About CSULB Events
                     </h2>
-                    <p className="max-w-3xl mx-auto text-center text-gray-800 text-lg leading-relaxed">
+                    <p className="max-w-3xl mx-auto text-center text-gray-800 text-base sm:text-lg leading-relaxed">
                         CSULBEvents is designed to help students, faculty, and visitors stay
                         connected with all the exciting activities happening around campus.
                         Our interactive map allows you to easily find events based on location,
@@ -78,17 +79,20 @@ export default function Home() {
                     </p>
                 </section>
 
-                <section id="contact" className="flex justify-center flex-col mt-20 bg-white rounded-lg shadow-lg p-10">
-                    <h2 className="text-3xl font-extrabold text-[#ECAA00] mb-6 text-center">
+                <section id="contact" className="flex justify-center flex-col mt-20 bg-white rounded-lg shadow-lg p-6 sm:p-10">
+                    <h2 className="text-xl sm:text-3xl font-extrabold text-[#ECAA00] mb-6 text-center">
                         Contact Me
                     </h2>
                     <div className="mb-6 text-center space-y-2">
                         <div className="w-full bg-gray-100 p-4 rounded-md text-gray-700">
-                            <p>
-                                Feel free to reach out via LinkedIn or email. I’m happy to connect and discuss projects, collaborations, or any questions you may have. (p.s this is a personal project, not affiliated with CSULB)
+                            <p className="text-sm sm:text-base">
+                                Feel free to reach out via LinkedIn or email. 
+                                I'm happy to connect and discuss projects, collaborations, 
+                                or any questions you may have. (p.s this is a personal project, 
+                                not affiliated with CSULB). <br/><br/>If you found any bugs, please contact me as well with info about the issue, this helps me to improve on the website.
                             </p>
                         </div>
-                        <p>
+                        <p className="text-sm sm:text-base">
                             LinkedIn:{" "}
                             <a
                                 href="https://www.linkedin.com/in/maorbarzilay"
@@ -99,7 +103,7 @@ export default function Home() {
                                 Maor Barzilay
                             </a>
                         </p>
-                        <p>
+                        <p className="text-sm sm:text-base">
                             Email:{" "}
                             <a target="_blank"
                                 rel="noopener noreferrer"
@@ -109,7 +113,7 @@ export default function Home() {
                                 maorbarzilay8@gmail.com
                             </a>
                         </p>
-                        <p>
+                        <p className="text-sm sm:text-base">
                             GitHub:{" "}
                             <a
                                 target="_blank"
@@ -125,8 +129,7 @@ export default function Home() {
             </main>
 
             {/* Footer */}
-            {/* Uncomment and style your footer similarly if needed */}
-            {/* <footer className="bg-[#ECAA00] text-white text-center py-6 mt-16">
+            {/*
         <p>
           &copy; 2025 CSULBEvents |{" "}
           <a href="#" className="underline hover:text-[#0088A9]">

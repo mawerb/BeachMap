@@ -9,7 +9,7 @@ function PathCreator() {
   const token = localStorage.getItem('jwt-token');
 
   useEffect(() => {
-    fetch('http://127.0.0.1:8000/auth/verify/', {
+    fetch('https://csulbroutesserver.fly.dev/auth/verify/', {
       headers: {
         'Authorization': `Bearer ${token}`
       },

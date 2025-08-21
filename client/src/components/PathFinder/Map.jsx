@@ -1,5 +1,5 @@
 import { MapContainer, TileLayer, Polyline, useMap, ZoomControl, LayersControl, } from 'react-leaflet'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import NodeLoader from './NodeLoader'
 import RecenterButton from './RecenterButton'
 import { filterNodesByEvent } from '../../services/api'
@@ -32,21 +32,23 @@ function Map({
     const [nodesWithEvents, setNodesWithEvents] = useState([]);
     let coords = null;
 
-    useEffect(() => {
-        const loadNodesWithEvents = async () => {
-            let nodes = await filterNodesByEvent();
-            setNodesWithEvents(nodes);
-        }
-        loadNodesWithEvents();
-    }, [])
-
     if (routeData) {
         coords = routeData.map(coord => coord[1])
     }
 
     return (
         <div className='leaflet-map'>
-            <MapContainer center={[33.78184042460368, -118.11463594436647]} zoom={16} scrollWheelZoom={true} maxZoom={22} minZoom={15} zoomControl={false}>
+            <MapContainer 
+            ref={mapRef}
+            center={[33.78184042460368, -118.11463594436647]} 
+            zoom={16} scrollWheelZoom={true} 
+            maxZoom={22}
+            minZoom={15} 
+            zoomControl={false}
+            whenReady={(map) => {
+                map.target.invalidateSize();
+            }}
+            >
                 {coords && coords.length > 0 &&
                     <>
                         <Polyline positions={coords} color='blue' />

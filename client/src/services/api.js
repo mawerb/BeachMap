@@ -33,7 +33,7 @@ export const findOptRoute = async (start, end) => {
 
 export const getNodes = async () => {
     try {
-        const response = await fetch('http://127.0.0.1:8000/api/nodes/', { method: 'GET' });
+        const response = await fetch('https://csulbroutesserver.fly.dev/api/nodes/', { method: 'GET' });
         if (!response.ok) {
             throw new Error(`HTTPs error! status: ${response.status}`)
         };
@@ -51,7 +51,7 @@ export const updateNodes = async (
     renamedNodes = [],
 ) => {
     try {
-        const response = await fetch('http://127.0.0.1:8000/api/update_nodes/', {
+        const response = await fetch('https://csulbroutesserver.fly.dev/api/update_nodes/', {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",

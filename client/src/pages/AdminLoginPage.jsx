@@ -10,7 +10,7 @@ export default function AdminLoginPage() {
 
     function submitUser(event) {
         event.preventDefault()
-        fetch('http://127.0.0.1:8000/auth/login/', {
+        fetch('https://csulbroutesserver.fly.dev/auth/login/', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',

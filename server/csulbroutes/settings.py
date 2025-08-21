@@ -15,7 +15,7 @@ from dotenv import load_dotenv
 import os
 
 load_dotenv()
-deployed = False
+deployed = True
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,12 +26,13 @@ MEDIA_URL = '/media/'
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",
     "https://clientevents.fly.dev",
+    "http://localhost:5173",
     ]
 
 CSRF_TRUSTED_ORIGINS = [
     'https://csulbroutesserver.fly.dev'
+    'http://localhost:5173',
 ]
 
 # SECURITY WARNING: keep the secret key used in production secret!

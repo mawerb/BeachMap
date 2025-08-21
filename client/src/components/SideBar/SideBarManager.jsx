@@ -42,7 +42,7 @@ function SideBarManager({
 
     return (
         <>
-            <FilterTab />
+            {/* <FilterTab /> */}
             <DropDown
                 choices={LandMarks.map(landmark => landmark.name)}
                 setSelectedNodeByName={setSelectedNodeByName} 

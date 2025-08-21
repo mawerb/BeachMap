@@ -20,7 +20,7 @@ def auth_handler(request):
     json_data = json.loads(request.body.decode('utf-8'))
     username, password = json_data.values()
     
-    if (password != 'secretpassword'):
+    if (password != os.environ.get('JWT_PASSWORD')):
         return Response({'message' : 'Invalid password'}, status=status.HTTP_401_UNAUTHORIZED)
     
     payload = {

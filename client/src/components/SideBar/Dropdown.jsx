@@ -39,12 +39,12 @@ const DropDown = ({
     }
 
     return (
-        <div className="absolute top-10 left-8 z-[1100]" ref={dropdownRef}>
+        <div className="absolute top-8 left-1/2 transform -translate-x-1/2 md:translate-x-0 md:top-10 md:left-8 z-[1100]" ref={dropdownRef}>
             <div className="relative">
                 <input
                     className={`text-black bg-white border border-[rgba(0,0,0,0.35)] 
-                w-[17.7rem] h-[2.7rem] pl-4 focus:outline-none 
-                focus:ring-0 placeholder:text-[rgba(0,0,0,0.5)] z-100 mt-4 text-lg
+                w-[15rem] h-[2.1rem] md:w-[17.7rem] md:h-[2.7rem] pl-4 focus:outline-none 
+                focus:ring-0 placeholder:text-[rgba(0,0,0,0.5)] z-100 mt-4 text-base md :text-lg
                 ${showSuggestions && suggestions.length > 0
                             ? 'rounded-t-xl rounded-b-none'
                             : 'rounded-full'}`}
@@ -62,7 +62,7 @@ const DropDown = ({
                 />
                 {showSuggestions && suggestions.length > 0 && (
                     <ul className="absolute top-full border-l border-r border-b border-[rgba(0,0,0,0.35)] 
-                                rounded-b-xl w-[17.7rem] text-lg text-[rgba(0,0,0,0.75)] bg-white">
+                                rounded-b-xl w-[15rem] md:w-[17.7rem] text-base md:text-lg text-[rgba(0,0,0,0.75)] bg-white">
                         {suggestions.map(suggestion => (
                             <li className="flex gap-2 cursor-pointer items-center
                                        hover:bg-gray-200 pl-2 last:rounded-b-xl"
