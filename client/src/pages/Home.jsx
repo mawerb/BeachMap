@@ -1,7 +1,6 @@
 import { React, useEffect } from "react";
 import Navbar from "../components/NavBar";
 import { useLocation, Link } from "react-router-dom";
-import "../css/scroll.css"
 
 export default function Home() {
     const { hash } = useLocation();

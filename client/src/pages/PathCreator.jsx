@@ -3,6 +3,7 @@ import { Navigate } from 'react-router-dom';
 import Map from '../components/NodeCreator/AdminMap'
 import AdminNav from '../components/NodeCreator/AdminNav';
 import { NodeProvider } from '../context/NodeManager';
+import LoaderSimple from '../components/LoadingSimple';
 
 function PathCreator() {
   const [isVerified, setIsVerified] = useState(null)
@@ -32,12 +33,7 @@ function PathCreator() {
 
   if (isVerified === null) {
     return (
-      <div className="flex items-center justify-center h-screen w-screen bg-gray-100">
-        <div className="flex flex-col items-center">
-          <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500 border-solid mb-4"></div>
-          <p className="text-lg font-semibold text-gray-700 animate-pulse">Verifying token...</p>
-        </div>
-      </div>
+      <LoaderSimple text="Verifying Token..." />
     );
   }
 

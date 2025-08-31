@@ -14,7 +14,7 @@ function NodeMarker({
     const pointIcon = L.icon({
         iconUrl: pointImg,
         iconSize: [20, 30],
-        iconAnchor: [7.5,23]
+        iconAnchor: [7.5, 23]
     });
 
     const curr_map = useMap();

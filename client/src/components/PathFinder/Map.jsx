@@ -5,6 +5,7 @@ import RecenterButton from './RecenterButton'
 import { filterNodesByEvent } from '../../services/api'
 import '../../css/Map.css'
 import 'leaflet/dist/leaflet.css';
+import LoaderSimple from '../LoadingSimple'
 
 function FitBounds({ coords }) {
     const map = useMap();
@@ -30,7 +31,17 @@ function Map({
     setError,
 }) {
     const [nodesWithEvents, setNodesWithEvents] = useState([]);
+    const [mapLoading, setMapLoading] = useState(true);
     let coords = null;
+
+    useEffect(() => {
+        const loadNodesWithEvents = async () => {
+            let nodes = await filterNodesByEvent();
+            setNodesWithEvents(nodes);
+            setLoading(false)
+        }
+        loadNodesWithEvents();
+    }, [])
 
     if (routeData) {
         coords = routeData.map(coord => coord[1])
@@ -38,16 +49,22 @@ function Map({
 
     return (
         <div className='leaflet-map'>
-            <MapContainer 
-            ref={mapRef}
-            center={[33.78184042460368, -118.11463594436647]} 
-            zoom={16} scrollWheelZoom={true} 
-            maxZoom={22}
-            minZoom={15} 
-            zoomControl={false}
-            whenReady={(map) => {
-                map.target.invalidateSize();
-            }}
+            {mapLoading && <LoaderSimple text={"Loading map..."} />}
+            {!mapLoading && loading && <LoaderSimple text={"Loading landmarks..."} />}
+            <MapContainer
+                center={window.innerWidth > 640 ? [33.78184042460368, -118.11463594436647] : [33.780899, -118.113119]}
+                zoom={16} scrollWheelZoom={true}
+                maxZoom={20}
+                minZoom={15}
+                zoomControl={false}
+                whenReady={(map) => {
+                    map.target.invalidateSize();
+
+                    setTimeout(() => {
+                        map.target.invalidateSize();
+                        setMapLoading(false);
+                    }, 300);
+                }}
             >
                 {coords && coords.length > 0 &&
                     <>

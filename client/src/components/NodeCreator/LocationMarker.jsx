@@ -34,6 +34,7 @@ import { useRef, useEffect } from 'react';
 import NodeMarker from './NodeMarker';
 import { useNodeManager } from '../../context/NodeManager';
 import '../../css/LocationMarker.css';
+import LoaderSimple from '../LoadingSimple';
 
 
 function LocationMarker() {
@@ -85,9 +86,7 @@ function LocationMarker() {
 
   return (
     mapLoading ? (
-      <div className="flex h-screen justify-center align-center">
-        <h1 className="text-xl">Loading ...</h1>
-      </div>
+      <LoaderSimple text="Loading map" />
     ) :
       <div tabIndex={0} ref={containerRef}>
         {neighborUI && (

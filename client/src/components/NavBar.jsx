@@ -1,8 +1,6 @@
 import { Link } from 'react-router-dom';
 
 function Navbar() {
-
-  console.log(window.innerWidth)
   return (
     <header className="absolute w-full z-[1000] flex justify-end items-center px-[5%] py-2 bg-[#ECAA00]">
       <Link 
