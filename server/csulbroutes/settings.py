@@ -15,7 +15,7 @@ from dotenv import load_dotenv
 import os
 
 load_dotenv()
-deployed = False
+deployed = True
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -31,7 +31,7 @@ CORS_ALLOWED_ORIGINS = [
     ]
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://csulbroutesserver.fly.dev'
+    'https://csulbroutesserver.fly.dev',
     'http://localhost:5173',
 ]
 

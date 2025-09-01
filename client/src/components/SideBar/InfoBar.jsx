@@ -94,12 +94,12 @@ function InfoBar({
             <div className="relative h-full w-vw md:w-[21.7rem]  bg-white flex flex-col">
                 <button
                     onClick={() => setSelectedNode(null)}
-                    className="absolute top-2 right-2 text-gray-500 hover:text-black text-lg font-bold z-10">
+                    className="absolute top-2 right-2 text-gray-500 hover:text-black text-5xl sm:text-3xl font-bold z-10">
                     ×
                 </button>
                 <img src={Image} className="h-[30%] w-full" />
                 <div className="ml-4 flex-shrink-0">
-                    <h1 className="text-xl lg:text-2xl font-medium">{Name}</h1>
+                    <h1 className="text-xl lg:text-2xl font-medium line-clamp-2">{Name}</h1>
                     <h2 className="text-sm font-light text-gray-500">{LandmarkType}</h2>
                 </div>
                 <div className="flex border-b border-[#ECAA01] justify-around mt-5 flex-shrink-0">

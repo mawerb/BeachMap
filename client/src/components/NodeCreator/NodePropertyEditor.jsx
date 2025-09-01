@@ -90,6 +90,18 @@ function NodePropertyEditor({
           <option value="Parking">
             Parking
           </option>
+          <option value="Study Zone">
+            Study Zone
+          </option>
+          <option value="Food Spot">
+            Food Spot
+          </option>
+          <option value="Dorm">
+            Dorm
+          </option>
+          <option value="Sports Stadium">
+            Sports Stadium
+          </option>
         </select>
 
         <div className="mt-2">

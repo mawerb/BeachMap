@@ -94,7 +94,6 @@ def update_nodes (request):
 
         # Define the path to save the JSON file
         base_dir = os.path.dirname(os.path.abspath(__file__))
-        coord_path = os.path.join(base_dir,'algo','mapdata','coordinate_graph.json')
 
         for updated_node in updated_nodes:
             node_name = updated_node.get('name')
@@ -105,10 +104,6 @@ def update_nodes (request):
             if node_name in nodes and node_type:
                 nodes[node_name]['type'] = node_type
                 nodes[node_name]['overview'] = node_overview
-
-        # Write the combined data to the JSON file
-        with open(coord_path,'w') as file:
-            json.dump(nodes,file,indent=4)
 
         if removed_nodes:
             deleted_count = Nodes.objects.filter(name__in=removed_nodes).delete()[0]

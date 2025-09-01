@@ -71,7 +71,7 @@ function EventsTab({
                         className="hover:bg-gray-100 flex p-2 items-center space-x-2 h-[10%] min-h-[70px]">
                         <img src={event.image_path} alt="Description" className="h-10 w-10 sm:h-8 sm:w-8 md:h-10 md:w-10 aspect-square object-cover rounded-full" />
                         <div className="flex-1">
-                            <h1 className="text-sm font-bold truncate">{event.name}</h1>
+                            <h1 className="text-sm font-bold line-clamp-1">{event.name}</h1>
                             <p className="text-xs text-gray-600 line-clamp-2">{event.description.replace(/<\/?[^>]+(>|$)/g, "") || "No description available"}
                             </p>
                         </div>
