@@ -1,13 +1,15 @@
 import { Link } from 'react-router-dom';
+import logo from '../assets/palm-tree.png'
 
 function Navbar() {
   return (
     <header className="absolute w-full z-[1000] flex justify-end items-center px-[5%] py-2 bg-[#ECAA00]">
       <Link 
-        className="mr-auto cursor-pointer text-white" 
+        className="mr-auto flex cursor-pointer text-white" 
         to="/"
       >
-        <h1 className="font-bold text-sm md:text-lg">CSULB Routes</h1>
+        <img src={logo} alt="Logo" className="h-5 md:h-7 mr-1" />
+        <h1 className="font-bold text-sm md:text-lg">BeachMap</h1>
       </Link>
       
       <nav>

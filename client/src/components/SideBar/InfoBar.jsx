@@ -90,7 +90,7 @@ function InfoBar({
     console.log("CURRENT IMAGE:", Image)
 
     return (
-        <div className="absolute top-9 md:top-11 h-[calc(100%-2.25rem)] md:h-[calc(100%-2.8rem)] z-[1099]">
+        <div className="absolute top-9 md:top-11 left-0 right-0 bottom-0 z-[1099]">
             <div className="relative h-full w-vw md:w-[21.7rem]  bg-white flex flex-col">
                 <button
                     onClick={() => setSelectedNode(null)}

@@ -28,11 +28,15 @@ MEDIA_URL = '/media/'
 CORS_ALLOWED_ORIGINS = [
     "https://clientevents.fly.dev",
     "http://localhost:5173",
+    "https://beachmap.org",
+    'https://www.beachmap.org',
     ]
 
 CSRF_TRUSTED_ORIGINS = [
     'https://csulbroutesserver.fly.dev',
     'http://localhost:5173',
+    'https://beachmap.org',
+    'https://www.beachmap.org',
 ]
 
 # SECURITY WARNING: keep the secret key used in production secret!
@@ -41,7 +45,12 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False if deployed else True
 
-ALLOWED_HOSTS = ['csulbroutesserver.fly.dev', '127.0.0.1']
+ALLOWED_HOSTS = [
+    'csulbroutesserver.fly.dev', 
+    '127.0.0.1',
+    'beachmap.org',
+    'www.beachmap.org',
+    ]
 
 
 # Application definition

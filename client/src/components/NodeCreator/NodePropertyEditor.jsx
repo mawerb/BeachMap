@@ -7,7 +7,7 @@ function NodePropertyEditor({
   nodeName,
   property,
   landmarkType = null,
-  overview = "Overview Placeholder",
+  overview,
   image = null,
   handlePropChange,
   setShowPropEditor,
@@ -102,6 +102,13 @@ function NodePropertyEditor({
           <option value="Sports Stadium">
             Sports Stadium
           </option>
+          <option value="Recreation">
+            Recreation
+          </option>
+          <option value="Services">
+            Services
+          </option>
+
         </select>
 
         <div className="mt-2">

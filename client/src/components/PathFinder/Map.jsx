@@ -6,6 +6,7 @@ import { filterNodesByEvent } from '../../services/api'
 import '../../css/Map.css'
 import 'leaflet/dist/leaflet.css';
 import LoaderSimple from '../LoadingSimple'
+import UserMarker from './UserMarker'
 
 function FitBounds({ coords }) {
     const map = useMap();
@@ -32,6 +33,7 @@ function Map({
 }) {
     const [nodesWithEvents, setNodesWithEvents] = useState([]);
     const [mapLoading, setMapLoading] = useState(true);
+    const [position, setPosition] = useState(null);
     let coords = null;
 
     useEffect(() => {
@@ -52,7 +54,7 @@ function Map({
             {mapLoading && <LoaderSimple text={"Loading map..."} />}
             {!mapLoading && loading && <LoaderSimple text={"Loading landmarks..."} />}
             <MapContainer
-                center={window.innerWidth > 640 ? [33.78184042460368, -118.11463594436647] : [33.780899, -118.113119]}
+                center={window.innerWidth > 640 ? [33.78244042460368, -118.11463594436647] : [33.780899, -118.113119]}
                 zoom={16} scrollWheelZoom={true}
                 maxZoom={20}
                 minZoom={15}
@@ -84,6 +86,9 @@ function Map({
                     maxZoom={20}
                     keepBuffer={10}
                 />
+                <UserMarker
+                    position={position}
+                    setPosition={setPosition} />
                 <ZoomControl position="bottomright" />
                 <LayersControl position="bottomright">
                     <NodeLoader
@@ -98,7 +103,9 @@ function Map({
                         nodesWithEvents={nodesWithEvents}
                     />
                 </LayersControl>
-                <RecenterButton />
+                <RecenterButton
+                    position={position}
+                />
             </MapContainer>
         </div>
     )

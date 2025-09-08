@@ -2,56 +2,54 @@ import landmark from '../../assets/landmark.png'
 import clock from '../../assets/clock.png'
 import gcal_logo from '../../assets/gcal-logo.png'
 import { Transition } from '@headlessui/react'
-import { useState } from 'react';
-
-function formatEventTime(startsOnStr, endsOnStr) {
-    const optionsDate = { month: '2-digit', day: '2-digit', year: 'numeric' };
-    const optionsTime = { hour: 'numeric', minute: '2-digit', hour12: true };
-
-    const startsOn = new Date(startsOnStr);
-    const endsOn = new Date(endsOnStr);
-
-    // Format date (use start date)
-    const dateFormatted = startsOn.toLocaleDateString(undefined, optionsDate);
-
-    // Format times
-    const startTimeFormatted = startsOn.toLocaleTimeString(undefined, optionsTime).toLowerCase();
-    const endTimeFormatted = endsOn.toLocaleTimeString(undefined, optionsTime).toLowerCase();
-
-    return `${dateFormatted} (${startTimeFormatted} - ${endTimeFormatted})`;
-}
-
-function formatForGCal(dateStr) {
-    // Parse date string to Date object
-    const date = new Date(dateStr);
-    // Format date parts with leading zeros
-    const pad = n => n.toString().padStart(2, '0');
-
-    const year = date.getUTCFullYear();
-    const month = pad(date.getUTCMonth() + 1);
-    const day = pad(date.getUTCDate());
-    const hours = pad(date.getUTCHours());
-    const minutes = pad(date.getUTCMinutes());
-    const seconds = pad(date.getUTCSeconds());
-
-    return `${year}${month}${day}T${hours}${minutes}${seconds}Z`;
-}
-
-function createGCalendarLink(event, webURL) {
-    const GCalendarBaseURL = 'https://calendar.google.com/calendar/u/0/r/eventedit?'
-    const title = encodeURIComponent(event.name);
-    const details = encodeURIComponent('For more details visit: ' + webURL)
-    const date = encodeURIComponent(formatForGCal(event.starts_on) + '/' + formatForGCal(event.ends_on));
-    const location = encodeURIComponent(event.location);
-
-    return `${GCalendarBaseURL}text=${title}&dates=${date}&details=${details}&location=${location}`;
-}
+import { useEffect, useState } from 'react';
+import { isTouchDevice, formatEventTime, formatForGCal, createGCalendarLink } from '../../services/utility';
 
 function EventsTab({
     events = ["No Events", "Poop", "stink", 'Freak', "hey!"],
 }) {
     const [hoveredIndex, setHoveredIndex] = useState(null);
+    const [clickCount, setClickCount] = useState(0);
+    const [focusedEvent, setFocusedEvent] = useState(null);
     const websiteURL = "https://csulb.campuslabs.com/engage/event/";
+    const isTouch = isTouchDevice();
+
+    useEffect(() => {
+        let timer;
+        if (clickCount > 0) {
+            timer = setTimeout(() => {
+                setClickCount(0)
+                setFocusedEvent(null);
+            }, 2000);
+        }
+        return () => clearTimeout(timer);
+    }, [clickCount]);
+
+    const handleClick = (eventId) => {
+        const url = websiteURL + eventId;
+
+        // Handle non-touch device click, open link immediately
+        if (!isTouch) {
+            window.open(url, "_blank", "noopener,noreferrer");
+            return;
+        }
+
+        // Reset click count if clicking on a different event
+        if (focusedEvent !== eventId) {
+            setClickCount(1);
+            setFocusedEvent(eventId);
+            return;
+        }
+
+        // Handle touch device click, require double tap to open link
+        if (clickCount === 0) {
+            setClickCount(1);
+        } else {
+            window.open(url, "_blank", "noopener,noreferrer");
+            setClickCount(0);
+            setFocusedEvent(null);
+        }
+    }
 
     if (events.length === 0) {
         return (
@@ -66,17 +64,18 @@ function EventsTab({
             < div key={index}
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
-            >     <a target="_blank" rel="noopener noreferrer" href={websiteURL + event.id}>
-                    <div
-                        className="hover:bg-gray-100 flex p-2 items-center space-x-2 h-[10%] min-h-[70px]">
-                        <img src={event.image_path} alt="Description" className="h-10 w-10 sm:h-8 sm:w-8 md:h-10 md:w-10 aspect-square object-cover rounded-full" />
-                        <div className="flex-1">
-                            <h1 className="text-sm font-bold line-clamp-1">{event.name}</h1>
-                            <p className="text-xs text-gray-600 line-clamp-2">{event.description.replace(/<\/?[^>]+(>|$)/g, "") || "No description available"}
-                            </p>
-                        </div>
+            >
+                <div
+                    onClick={() => handleClick(event.id)}
+                    className={`hover:bg-gray-100 flex p-2 items-center space-x-2 h-[10%] min-h-[70px] 
+                                ${isTouch && focusedEvent === event.id ? "bg-yellow-100 bg-gray-100 cursor-pointer" : ""}`}>
+                    <img src={event.image_path} alt="Description" className="h-10 w-10 sm:h-8 sm:w-8 md:h-10 md:w-10 aspect-square object-cover rounded-full" />
+                    <div className="flex-1">
+                        <h1 className="text-sm font-bold line-clamp-1">{event.name}</h1>
+                        <p className="text-xs text-gray-600 line-clamp-2">{event.description.replace(/<\/?[^>]+(>|$)/g, "") || "No description available"}
+                        </p>
                     </div>
-                </a>
+                </div>
                 <Transition
                     show={hoveredIndex === index}
                     enter="transition-all duration-200 ease-out"
