@@ -78,7 +78,7 @@ function NodePropertyEditor({
           value={selectedType}
           onChange={(e) => { setSelectedType(e.target.value); setUpdated(false); }}
         >
-          <option value="default" className="" disabled selected>
+          <option value="default" className="" disabled>
             Landmark Type
           </option>
           <option value="Building">

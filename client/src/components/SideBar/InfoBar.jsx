@@ -3,14 +3,15 @@ import placeholder from '../../assets/InfoBar/placeholder-image.jpg'
 import Overview from './Overview'
 import EventsTab from './EventsTab'
 import { getEvents } from '../../services/api'
+import LoaderSimple from '../LoadingSimple'
 
 function InfoBar({
     Name = "Landmark Name",
     LandmarkType = "Landmark Type(building, lawn, etc..)",
     Image = placeholder,
-
     selectedNode = null,
     setSelectedNode,
+    imageLoading,
 }) {
 
     const [selected, setSelected] = useState("events")
@@ -90,8 +91,27 @@ function InfoBar({
     console.log("CURRENT IMAGE:", Image)
 
     return (
-        <div className="absolute top-9 md:top-11 left-0 right-0 bottom-0 z-[1099]">
+        <div className="absolute top-9 md:top-11 left-0 bottom-0 z-[1099]">
             <div className="relative h-full w-vw md:w-[21.7rem]  bg-white flex flex-col">
+                {loading && (
+                    <div className="absolute inset-0">
+                        <LoaderSimple
+                            text={"Loading events..."}
+                            style={"h-full w-full"}
+                            useAbsolute={true}
+                        />
+                    </div>
+                )
+                }
+                {!loading && imageLoading && (
+                    <div className="absolute inset-0">
+                        <LoaderSimple
+                            text={"Loading image..."}
+                            style={"h-full w-full"}
+                            useAbsolute={true}
+                            />
+                    </div>
+                )}
                 <button
                     onClick={() => setSelectedNode(null)}
                     className="absolute top-2 right-2 text-gray-500 hover:text-black text-5xl sm:text-3xl font-bold z-10">

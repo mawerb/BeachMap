@@ -1,7 +1,8 @@
 import DropDown from "./Dropdown"
 import InfoBar from "./InfoBar"
-import { getImage, getEvents  } from "../../services/api"
+import { getImage, getEvents } from "../../services/api"
 import { useEffect, useState } from "react"
+import LoaderSimple from "../LoadingSimple"
 import FilterTab from './FilterTab';
 
 
@@ -12,11 +13,14 @@ function SideBarManager({
     setSelectedNodeByName,
 }) {
     const [image, setImage] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         let isCancelled = false;
+        setLoading(true);
+
         if (!selectedNode?.name) {
-            setImage(null);
+            setLoading(false);
             return;
         }
 
@@ -30,6 +34,8 @@ function SideBarManager({
                 console.error('Error loading image:', err);
                 setImage(null);
             }
+        }).finally(() => {
+                setLoading(false);
         });
 
         return () => {
@@ -45,14 +51,16 @@ function SideBarManager({
             {/* <FilterTab /> */}
             <DropDown
                 choices={LandMarks.map(landmark => landmark.name)}
-                setSelectedNodeByName={setSelectedNodeByName} 
-                setSelectedNode={setSelectedNode}/>
+                setSelectedNodeByName={setSelectedNodeByName}
+                setSelectedNode={setSelectedNode} />
             {selectedNode && (<InfoBar
                 Name={selectedNode?.name ?? "Landmark Name"}
                 LandmarkType={selectedNode?.type ?? "Landmark Type"}
                 Image={image}
                 setSelectedNode={setSelectedNode}
-                selectedNode={selectedNode}/>
+                selectedNode={selectedNode}
+                imageLoading={loading}
+                />
             )}
         </>
 
