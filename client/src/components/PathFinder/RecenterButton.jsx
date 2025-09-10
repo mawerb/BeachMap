@@ -11,7 +11,7 @@ function RecenterButton({ position }) {
                 if (position) {
                     map.flyTo(position, 18);
                 } else {
-                    map.flyTo(window.innerWidth > 640 ? [33.78184042460368, -118.11463594436647] : [33.780899, -118.113119], 16);
+                    map.flyTo(window.innerWidth > 640 ? [33.78244042460368, -118.11463594436647] : [33.780899, -118.113119], 16);
                 }
             }}
         >

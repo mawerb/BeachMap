@@ -8,7 +8,7 @@ function Navbar() {
         className="mr-auto flex cursor-pointer text-white" 
         to="/"
       >
-        <img src={logo} alt="Logo" className="h-5 md:h-7 mr-1" />
+        <img src={logo} alt="Logo" className="h-5 md:h-7 mr-2" />
         <h1 className="font-bold text-sm md:text-lg">BeachMap</h1>
       </Link>
       

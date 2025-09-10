@@ -78,36 +78,36 @@ function PathFinder() {
     const node = options.find(node => node.name === name);
     console.log('node:', node)
     if (node) {
-        setSelectedNode(node);
+      setSelectedNode(node);
     } else {
-        alert(`Node with name ${name} not found.`);
-        console.error(`Node with name ${name} not found.`);
+      alert(`Node with name ${name} not found.`);
+      console.error(`Node with name ${name} not found.`);
     }
-}
+  }
 
   return (
-    <div className="h-screen overflow-hidden">
-      {/* <form onSubmit={handleSearch}>
+      <div className="overflow-hidden">
+        {/* <form onSubmit={handleSearch}>
         <DropDown options={options} value={start} oppValue={end} setValue={handleStartChange} placeholder={"Select A Start"}/>
         <DropDown options={options} value={end} oppValue={start} setValue={handleEndChange} placeholder={"Select A Destination"}/>
         <button type="submit">Submit</button>
       </form> */}
-      <Navbar />
-      <div id="root">
-        <div className="leaflet-map">
-          <Map routeData={route}
-            nodes={options}
-            setNodes={setOptions}
-            loading={loading}
-            setLoading={setLoading}
-            selectedNode={selectedNode}
-            setSelectedNode={setSelectedNode}
-            error={error}
-            setError={setError} />
+        <Navbar />
+        <div id="root">
+          <div className="leaflet-map">
+            <Map routeData={route}
+              nodes={options}
+              setNodes={setOptions}
+              loading={loading}
+              setLoading={setLoading}
+              selectedNode={selectedNode}
+              setSelectedNode={setSelectedNode}
+              error={error}
+              setError={setError} />
+          </div>
+          <SideBarManager LandMarks={options} selectedNode={selectedNode} setSelectedNode={setSelectedNode} setSelectedNodeByName={setSelectedNodeByName} />
         </div>
-        <SideBarManager LandMarks={options} selectedNode={selectedNode} setSelectedNode={setSelectedNode} setSelectedNodeByName={setSelectedNodeByName} />
       </div>
-    </div>
   )
 }
 

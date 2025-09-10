@@ -1,6 +1,7 @@
 .leaflet-map {
     display: flex;
-    justify-content: center;     
+    justify-content: center;    
+    overflow: hidden; 
     width: 100vw;
     height:100vh;
     height: 100dvh;

@@ -75,6 +75,7 @@ def get_nodes (request):
                     'coords' : [node.coords.y, node.coords.x],
                     'neighbors' : {},
                     'properties' : node.properties,
+                    'type' : node.type
                 }
             data[node.name] = node_data
         
@@ -147,7 +148,7 @@ def update_nodes (request):
         return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     
 class ImageAPIView(APIView):
-
+    
     def get(self, request, *args, **kwargs):
         """
         This view retrieves the image associated with a node.

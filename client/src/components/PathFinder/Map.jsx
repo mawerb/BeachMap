@@ -1,4 +1,4 @@
-import { MapContainer, TileLayer, Polyline, useMap, ZoomControl, LayersControl, } from 'react-leaflet'
+import { MapContainer, TileLayer, Polyline, useMap, ZoomControl, LayersControl, Circle } from 'react-leaflet'
 import { useEffect, useState, useRef } from 'react'
 import NodeLoader from './NodeLoader'
 import RecenterButton from './RecenterButton'
@@ -34,6 +34,7 @@ function Map({
     const [nodesWithEvents, setNodesWithEvents] = useState([]);
     const [mapLoading, setMapLoading] = useState(true);
     const [position, setPosition] = useState(null);
+    const initialLoadRef = useRef(true);
     let coords = null;
 
     useEffect(() => {
@@ -88,7 +89,8 @@ function Map({
                 />
                 <UserMarker
                     position={position}
-                    setPosition={setPosition} />
+                    setPosition={setPosition}
+                    initialLoadRef={initialLoadRef} />
                 <ZoomControl position="bottomright" />
                 <LayersControl position="bottomright">
                     <NodeLoader
