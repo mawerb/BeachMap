@@ -71,7 +71,7 @@ function UserMarker({
             )}
             <Modal open={showModal} onClose={() => setShowModal(false)}>
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2  -translate-y-1/2 z-[20000]
-                bg-[#b38102] p-6 shadow-2xl flex flex-col items-center space-y-4 max-w-md">
+                bg-[#b38102] p-6 shadow-2xl flex flex-col items-center space-y-4 w-[70%] max-w-2xl md:max-w-md">
                     <h2 className="text-sm md:text-xl font-bold text-white text-center">
                         Outside Campus Vicinity
                     </h2>
