@@ -162,6 +162,9 @@ class ImageAPIView(APIView):
         except Nodes.DoesNotExist:
             print(f'{name} node not found')
             return Response({'error': 'Node not found'}, status=status.HTTP_404_NOT_FOUND)
+        except Exception as e:
+            print("Error", e)
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         
         image_instance = node.image
         if not image_instance or not image_instance.image:

@@ -22,7 +22,10 @@ function NodeLoader({
     useEffect(() => {
         if (selectedNode) {
             const coords = selectedNode.coords;
-            curr_map.flyTo([coords[0], coords[1] - 0.0008], 18);
+            if(window.innerWidth > 640)
+                curr_map.flyTo([coords[0], coords[1] - 0.0008], 18);
+            else 
+                curr_map.flyTo(coords, 18);
         }
     }, [selectedNode])
 

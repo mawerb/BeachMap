@@ -14,6 +14,10 @@ primary_region = 'lax'
   min_machines_running = 0
   processes = ['app']
 
+[[mounts]]
+  source = "media_volume"
+  destination = "/data"
+
 [[vm]]
   memory = '1gb'
   cpu_kind = 'shared'

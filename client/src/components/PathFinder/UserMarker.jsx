@@ -72,16 +72,16 @@ function UserMarker({
             <Modal open={showModal} onClose={() => setShowModal(false)}>
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2  -translate-y-1/2 z-[20000]
                 bg-[#b38102] p-6 shadow-2xl flex flex-col items-center space-y-4 max-w-md">
-                    <h2 className="text-xl font-bold text-white text-center">
+                    <h2 className="text-sm md:text-xl font-bold text-white text-center">
                         Outside Campus Vicinity
                     </h2>
-                    <p className="text-gray-300 text-center">
+                    <p className="text-xs md:text-base text-gray-300 text-center">
                         You are currently outside the campus boundary.
                         Your location will not be tracked.
                     </p>
                     <button
                     onClick={() => setShowModal(false)}
-                    className="bg-green-600 hover:bg-green-700 cursor-pointer text-white font-semibold px-4 py-2 rounded transition"
+                    className="bg-green-600 hover:bg-green-700 cursor-pointer text-white text-xs md:text-base font-semibold px-4 py-2 rounded transition"
                     >
                         Got it
                     </button>

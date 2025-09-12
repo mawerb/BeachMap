@@ -92,7 +92,7 @@ function InfoBar({
 
     return (
         <div className="absolute top-9 md:top-11 left-0 bottom-0 z-[1099]">
-            <div className="relative h-full w-vw md:w-[21.7rem]  bg-white flex flex-col">
+            <div className="relative h-full w-screen md:w-[21.7rem]  bg-white flex flex-col">
                 {loading && (
                     <div className="absolute inset-0">
                         <LoaderSimple
@@ -114,10 +114,11 @@ function InfoBar({
                 )}
                 <button
                     onClick={() => setSelectedNode(null)}
-                    className="absolute top-2 right-2 text-gray-500 hover:text-black text-5xl sm:text-3xl font-bold z-10">
+                    className="absolute top-2 right-2 text-gray-500 hover:text-black 
+                    text-5xl sm:text-3xl font-bold z-10">
                     ×
                 </button>
-                <img src={Image} className="h-[30%] w-full" />
+                <img src={Image} className="w-full h-[30%] object-cover md:w-full md:max-w-full" />
                 <div className="ml-4 flex-shrink-0">
                     <h1 className="text-xl lg:text-2xl font-medium line-clamp-2">{Name}</h1>
                     <h2 className="text-sm font-light text-gray-500">{LandmarkType}</h2>
